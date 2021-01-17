@@ -9,7 +9,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <Link className="navbar-brand" to={"/"}>
+          <Link className="navbar-brand" to="/">
             Navbar
           </Link>
           <button
@@ -27,7 +27,7 @@ class Navbar extends Component {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link
-                  to={"/home"}
+                  to="/home"
                   className="nav-link active"
                   aria-current="page"
                 >
@@ -37,13 +37,13 @@ class Navbar extends Component {
               {this.props.isLoggedIn ? (
                 <>
                   <li className="nav-item">
-                    <Link to={"/myprofile"} className="nav-link">
+                    <Link to="/myprofile" className="nav-link">
                       My Profile
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link
-                      to={"/login"}
+                      to="/login"
                       className="nav-link"
                       onClick={this.props.logout}
                     >
@@ -54,12 +54,12 @@ class Navbar extends Component {
               ) : (
                 <>
                   <li className="nav-item">
-                    <Link to={"/signup"} className="nav-link">
+                    <Link to="/signup" className="nav-link">
                       Signup
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to={"/login"} className="nav-link">
+                    <Link to="/login" className="nav-link">
                       Login
                     </Link>
                   </li>

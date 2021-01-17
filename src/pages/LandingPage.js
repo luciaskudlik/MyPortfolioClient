@@ -5,10 +5,10 @@ function LandingPage() {
   return (
     <div id="landing-page">
       <Link to={"/signup"}>
-        <button>Get started for free</button>
+        <button className="landing-btn">Get started</button>
       </Link>
       <Link to={"/home"}>
-        <button>Explore</button>
+        <button className="landing-btn">Explore</button>
       </Link>
     </div>
   );

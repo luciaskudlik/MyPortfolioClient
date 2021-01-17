@@ -3,9 +3,26 @@
 }
 
 #landing-page {
-  background-image: url("./images/paper.jpg");
+  background-image: url("./images/simone-hutsch-GnHUOyPV0WI-unsplash.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 500px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-btn {
+  position: relative;
+  top: 160px;
+  margin: 10px;
+  width: 140px;
+  border: none;
+  height: 60px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+}
+
+.landing-btn:hover {
+  background-color: orange;
 }

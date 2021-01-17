@@ -82,6 +82,10 @@ class UserProfile extends React.Component {
         <h1>User Profile</h1>
         <h2>{this.state.user.username}</h2>
         <h4>{this.state.user.occupation}</h4>
+        <div>
+          <i class="far fa-envelope"></i>
+          <p>{this.state.user.email}</p>
+        </div>
         {this.props.user && this.state.following ? (
           <button onClick={this.unfollowUser}> - unfollow</button>
         ) : null}
