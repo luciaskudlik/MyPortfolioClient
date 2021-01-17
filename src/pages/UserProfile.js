@@ -8,6 +8,7 @@ class UserProfile extends React.Component {
   state = {
     user: {},
     currentUser: {},
+    followers: [],
     following: false,
     portfolio: [],
   };
@@ -20,6 +21,7 @@ class UserProfile extends React.Component {
         this.setState({
           user: response.data,
           portfolio: response.data.portfolio,
+          followers: response.data.followers,
         });
       })
       .catch((err) => console.log(err));
@@ -82,21 +84,29 @@ class UserProfile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="user-profile">
         <Navbar />
-        <h1>User Profile</h1>
-        <h2>{this.state.user.username}</h2>
-        <h4>{this.state.user.occupation}</h4>
-        <div>
-          <i class="far fa-envelope"></i>
-          <p>{this.state.user.email}</p>
+        <div className="user-details">
+          <div className="top-left">
+            <img src={this.state.user.image} className="user-image" />
+            <div>
+              <h2>{this.state.user.username}</h2>
+              <h4>{this.state.user.occupation}</h4>
+              <p>{this.state.followers.length} followers</p>
+            </div>
+          </div>
+
+          {this.props.user && this.state.following ? (
+            <button onClick={this.unfollowUser}> - unfollow</button>
+          ) : null}
+          {this.props.user && !this.state.following ? (
+            <button onClick={this.followUser}> + Follow</button>
+          ) : null}
+          <div>
+            <i class="far fa-envelope"></i>
+            <p>{this.state.user.email}</p>
+          </div>
         </div>
-        {this.props.user && this.state.following ? (
-          <button onClick={this.unfollowUser}> - unfollow</button>
-        ) : null}
-        {this.props.user && !this.state.following ? (
-          <button onClick={this.followUser}> + Follow</button>
-        ) : null}
 
         {this.state.portfolio.length > 0
           ? this.state.user.portfolio.map((project) => {

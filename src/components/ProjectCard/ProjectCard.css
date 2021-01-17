@@ -1,8 +1,8 @@
 .project-card {
   border: 1px solid grey;
-  border-radius: 3px;
+  border-radius: 5px;
   width: 90vw;
-  margin: 0 auto;
+  margin: 20px auto;
   height: 250px;
 }
 
@@ -22,8 +22,6 @@
   display: flex;
   align-items: center;
 }
-
-
 
 .back p {
   border-left: 1px solid black;
