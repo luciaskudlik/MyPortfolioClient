@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withAuth } from "./../context/auth-context";
 import axios from "axios";
+import Navbar from "./../components/Navbar/Navbar";
 
 class Private extends Component {
   // state = {
@@ -19,6 +20,7 @@ class Private extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <h1>User Profile</h1>
         <p>Welcome {this.props.user && this.props.user.username}</p>
         <img src={this.props.user.image} />

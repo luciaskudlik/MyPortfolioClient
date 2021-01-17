@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "./../context/auth-context";
 import axios from "axios";
+import Navbar from "./../components/Navbar/Navbar";
 
 class Signup extends Component {
   state = { username: "", image: "", occupation: "", email: "", password: "" };
@@ -45,6 +46,7 @@ class Signup extends Component {
     const { username, occupation, email, password } = this.state;
     return (
       <div>
+        <Navbar />
         <h1>Sign Up</h1>
 
         <form onSubmit={this.handleFormSubmit}>

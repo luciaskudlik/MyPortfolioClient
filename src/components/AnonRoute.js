@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { withAuth } from "./../context/auth-context";
+import Navbar from "./Navbar/Navbar";
 
 // Route that only allows access to a user who is not logged in
 
@@ -21,7 +22,12 @@ function AnonRoute(routeProps) {
       path={path}
       render={function (props) {
         if (isLoggedIn) return <Redirect to="/myprofile" />;
-        else if (!isLoggedIn) return <ComponentToShow {...props} />;
+        else if (!isLoggedIn)
+          return (
+            <div>
+              <ComponentToShow {...props} />;
+            </div>
+          );
       }}
     />
   );

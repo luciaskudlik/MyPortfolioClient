@@ -1,6 +1,6 @@
-import Axios from "axios";
 import React from "react";
 import axios from "axios";
+import Navbar from "./../components/Navbar/Navbar";
 
 class UserProfile extends React.Component {
   state = {
@@ -20,6 +20,7 @@ class UserProfile extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <h1>User Profile</h1>
         <h2>{this.state.user.username}</h2>
         <h4>{this.state.user.occupation}</h4>

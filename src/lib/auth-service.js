@@ -11,15 +11,16 @@ class AuthService {
   signup(username, image, occupation, email, password) {
     const pr = this.auth
       .post("/auth/signup", { username, image, occupation, email, password })
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch(err => console.log("SIGNUP DIDNT WORK"));
     // .then(({ data }) => data); // Shorter way of `.then((response) => response.data);`
 
     return pr;
   }
 
-  login(username, password) {
+  login(email, password) {
     const pr = this.auth
-      .post("/auth/login", { username, password })
+      .post("/auth/login", { email, password })
       .then((response) => response.data);
 
     return pr;

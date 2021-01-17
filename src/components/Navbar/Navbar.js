@@ -9,9 +9,9 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to={"/"}>
             Navbar
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -26,7 +26,11 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link to={"/"} className="nav-link active" aria-current="page">
+                <Link
+                  to={"/home"}
+                  className="nav-link active"
+                  aria-current="page"
+                >
                   Home
                 </Link>
               </li>
