@@ -42,7 +42,7 @@ class Home extends React.Component {
     return (
       <div>
         <Navbar />
-        <h1>Home Page</h1>
+
         <Searchbar filterUsers={this.filterUsers} />
         {this.state.showErrorMessage ? (
           <p>sorry we didnt find any users with that name</p>

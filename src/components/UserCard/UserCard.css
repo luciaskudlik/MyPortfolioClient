@@ -3,7 +3,6 @@
   display: flex;
   padding: 10px;
   align-items: center;
-  border: 1px solid black;
 }
 
 .user-card img {
