@@ -48,7 +48,11 @@ class Home extends React.Component {
           <p>sorry we didnt find any users with that name</p>
         ) : null}
         {this.state.filteredUsers.map((user) => {
-          return <UserCard userOnCard={user} />;
+          return (
+            <div key={user._id}>
+              <UserCard userOnCard={user} />
+            </div>
+          );
         })}
       </div>
     );

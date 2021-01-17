@@ -1,0 +1,32 @@
+.project-card {
+  border: 1px solid grey;
+  border-radius: 3px;
+  width: 90vw;
+  margin: 0 auto;
+  height: 250px;
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.fa-github {
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.back p {
+  border-left: 1px solid black;
+  height: 220px;
+  padding: 10px;
+}

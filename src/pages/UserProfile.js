@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
+import ProjectCard from "./../components/ProjectCard/ProjectCard";
 import { withAuth } from "./../context/auth-context";
 
 class UserProfile extends React.Component {
@@ -8,6 +9,7 @@ class UserProfile extends React.Component {
     user: {},
     currentUser: {},
     following: false,
+    portfolio: [],
   };
 
   componentDidMount = () => {
@@ -15,7 +17,10 @@ class UserProfile extends React.Component {
     axios
       .get(`http://localhost:5000/api/user/${id}`)
       .then((response) => {
-        this.setState({ user: response.data });
+        this.setState({
+          user: response.data,
+          portfolio: response.data.portfolio,
+        });
       })
       .catch((err) => console.log(err));
 
@@ -92,6 +97,16 @@ class UserProfile extends React.Component {
         {this.props.user && !this.state.following ? (
           <button onClick={this.followUser}> + Follow</button>
         ) : null}
+
+        {this.state.portfolio.length > 0
+          ? this.state.user.portfolio.map((project) => {
+              return (
+                <div key={project._id}>
+                  <ProjectCard project={project} />
+                </div>
+              );
+            })
+          : null}
       </div>
     );
   }
