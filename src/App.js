@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
+import withTheme from "./hoc/withTheme";
 
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
@@ -17,7 +18,7 @@ import PublicRoute from "./components/PrivateRoute";
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App" style={this.props.style}>
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/home" component={Home} />
@@ -33,4 +34,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withTheme(App, "light");

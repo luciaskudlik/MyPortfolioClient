@@ -59,7 +59,10 @@ class UserProfile extends React.Component {
       )
       .then((response) => {
         console.log("followed succesfully");
-        this.setState({ following: true });
+        this.setState({
+          following: true,
+          followers: [...this.state.followers, currentUserId],
+        });
       })
       .catch((err) => console.log(err));
   };
@@ -77,7 +80,10 @@ class UserProfile extends React.Component {
       )
       .then((response) => {
         console.log("unfollowed succesfully");
-        this.setState({ following: false });
+        const newFollowers = this.state.followers.filter(
+          (follower) => follower !== currentUserId
+        );
+        this.setState({ following: false, followers: newFollowers });
       })
       .catch((err) => console.log(err));
   };

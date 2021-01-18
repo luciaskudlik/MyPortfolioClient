@@ -13,8 +13,14 @@
 }
 
 .fa-github {
-  height: 20px;
-  width: 20px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+}
+
+.fa-globe {
+  height: 50px;
+  width: 50px;
   border: 1px solid black;
 }
 
