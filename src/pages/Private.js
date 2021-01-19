@@ -3,20 +3,25 @@ import { withAuth } from "./../context/auth-context";
 import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
 import AddProject from "./../components/AddProject/AddProject";
+import ProjectCard from "../components/ProjectCard/ProjectCard";
 
 class Private extends Component {
-  // state = {
-  //   user: {},
-  // };
+  state = {
+    portfolio: [],
+  };
 
-  // componentDidMount = () => {
-  //   axios
-  //     .get("http://localhost:5000/api/user")
-  //     .then((response) => {
-  //       this.setState({ user: response.data });
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
+  displayProjects = () => {
+    axios
+      .get(`http://localhost:5000/api/user`, { withCredentials: true })
+      .then((response) => {
+        console.log("rendered");
+        this.setState({ portfolio: response.data.portfolio });
+      });
+  };
+
+  componentDidMount = () => {
+    this.displayProjects();
+  };
 
   render() {
     return (
@@ -27,7 +32,13 @@ class Private extends Component {
         <img src={this.props.user.image} className="user-image" />
         <h2>{this.props.user.username}</h2>
         <h4>{this.props.user.occupation}</h4>
-        <AddProject />
+        <AddProject displayProjects={this.displayProjects} />
+
+        {this.state.portfolio
+          .map((project) => {
+            return <ProjectCard project={project} />;
+          })
+          .reverse()}
       </div>
     );
   }

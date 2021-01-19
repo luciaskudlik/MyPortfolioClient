@@ -26,13 +26,13 @@ class ProjectCard extends Component {
           <div className="project-card back" onClick={this.toggleCard}>
             <a href="https://github.com/" target="_blank">
               <i
-                class="fab fa-github"
-                style={{ color: "black", fontSize: "30px" }}
+                className="fab fa-github"
+                style={{ color: "black", fontSize: "100px" }}
               ></i>
             </a>
             <i
-              class="fas fa-globe"
-              style={{ color: "black", fontSize: "30px" }}
+              className="fas fa-globe"
+              style={{ color: "black", fontSize: "100px" }}
             ></i>
             <p>{this.props.project.description} </p>
           </div>

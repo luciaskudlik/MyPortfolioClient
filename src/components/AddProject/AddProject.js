@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { withAuth } from "./../../context/auth-context";
 import "./AddProject.css";
 
 class AddProject extends Component {
   state = {
     title: "",
+    image: "",
     description: "",
     deployedLink: "",
     githubLink: "",
@@ -14,6 +16,63 @@ class AddProject extends Component {
     let { name, value, type } = event.target;
 
     this.setState({ [name]: value });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const { title, image, description, deployedLink, githubLink } = this.state;
+
+    const userId = this.props.user._id;
+
+    axios
+      .post(
+        "http://localhost:5000/api/projects",
+        {
+          title,
+          image,
+          description,
+          deployedLink,
+          githubLink,
+          userId,
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        this.props.displayProjects();
+      })
+      .catch((err) => console.log(err));
+
+    this.setState({
+      title: "",
+      image: "",
+      description: "",
+      deployedLink: "",
+      githubLink: "",
+    });
+  };
+
+  handleFileUpload = (e) => {
+    console.log("The file to be uploaded is: ", e.target.files);
+    const file = e.target.files[0];
+
+    const uploadData = new FormData();
+    // image => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new project in '/api/projects' POST route
+    uploadData.append("image", file);
+
+    axios
+      .post("http://localhost:5000/api/upload", uploadData, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log("response is: ", response);
+        // after the console.log we can see that response carries 'secure_url' which we can use to update the state
+        this.setState({ image: response.data.secure_url });
+      })
+      .catch((err) => {
+        console.log("Error while uploading the file: ", err);
+      });
   };
 
   render() {
@@ -27,6 +86,19 @@ class AddProject extends Component {
           placeholder="name of your project"
           required
         />
+
+        <input
+          name="image"
+          type="file"
+          onChange={this.handleFileUpload}
+        ></input>
+        <span>
+          <img
+            style={{ width: "100px" }}
+            src={this.state.image && this.state.image}
+            alt=""
+          ></img>
+        </span>
 
         <textarea
           type="text"
@@ -58,4 +130,4 @@ class AddProject extends Component {
   }
 }
 
-export default AddProject;
+export default withAuth(AddProject);
