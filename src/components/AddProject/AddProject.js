@@ -7,7 +7,9 @@ class AddProject extends Component {
   state = {
     title: "",
     image: "",
+    about: "",
     description: "",
+    technologies: "",
     deployedLink: "",
     githubLink: "",
   };
@@ -21,7 +23,15 @@ class AddProject extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { title, image, description, deployedLink, githubLink } = this.state;
+    const {
+      title,
+      image,
+      about,
+      description,
+      technologies,
+      deployedLink,
+      githubLink,
+    } = this.state;
 
     const userId = this.props.user._id;
 
@@ -31,7 +41,9 @@ class AddProject extends Component {
         {
           title,
           image,
+          about,
           description,
+          technologies,
           deployedLink,
           githubLink,
           userId,
@@ -40,13 +52,16 @@ class AddProject extends Component {
       )
       .then(() => {
         this.props.displayProjects();
+        this.props.toggleForm();
       })
       .catch((err) => console.log(err));
 
     this.setState({
       title: "",
       image: "",
+      about: "",
       description: "",
+      technologies: "",
       deployedLink: "",
       githubLink: "",
     });
@@ -99,13 +114,28 @@ class AddProject extends Component {
             alt=""
           ></img>
         </span>
-
+        <input
+          type="text"
+          name="about"
+          value={this.state.about}
+          onChange={this.handleInput}
+          placeholder="e.g restaurant finder"
+          required
+        />
         <textarea
           type="text"
           name="description"
           value={this.state.description}
           onChange={this.handleInput}
           placeholder="e.g. technologies used"
+          required
+        />
+        <input
+          type="text"
+          name="technologies"
+          value={this.state.technologies}
+          onChange={this.handleInput}
+          placeholder="technolgies"
           required
         />
         <input

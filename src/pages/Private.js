@@ -8,6 +8,11 @@ import ProjectCard from "../components/ProjectCard/ProjectCard";
 class Private extends Component {
   state = {
     portfolio: [],
+    showForm: false,
+  };
+
+  toggleForm = () => {
+    this.setState({ showForm: !this.state.showForm });
   };
 
   displayProjects = () => {
@@ -27,16 +32,28 @@ class Private extends Component {
     return (
       <div className="user-profile">
         <Navbar />
-        <h1>User Profile</h1>
         <p>Welcome {this.props.user && this.props.user.username}</p>
         <img src={this.props.user.image} className="user-image" />
         <h2>{this.props.user.username}</h2>
         <h4>{this.props.user.occupation}</h4>
-        <AddProject displayProjects={this.displayProjects} />
+        <button onClick={this.toggleForm}>
+          Add a new project to your portfolio
+        </button>
+        {this.state.showForm ? (
+          <AddProject
+            displayProjects={this.displayProjects}
+            toggleForm={this.toggleForm}
+          />
+        ) : null}
 
         {this.state.portfolio
           .map((project) => {
-            return <ProjectCard project={project} />;
+            return (
+              <ProjectCard
+                project={project}
+                displayProjects={this.displayProjects}
+              />
+            );
           })
           .reverse()}
       </div>

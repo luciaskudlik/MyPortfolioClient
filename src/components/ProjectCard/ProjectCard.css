@@ -12,16 +12,38 @@
   object-fit: cover;
 }
 
+.bottom-card {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.link-icons {
+  display: flex;
+  flex-direction: column;
+  width: 80px;
+  text-align: center;
+}
+
 .fa-github {
-  height: 50px;
-  width: 50px;
-  border: 1px solid black;
+  font-size: 30px;
+  color: grey;
+  margin-bottom: 20px;
+}
+
+.fa-github:hover {
+  color: orange;
+}
+
+.fa-globe:hover {
+  color: orange;
 }
 
 .fa-globe {
-  height: 50px;
-  width: 50px;
-  border: 1px solid black;
+  font-size: 30px;
+  color: grey;
 }
 
 .back {
@@ -29,8 +51,12 @@
   align-items: center;
 }
 
-.back p {
+.description {
   border-left: 1px solid black;
   height: 220px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: grey;
 }

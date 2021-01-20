@@ -7,7 +7,7 @@ function withTheme(WrappedComonent, mode) {
   };
 
   const lightModeStyle = {
-    background: "#d0e8f2",
+    background: "#fcf8ec",
     color: "black",
   };
 

@@ -9,6 +9,7 @@ class UserProfile extends React.Component {
     user: {},
     currentUser: {},
     followers: [],
+    userIsFollowing: [],
     following: false,
     portfolio: [],
   };
@@ -22,6 +23,7 @@ class UserProfile extends React.Component {
           user: response.data,
           portfolio: response.data.portfolio,
           followers: response.data.followers,
+          userIsFollowing: response.data.following,
         });
       })
       .catch((err) => console.log(err));
@@ -98,30 +100,37 @@ class UserProfile extends React.Component {
             <div>
               <h2>{this.state.user.username}</h2>
               <h4>{this.state.user.occupation}</h4>
-              <p>{this.state.followers.length} followers</p>
+              <div className="followers-following">
+                <p>{this.state.followers.length} followers</p>
+                <p>{this.state.userIsFollowing.length} following</p>
+              </div>
             </div>
           </div>
+          <div className="user-details-bottom">
+            <div>
+              <i className="far fa-envelope"></i>
+              <p>{this.state.user.email}</p>
+            </div>
 
-          {this.props.user && this.state.following ? (
-            <button onClick={this.unfollowUser}> - unfollow</button>
-          ) : null}
-          {this.props.user && !this.state.following ? (
-            <button onClick={this.followUser}> + Follow</button>
-          ) : null}
-          <div>
-            <i class="far fa-envelope"></i>
-            <p>{this.state.user.email}</p>
+            {this.props.user && this.state.following ? (
+              <button onClick={this.unfollowUser}> - unfollow</button>
+            ) : null}
+            {this.props.user && !this.state.following ? (
+              <button onClick={this.followUser}> + Follow</button>
+            ) : null}
           </div>
         </div>
 
         {this.state.portfolio.length > 0
-          ? this.state.user.portfolio.map((project) => {
-              return (
-                <div key={project._id}>
-                  <ProjectCard project={project} />
-                </div>
-              );
-            })
+          ? this.state.user.portfolio
+              .map((project) => {
+                return (
+                  <div key={project._id}>
+                    <ProjectCard project={project} />
+                  </div>
+                );
+              })
+              .reverse()
           : null}
       </div>
     );
