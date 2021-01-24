@@ -126,7 +126,7 @@ class UserProfile extends React.Component {
               .map((project) => {
                 return (
                   <div key={project._id}>
-                    <ProjectCard project={project} />
+                    <ProjectCard project={project} showEditOptions={false} />
                   </div>
                 );
               })

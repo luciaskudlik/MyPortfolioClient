@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./ProjectCard.css";
 import { Link } from "react-router-dom";
+import EditProject from "./../EditProject/EditProject";
 
 class ProjectCard extends Component {
   state = {
     showFront: true,
+    showEditForm: false,
+    showCommentSection: false,
   };
 
   toggleCard = () => {
@@ -21,19 +24,33 @@ class ProjectCard extends Component {
       .catch((err) => console.log(err));
   };
 
+  toggleEditForm = () => {
+    this.setState({ showEditForm: !this.state.showEditForm });
+  };
+
+  toggleComments = () => {};
+
   render() {
     return (
       <div>
         {this.state.showFront ? (
-          <div className="project-card front" onClick={this.toggleCard}>
-            <img src={this.props.project.image} />
+          <div className="project-card front">
+            <img src={this.props.project.image} onClick={this.toggleCard} />
             <div className="bottom-card">
               <p>{this.props.project.title}</p>
               <p>{this.props.project.about}</p>
               <div>
-                <i className="fas fa-pen"></i>
-                <i className="fas fa-trash" onClick={this.deleteProject}></i>
-                <i className="far fa-comment"></i>
+                {this.props.showEditOptions ? (
+                  <div>
+                    <i className="fas fa-pen" onClick={this.toggleEditForm}></i>
+                    <i
+                      className="fas fa-trash"
+                      onClick={this.deleteProject}
+                    ></i>
+                  </div>
+                ) : null}
+
+                <i className="far fa-comment" onClick={this.toggleComments}></i>
                 <i className="far fa-thumbs-up"></i>
               </div>
             </div>
@@ -54,6 +71,13 @@ class ProjectCard extends Component {
             </div>
           </div>
         )}
+        {this.state.showEditForm ? (
+          <EditProject
+            project={this.props.project}
+            toggleForm={this.toggleEditForm}
+            displayProjects={this.props.displayProjects}
+          />
+        ) : null}
       </div>
     );
   }

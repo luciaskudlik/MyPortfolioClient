@@ -52,6 +52,7 @@ class Private extends Component {
               <ProjectCard
                 project={project}
                 displayProjects={this.displayProjects}
+                showEditOptions={true}
               />
             );
           })
