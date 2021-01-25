@@ -53,6 +53,7 @@ class Private extends Component {
                 project={project}
                 displayProjects={this.displayProjects}
                 showEditOptions={true}
+                showCommentInput={true}
               />
             );
           })
