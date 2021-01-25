@@ -12,6 +12,7 @@ class UserProfile extends React.Component {
     userIsFollowing: [],
     following: false,
     portfolio: [],
+    loggedInUser: false,
   };
 
   componentDidMount = () => {
@@ -30,6 +31,9 @@ class UserProfile extends React.Component {
 
     if (this.props.user) {
       console.log(this.props.user);
+
+      this.setState({ loggedInUser: true });
+
       axios
         .get(`http://localhost:5000/api/user`, { withCredentials: true })
         .then((response) => {
@@ -126,7 +130,11 @@ class UserProfile extends React.Component {
               .map((project) => {
                 return (
                   <div key={project._id}>
-                    <ProjectCard project={project} showEditOptions={false} />
+                    <ProjectCard
+                      project={project}
+                      showEditOptions={false}
+                      showCommentInput={this.state.loggedInUser}
+                    />
                   </div>
                 );
               })

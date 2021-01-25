@@ -1,0 +1,19 @@
+.comment {
+  display: flex;
+}
+
+.comment > img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.comment-center > p {
+  font-size: 0.7rem;
+}
+
+.delete-x {
+  margin-left: 80px;
+  
+}

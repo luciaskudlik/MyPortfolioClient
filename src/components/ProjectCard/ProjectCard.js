@@ -72,6 +72,7 @@ class ProjectCard extends Component {
                 <i className="far fa-comment" onClick={this.toggleComments}></i>
                 <i className="far fa-thumbs-up"></i>
               </div>
+              <p>{this.state.comments.length} comments</p>
             </div>
           </div>
         ) : (
@@ -105,13 +106,18 @@ class ProjectCard extends Component {
                 displayComments={this.displayComments}
                 toggleComments={this.toggleComments}
               />
-            ) : <p>You must log in to comment on projects</p>}
+            ) : (
+              <p>You must log in to comment on projects</p>
+            )}
 
             {this.state.comments
               .map((comment) => {
                 return (
                   <div key={comment._id}>
-                    <Comment comment={comment} />
+                    <Comment
+                      comment={comment}
+                      displayComments={this.displayComments}
+                    />
                   </div>
                 );
               })
