@@ -5,7 +5,14 @@ import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
 
 class Signup extends Component {
-  state = { username: "", image: "", occupation: "", email: "", password: "" };
+  state = {
+    username: "",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRI7M4Z0v1HP2Z9tZmfQaZFCuspezuoxter_A&usqp=CAU",
+    occupation: "",
+    email: "",
+    password: "",
+  };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -56,6 +63,7 @@ class Signup extends Component {
             name="username"
             value={username}
             onChange={this.handleChange}
+            required
           />
 
           <label>Image</label>
@@ -78,6 +86,7 @@ class Signup extends Component {
             name="occupation"
             value={occupation}
             onChange={this.handleChange}
+            required
           />
 
           <label>Email:</label>
@@ -86,6 +95,7 @@ class Signup extends Component {
             name="email"
             value={email}
             onChange={this.handleChange}
+            required
           />
 
           <label>Password:</label>
@@ -94,6 +104,7 @@ class Signup extends Component {
             name="password"
             value={password}
             onChange={this.handleChange}
+            required
           />
 
           <input type="submit" value="Signup" />

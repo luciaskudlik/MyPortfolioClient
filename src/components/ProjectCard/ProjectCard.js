@@ -13,6 +13,7 @@ class ProjectCard extends Component {
     showEditForm: false,
     showCommentSection: false,
     comments: [],
+    likedBy: [],
   };
 
   toggleCard = () => {
@@ -40,7 +41,48 @@ class ProjectCard extends Component {
     axios
       .get(`http://localhost:5000/api/projects/${this.props.project._id}`)
       .then((response) => {
-        this.setState({ comments: response.data.comments });
+        this.setState({
+          comments: response.data.comments,
+          likedBy: response.data.likedBy,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  showAlert = () => {
+    alert("you must log in to write a comment");
+  };
+
+  like = () => {
+    const userId = this.props.user._id;
+    axios
+      .post(
+        `http://localhost:5000/api/projects/like/${this.props.project._id}`,
+        { userId },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        this.displayComments();
+        this.props.updateLikes();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  dislike = () => {
+    const userId = this.props.user._id;
+    axios
+      .post(
+        `http://localhost:5000/api/projects/dislike/${this.props.project._id}`,
+        { userId },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        this.displayComments();
+        this.props.updateLikes();
       })
       .catch((err) => console.log(err));
   };
@@ -50,14 +92,35 @@ class ProjectCard extends Component {
   };
 
   render() {
+    // const alreadyLiked = this.props.project.likedBy.includes(
+    //   this.props.user._id
+    // );
+    // console.log(alreadyLiked);
     return (
       <div>
         {this.state.showFront ? (
           <div className="project-card front">
             <img src={this.props.project.image} onClick={this.toggleCard} />
             <div className="bottom-card">
-              <p>{this.props.project.title}</p>
-              <p>{this.props.project.about}</p>
+              <div>
+                <div className="project-name">
+                  <p>{this.props.project.title}</p>
+                  <p>{this.props.project.about}</p>
+                </div>
+                <div className="like-comment-calculator">
+                  {this.state.comments.length > 0 ? (
+                    <p onClick={this.toggleComments}>
+                      {this.state.comments.length} comments
+                    </p>
+                  ) : null}
+                  {this.state.likedBy.length > 0 ? (
+                    <p>
+                      liked by{this.state.likedBy[0].username} and
+                      {this.state.likedBy.length - 1} others
+                    </p>
+                  ) : null}
+                </div>
+              </div>
               <div>
                 {this.props.showEditOptions ? (
                   <div>
@@ -68,11 +131,18 @@ class ProjectCard extends Component {
                     ></i>
                   </div>
                 ) : null}
-
                 <i className="far fa-comment" onClick={this.toggleComments}></i>
-                <i className="far fa-thumbs-up"></i>
+
+                {this.props.enableLikes &&
+                !this.props.project.likedBy.includes(this.props.user._id) ? (
+                  <i className="far fa-thumbs-up" onClick={this.like}></i>
+                ) : null}
+
+                {this.props.enableLikes &&
+                this.props.project.likedBy.includes(this.props.user._id) ? (
+                  <i className="far fa-thumbs-down" onClick={this.dislike}></i>
+                ) : null}
               </div>
-              <p>{this.state.comments.length} comments</p>
             </div>
           </div>
         ) : (
@@ -107,7 +177,10 @@ class ProjectCard extends Component {
                 toggleComments={this.toggleComments}
               />
             ) : (
-              <p>You must log in to comment on projects</p>
+              <div>
+                <input placeholder="log in to write a comment" />
+                <button onClick={this.showAlert}>Post</button>
+              </div>
             )}
 
             {this.state.comments

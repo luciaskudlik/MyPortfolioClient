@@ -54,6 +54,8 @@ class Private extends Component {
                 displayProjects={this.displayProjects}
                 showEditOptions={true}
                 showCommentInput={true}
+                enableLikes={true}
+                updateLikes={this.displayProjects}
               />
             );
           })

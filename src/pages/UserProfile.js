@@ -134,6 +134,8 @@ class UserProfile extends React.Component {
                       project={project}
                       showEditOptions={false}
                       showCommentInput={this.state.loggedInUser}
+                      enableLikes={this.state.loggedInUser}
+                      updateLikes={this.componentDidMount}
                     />
                   </div>
                 );
