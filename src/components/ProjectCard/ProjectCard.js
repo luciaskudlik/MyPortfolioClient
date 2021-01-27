@@ -151,14 +151,24 @@ class ProjectCard extends Component {
                 <i className="far fa-comment" onClick={this.toggleComments}></i>
 
                 {this.props.enableLikes &&
-                !this.props.project.likedBy.includes(this.props.user._id) ? (
+                this.state.likedBy.every((user) => {
+                  return user._id !== this.props.user._id;
+                }) ? (
                   <i className="far fa-thumbs-up" onClick={this.like}></i>
-                ) : null}
-
-                {this.props.enableLikes &&
-                this.props.project.likedBy.includes(this.props.user._id) ? (
+                ) : this.props.enableLikes &&
+                  this.state.likedBy.some((user) => {
+                    return user._id === this.props.user._id;
+                  }) ? (
                   <i className="far fa-thumbs-down" onClick={this.dislike}></i>
                 ) : null}
+
+                {/* {this.props.enableLikes &&
+                !this.props.project.likedBy.includes(this.props.user._id) ? (
+                  <i className="far fa-thumbs-up" onClick={this.like}></i>
+                ) : this.props.enableLikes &&
+                  this.props.project.likedBy.includes(this.props.user._id) ? (
+                  <i className="far fa-thumbs-down" onClick={this.dislike}></i>
+                ) : null} */}
               </div>
             </div>
           </div>
