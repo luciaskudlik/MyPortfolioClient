@@ -114,10 +114,27 @@ class ProjectCard extends Component {
                     </p>
                   ) : null}
                   {this.state.likedBy.length > 0 ? (
-                    <p>
-                      liked by{this.state.likedBy[0].username} and
-                      {this.state.likedBy.length - 1} others
-                    </p>
+                    <div className="likedBy-line">
+                      {this.state.likedBy.map((user, index) => {
+                        if (index <= 2) {
+                          return (
+                            <div key={user._id} id="mini-img-container">
+                              <img src={user.image} id="mini-img" />
+                            </div>
+                          );
+                        }
+                      })}
+
+                      <p>
+                        liked by{this.state.likedBy[0].username}
+                        {this.state.likedBy.length >= 2 ? (
+                          <p>
+                            and
+                            {this.state.likedBy.length - 1} others
+                          </p>
+                        ) : null}
+                      </p>
+                    </div>
                   ) : null}
                 </div>
               </div>

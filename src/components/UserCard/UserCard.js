@@ -10,17 +10,25 @@ class UserCard extends Component {
       <div>
         {this.props.user &&
         this.props.userOnCard._id === this.props.user._id ? (
-          <Link to={"/myprofile"}>
+          <Link to={"/myprofile"} className="link">
             <div className="user-card">
               <img src={this.props.userOnCard.image} />
-              <p>{this.props.userOnCard.username}</p>
+              <div>
+                <p>{this.props.userOnCard.username}</p>
+                <p>{this.props.userOnCard.occupation}</p>
+              </div>
             </div>
           </Link>
         ) : (
-          <Link to={`/user/${this.props.userOnCard._id}`}>
+          <Link to={`/user/${this.props.userOnCard._id}`} className="link">
             <div className="user-card">
               <img src={this.props.userOnCard.image} />
-              <p>{this.props.userOnCard.username}</p>
+              <div>
+                <p className="name-info">{this.props.userOnCard.username}</p>
+                <p className="occupation-info">
+                  {this.props.userOnCard.occupation}
+                </p>
+              </div>
             </div>
           </Link>
         )}{" "}

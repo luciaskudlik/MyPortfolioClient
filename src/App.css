@@ -2,7 +2,7 @@
   margin: 0;
 }
 
-/* landing page */
+/**************************** landing page ******************************/
 
 #landing-page {
   background-image: url("./images/simone-hutsch-GnHUOyPV0WI-unsplash.jpg");
@@ -37,7 +37,29 @@
   background-color: orange;
 }
 
-/* user profile */
+/****************************** home page *****************************/
+
+#homepage {
+  text-align: center;
+}
+
+#homepage h3 {
+  font-size: 1.3rem;
+  margin-top: 20px;
+}
+
+#homepage p {
+  font-size: 0.9rem;
+  margin: 20px;
+}
+
+#laptop-image {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+/****************************** user profile *****************************/
 
 .user-image {
   height: 80px;
@@ -46,10 +68,6 @@
   border-radius: 50%;
   border: 3px solid white;
 }
-
-/* .user-profile {
-  background-color: #d0e8f2;
-} */
 
 .user-details {
   /* display: flex; */

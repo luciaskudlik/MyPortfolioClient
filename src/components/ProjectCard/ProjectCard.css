@@ -28,14 +28,33 @@
   font-size: 0.8rem;
 }
 
+#mini-img-container {
+  width: 10px;
+  
+}
+
+#mini-img {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.likedBy-line {
+  display: flex;
+  
+}
+
+.likedBy-line > p {
+  margin-left: 12px;
+}
+
 .link-icons {
   display: flex;
   flex-direction: column;
   width: 80px;
   text-align: center;
 }
-
-
 
 .fa-github {
   font-size: 30px;

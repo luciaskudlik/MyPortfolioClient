@@ -3,12 +3,15 @@ import Searchbar from "./../components/Searchbar/Searchbar";
 import Navbar from "./../components/Navbar/Navbar";
 import axios from "axios";
 import UserCard from "../components/UserCard/UserCard";
+import image1 from "./../images/windows-C6T6vr1sQI0-unsplash.jpg";
+import image2 from "./../images/ramiro-mendes-CjS3QsRuxnE-unsplash.jpg";
 
 class Home extends React.Component {
   state = {
     allUsers: [],
     filteredUsers: [],
     showErrorMessage: false,
+    hidePageContent: false,
   };
 
   filterUsers = (input) => {
@@ -18,14 +21,22 @@ class Home extends React.Component {
       return userName.includes(searchInput);
     });
 
-    this.setState({ filteredUsers: filtered, showErrorMessage: false });
+    this.setState({
+      filteredUsers: filtered,
+      showErrorMessage: false,
+      hidePageContent: true,
+    });
 
     if (filtered.length === 0) {
-      this.setState({ showErrorMessage: true });
+      this.setState({ showErrorMessage: true, hidePageContent: true });
     }
 
     if (input === "") {
-      this.setState({ filteredUsers: [], showErrorMessage: false });
+      this.setState({
+        filteredUsers: [],
+        showErrorMessage: false,
+        hidePageContent: false,
+      });
     }
   };
 
@@ -54,6 +65,29 @@ class Home extends React.Component {
             </div>
           );
         })}
+
+        {this.state.hidePageContent ? null : (
+          <div id="homepage">
+            <img src={image1} id="laptop-image" />
+            <h3>Why do i need a portfolio</h3>
+            <p>
+              As a young developer the projects we've built are what count most
+              on the job market. Show employers what you have developed to
+              increase your chances.
+            </p>
+            <img src={image2} id="laptop-image" />
+            <h3>How does it work?</h3>
+            <p>
+              If you are a company you can start searching for a user by name
+              and check out their profile. If you want to contact a user you can
+              see their email address on the top of their profile page.{" "}
+            </p>
+            <p>
+              If you are a developer you need to create an account with us to
+              build your profile and to share your projects.
+            </p>
+          </div>
+        )}
       </div>
     );
   }
