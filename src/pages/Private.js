@@ -32,10 +32,14 @@ class Private extends Component {
     return (
       <div className="user-profile">
         <Navbar />
-        <p>Welcome {this.props.user && this.props.user.username}</p>
+        <p>Welcome {this.props.user.username}</p>
         <img src={this.props.user.image} className="user-image" />
         <h2>{this.props.user.username}</h2>
         <h4>{this.props.user.occupation}</h4>
+        <div className="followers-following">
+                <p>{this.props.user.followers.length} followers</p>
+                <p>{this.props.user.following.length} following</p>
+              </div>
         <button onClick={this.toggleForm}>
           Add a new project to your portfolio
         </button>

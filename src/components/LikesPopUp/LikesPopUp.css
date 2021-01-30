@@ -1,0 +1,12 @@
+.likes-pop-up {
+  border: 1px solid black;
+  height: 300px;
+  width: 90vw;
+  margin: 0 auto;
+  position: fixed;
+  bottom: 50px;
+  left: 20px;
+  z-index: 1;
+  background-color: white;
+  overflow: scroll;
+}

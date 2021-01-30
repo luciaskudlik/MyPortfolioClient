@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
 import ProjectCard from "./../components/ProjectCard/ProjectCard";
 import { withAuth } from "./../context/auth-context";
+import LikesPopUp from "./../components/LikesPopUp/LikesPopUp";
 
 class UserProfile extends React.Component {
   state = {

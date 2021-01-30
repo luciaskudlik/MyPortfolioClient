@@ -6,6 +6,7 @@ import EditProject from "./../EditProject/EditProject";
 import Comment from "./../Comment/Comment";
 import AddComment from "./../AddComment/AddComment";
 import { withAuth } from "./../../context/auth-context";
+import LikesPopUp from "../LikesPopUp/LikesPopUp";
 
 class ProjectCard extends Component {
   state = {
@@ -14,6 +15,7 @@ class ProjectCard extends Component {
     showCommentSection: false,
     comments: [],
     likedBy: [],
+    showLikesPopUp: false,
   };
 
   toggleCard = () => {
@@ -51,6 +53,10 @@ class ProjectCard extends Component {
 
   showAlert = () => {
     alert("you must log in to write a comment");
+  };
+
+  toggleLikesPopUp = () => {
+    this.setState({ showLikesPopUp: !this.state.showLikesPopUp });
   };
 
   like = () => {
@@ -98,6 +104,15 @@ class ProjectCard extends Component {
     // console.log(alreadyLiked);
     return (
       <div>
+        {this.state.showLikesPopUp ? (
+          <div>
+            <LikesPopUp
+              toggleLikesPopUp={this.toggleLikesPopUp}
+              likedBy={this.state.likedBy}
+            />
+          </div>
+        ) : null}
+
         {this.state.showFront ? (
           <div className="project-card front">
             <img src={this.props.project.image} onClick={this.toggleCard} />
@@ -114,7 +129,10 @@ class ProjectCard extends Component {
                     </p>
                   ) : null}
                   {this.state.likedBy.length > 0 ? (
-                    <div className="likedBy-line">
+                    <div
+                      className="likedBy-line"
+                      onClick={this.toggleLikesPopUp}
+                    >
                       {this.state.likedBy.map((user, index) => {
                         if (index <= 2) {
                           return (

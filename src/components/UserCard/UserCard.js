@@ -14,8 +14,10 @@ class UserCard extends Component {
             <div className="user-card">
               <img src={this.props.userOnCard.image} />
               <div>
-                <p>{this.props.userOnCard.username}</p>
-                <p>{this.props.userOnCard.occupation}</p>
+                <p className="name-info">{this.props.userOnCard.username}</p>
+                <p className="occupation-info">
+                  {this.props.userOnCard.occupation}
+                </p>
               </div>
             </div>
           </Link>

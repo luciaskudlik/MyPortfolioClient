@@ -31,7 +31,7 @@ class Navbar extends Component {
                   className="nav-link active"
                   aria-current="page"
                 >
-                  Search
+                  Home
                 </Link>
               </li>
               {this.props.isLoggedIn ? (
