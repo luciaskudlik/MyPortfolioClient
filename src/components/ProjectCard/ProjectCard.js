@@ -6,7 +6,7 @@ import EditProject from "./../EditProject/EditProject";
 import Comment from "./../Comment/Comment";
 import AddComment from "./../AddComment/AddComment";
 import { withAuth } from "./../../context/auth-context";
-import LikesPopUp from "../LikesPopUp/LikesPopUp";
+import PopUp from "../PopUp/PopUp";
 
 class ProjectCard extends Component {
   state = {
@@ -106,9 +106,9 @@ class ProjectCard extends Component {
       <div>
         {this.state.showLikesPopUp ? (
           <div>
-            <LikesPopUp
-              toggleLikesPopUp={this.toggleLikesPopUp}
-              likedBy={this.state.likedBy}
+            <PopUp
+              togglePopUp={this.toggleLikesPopUp}
+              userArray={this.state.likedBy}
             />
           </div>
         ) : null}

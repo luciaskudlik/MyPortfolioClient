@@ -3,7 +3,7 @@ import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
 import ProjectCard from "./../components/ProjectCard/ProjectCard";
 import { withAuth } from "./../context/auth-context";
-import LikesPopUp from "./../components/LikesPopUp/LikesPopUp";
+import PopUp from "./../components/PopUp/PopUp";
 
 class UserProfile extends React.Component {
   state = {
@@ -14,6 +14,8 @@ class UserProfile extends React.Component {
     following: false,
     portfolio: [],
     loggedInUser: false,
+    showFollowersPopUp: false,
+    showFollowingPopUp: false,
   };
 
   componentDidMount = () => {
@@ -51,6 +53,14 @@ class UserProfile extends React.Component {
         })
         .catch((err) => console.log(err));
     }
+  };
+
+  toggleFollowersPopup = () => {
+    this.setState({ showFollowersPopUp: !this.state.showFollowersPopUp });
+  };
+
+  toggleFollowingPopup = () => {
+    this.setState({ showFollowingPopUp: !this.state.showFollowingPopUp });
   };
 
   followUser = () => {
@@ -106,8 +116,27 @@ class UserProfile extends React.Component {
               <h2>{this.state.user.username}</h2>
               <h4>{this.state.user.occupation}</h4>
               <div className="followers-following">
-                <p>{this.state.followers.length} followers</p>
-                <p>{this.state.userIsFollowing.length} following</p>
+                <p onClick={this.toggleFollowersPopup}>
+                  {this.state.followers.length} followers
+                </p>
+
+                {this.state.showFollowersPopUp ? (
+                  <PopUp
+                    userArray={this.state.followers}
+                    togglePopUp={this.toggleFollowersPopup}
+                  />
+                ) : null}
+
+                <p onClick={this.toggleFollowingPopup}>
+                  {this.state.userIsFollowing.length} following
+                </p>
+
+                {this.state.showFollowingPopUp ? (
+                  <PopUp
+                    userArray={this.state.userIsFollowing}
+                    togglePopUp={this.toggleFollowingPopup}
+                  />
+                ) : null}
               </div>
             </div>
           </div>

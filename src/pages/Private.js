@@ -4,11 +4,16 @@ import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
 import AddProject from "./../components/AddProject/AddProject";
 import ProjectCard from "../components/ProjectCard/ProjectCard";
+import PopUp from "../components/PopUp/PopUp";
 
 class Private extends Component {
   state = {
     portfolio: [],
     showForm: false,
+    showFollowersPopUp: false,
+    showFollowingPopUp: false,
+    followers: [],
+    following: [],
   };
 
   toggleForm = () => {
@@ -20,8 +25,20 @@ class Private extends Component {
       .get(`http://localhost:5000/api/user`, { withCredentials: true })
       .then((response) => {
         console.log("rendered");
-        this.setState({ portfolio: response.data.portfolio });
+        this.setState({
+          portfolio: response.data.portfolio,
+          followers: response.data.followers,
+          following: response.data.following,
+        });
       });
+  };
+
+  toggleFollowersPopup = () => {
+    this.setState({ showFollowersPopUp: !this.state.showFollowersPopUp });
+  };
+
+  toggleFollowingPopup = () => {
+    this.setState({ showFollowingPopUp: !this.state.showFollowingPopUp });
   };
 
   componentDidMount = () => {
@@ -37,9 +54,28 @@ class Private extends Component {
         <h2>{this.props.user.username}</h2>
         <h4>{this.props.user.occupation}</h4>
         <div className="followers-following">
-                <p>{this.props.user.followers.length} followers</p>
-                <p>{this.props.user.following.length} following</p>
-              </div>
+          <p onClick={this.toggleFollowersPopup}>
+            {this.state.followers.length} followers
+          </p>
+
+          {this.state.showFollowersPopUp ? (
+            <PopUp
+              userArray={this.props.user.followers}
+              togglePopUp={this.toggleFollowersPopup}
+            />
+          ) : null}
+
+          <p onClick={this.toggleFollowingPopup}>
+            {this.state.following.length} following
+          </p>
+
+          {this.state.showFollowingPopUp ? (
+            <PopUp
+              userArray={this.props.user.following}
+              togglePopUp={this.toggleFollowingPopup}
+            />
+          ) : null}
+        </div>
         <button onClick={this.toggleForm}>
           Add a new project to your portfolio
         </button>

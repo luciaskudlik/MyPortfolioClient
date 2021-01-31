@@ -16,14 +16,18 @@ class Searchbar extends Component {
   render() {
     return (
       <div className="search-container">
-        <input
-          type="text"
-          className="input search-bar"
-          name="search"
-          placeholder="Search for a user"
-          value={this.state.search}
-          onChange={this.handleInput}
-        />
+        <div id="search">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            className="input search-bar"
+            name="search"
+            placeholder="Search for a user"
+            value={this.state.search}
+            onChange={this.handleInput}
+          />
+        </div>
+        <i class="fas fa-times-circle"></i>
       </div>
     );
   }
