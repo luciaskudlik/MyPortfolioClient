@@ -59,7 +59,7 @@
   object-fit: cover;
 }
 
-/****************************** user profile *****************************/
+/****************************** user profile / private*****************************/
 
 .user-image {
   height: 80px;
@@ -109,4 +109,12 @@
 
 .top-left {
   display: flex;
+}
+
+.user-details h2 {
+  font-size: 1.7rem;
+}
+
+.user-details h4 {
+  font-size: 1rem;
 }
