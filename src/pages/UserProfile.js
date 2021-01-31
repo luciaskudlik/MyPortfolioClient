@@ -29,30 +29,38 @@ class UserProfile extends React.Component {
           followers: response.data.followers,
           userIsFollowing: response.data.following,
         });
+
+        if (this.props.user) {
+          this.setState({ loggedInUser: true });
+
+          if (
+            response.data.followers.some(
+              (follower) => follower._id === this.props.user._id
+            )
+          ) {
+            console.log("YES IT INCLUDES");
+            this.setState({ following: true });
+          }
+
+          // axios
+          //   .get(`http://localhost:5000/api/user`, { withCredentials: true })
+          //   .then((response) => {
+          //     const isFollowing = response.data.following.includes(
+          //       this.state.user._id
+          //     );
+
+          //     console.log("FOLLOWING?!", isFollowing);
+
+          //     this.setState({
+          //       currentUser: response.data,
+          //       following: isFollowing,
+          //     });
+          //     console.log(this.state.currentUser);
+          //   })
+          //   .catch((err) => console.log(err));
+        }
       })
       .catch((err) => console.log(err));
-
-    if (this.props.user) {
-      console.log(this.props.user);
-
-      this.setState({ loggedInUser: true });
-
-      axios
-        .get(`http://localhost:5000/api/user`, { withCredentials: true })
-        .then((response) => {
-          console.log(response.data.following.includes(this.state.user._id));
-          const isFollowing = response.data.following.includes(
-            this.state.user._id
-          );
-
-          this.setState({
-            currentUser: response.data,
-            following: isFollowing,
-          });
-          console.log(this.state.currentUser);
-        })
-        .catch((err) => console.log(err));
-    }
   };
 
   toggleFollowersPopup = () => {
@@ -106,6 +114,7 @@ class UserProfile extends React.Component {
   };
 
   render() {
+    console.log(this.state.userIsFollowing);
     return (
       <div className="user-profile">
         <Navbar />
@@ -120,7 +129,8 @@ class UserProfile extends React.Component {
                   {this.state.followers.length} followers
                 </p>
 
-                {this.state.showFollowersPopUp ? (
+                {this.state.showFollowersPopUp &&
+                this.state.followers.length > 0 ? (
                   <PopUp
                     userArray={this.state.followers}
                     togglePopUp={this.toggleFollowersPopup}
@@ -131,7 +141,8 @@ class UserProfile extends React.Component {
                   {this.state.userIsFollowing.length} following
                 </p>
 
-                {this.state.showFollowingPopUp ? (
+                {this.state.showFollowingPopUp &&
+                this.state.userIsFollowing.length > 0 ? (
                   <PopUp
                     userArray={this.state.userIsFollowing}
                     togglePopUp={this.toggleFollowingPopup}

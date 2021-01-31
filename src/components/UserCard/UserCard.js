@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./UserCard.css";
 import { Link } from "react-router-dom";
 import { withAuth } from "./../../context/auth-context";

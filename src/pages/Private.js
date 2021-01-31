@@ -46,36 +46,51 @@ class Private extends Component {
   };
 
   render() {
+    console.log(this.state.following);
+
     return (
       <div className="user-profile">
         <Navbar />
-        <p>Welcome {this.props.user.username}</p>
-        <img src={this.props.user.image} className="user-image" />
-        <h2>{this.props.user.username}</h2>
-        <h4>{this.props.user.occupation}</h4>
-        <div className="followers-following">
-          <p onClick={this.toggleFollowersPopup}>
-            {this.state.followers.length} followers
-          </p>
+        {this.props.user ? (
+          <div>
+            <div className="user-details private-user-details">
+              <img src={this.props.user.image} className="user-image" />
+              <div>
+                <div>
+                  <h2>{this.props.user.username}</h2>
+                  <h4>{this.props.user.occupation}</h4>
+                </div>
+                <div className="followers-following">
+                  <p onClick={this.toggleFollowersPopup}>
+                    {this.state.followers.length} followers
+                  </p>
 
-          {this.state.showFollowersPopUp ? (
-            <PopUp
-              userArray={this.props.user.followers}
-              togglePopUp={this.toggleFollowersPopup}
-            />
-          ) : null}
+                  {this.state.showFollowersPopUp &&
+                  this.state.followers.length > 0 ? (
+                    <PopUp
+                      userArray={this.state.followers}
+                      togglePopUp={this.toggleFollowersPopup}
+                    />
+                  ) : null}
 
-          <p onClick={this.toggleFollowingPopup}>
-            {this.state.following.length} following
-          </p>
+                  <p onClick={this.toggleFollowingPopup}>
+                    {this.state.following.length} following
+                  </p>
 
-          {this.state.showFollowingPopUp ? (
-            <PopUp
-              userArray={this.props.user.following}
-              togglePopUp={this.toggleFollowingPopup}
-            />
-          ) : null}
-        </div>
+                  {this.state.showFollowingPopUp &&
+                  this.state.following.length > 0 ? (
+                    <PopUp
+                      userArray={this.state.following}
+                      togglePopUp={this.toggleFollowingPopup}
+                    />
+                  ) : null}
+                </div>
+              </div>
+            </div>
+            <p>Welcome back {this.props.user.username}</p>
+          </div>
+        ) : null}
+        
         <button onClick={this.toggleForm}>
           Add a new project to your portfolio
         </button>

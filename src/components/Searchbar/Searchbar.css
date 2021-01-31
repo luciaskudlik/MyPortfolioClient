@@ -1,11 +1,11 @@
 .search-container {
-  width: 98vw;
+  width: 95vw;
   display: flex;
   align-items: center;
-  background-color: lightgrey;
+  background-color: #e8e8e8;
   padding: 0px 8px;
   border-radius: 8px;
-  margin: 2px auto;
+  margin: 10px auto;
 }
 
 .search-bar {
@@ -13,14 +13,23 @@
   margin: 0 auto;
   height: 30px;
   border: none;
-  background-color: lightgrey;
+  background-color: #e8e8e8;
 }
 
 #search {
-  background-color: lightgrey;
+  background-color: #e8e8e8;
   border: none;
   border-radius: 3px;
   width: 98%;
   display: flex;
   align-items: center;
+}
+
+.fa-search {
+  margin-right: 5px;
+  font-size: 1rem;
+}
+
+.search-icon {
+  color: #888888;
 }

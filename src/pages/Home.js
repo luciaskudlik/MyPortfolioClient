@@ -68,8 +68,12 @@ class Home extends React.Component {
 
         {this.state.hidePageContent ? null : (
           <div id="homepage">
+            <p>
+              Welcome to myPortfolio, a platform for developers to share their
+              greatest work.
+            </p>
             <img src={image1} id="laptop-image" />
-            <h3>Why do i need a portfolio</h3>
+            <h3>Why do I need a portfolio</h3>
             <p>
               As a young developer the projects we've built are what count most
               on the job market. Show employers what you have developed to

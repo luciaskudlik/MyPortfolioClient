@@ -13,11 +13,16 @@ class Searchbar extends Component {
     this.props.filterUsers(value);
   };
 
+  closeSearchbar = () => {
+    this.setState({ search: "" });
+    this.props.filterUsers("");
+  };
+
   render() {
     return (
       <div className="search-container">
         <div id="search">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search search-icon"></i>
           <input
             type="text"
             className="input search-bar"
@@ -27,7 +32,10 @@ class Searchbar extends Component {
             onChange={this.handleInput}
           />
         </div>
-        <i class="fas fa-times-circle"></i>
+        <i
+          class="fas fa-times-circle search-icon"
+          onClick={this.closeSearchbar}
+        ></i>
       </div>
     );
   }

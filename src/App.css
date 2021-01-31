@@ -67,6 +67,7 @@
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid white;
+  margin-right: 15px;
 }
 
 .user-details {
@@ -74,15 +75,22 @@
   height: 200px;
   width: 90vw;
   margin: 20px auto;
+  padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #fcf8ec;
+  background-color: #f0f0f0;
+}
+
+.private-user-details {
+  display: flex;
+  height: 150px;
 }
 
 .followers-following {
   display: flex;
   width: 170px;
   justify-content: space-between;
+  font-size: 0.9rem;
 }
 
 /* .user-details-bottom {
@@ -92,12 +100,11 @@
 .user-details-bottom > div {
   display: flex;
   align-items: center;
-  border: 1px solid black;
 }
 
 .fa-envelope {
   font-size: 20px;
-  border: 1px solid black;
+  margin-right: 10px;
 }
 
 .top-left {
