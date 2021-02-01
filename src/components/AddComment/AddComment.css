@@ -1,0 +1,22 @@
+.comment-input {
+  text-align: center;
+  border: none;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #e8e8e8;
+  margin-bottom: 10px;
+}
+
+.comment-input > input {
+  width: 270px;
+  border: none;
+  background-color: #e8e8e8;
+  font-size: 0.9rem;
+}
+
+.comment-input > button {
+  border: none;
+  background-color: white;
+  background-color: #e8e8e8;
+  font-size: 0.9rem;
+}

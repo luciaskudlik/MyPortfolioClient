@@ -53,7 +53,9 @@ class EditOccupation extends Component {
           placeholder="occupation"
           required
         />
-        <button type="submit">Update changes</button>
+        <button type="submit">
+          <i class="fas fa-pen" type="submit"></i>
+        </button>
       </form>
     );
   }

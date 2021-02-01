@@ -2,7 +2,7 @@
   border: none;
   border-radius: 10px;
   width: 90vw;
-  margin: 60px auto;
+  margin: 20px auto;
   height: 320px;
   box-shadow: 4px 4px 5px 1px rgba(73, 84, 100, 0.86);
   -webkit-box-shadow: 4px 4px 5px 1px rgba(73, 84, 100, 0.86);
@@ -129,4 +129,9 @@
   flex-direction: column;
   justify-content: space-between;
   color: grey;
+}
+
+.comment-section {
+  width: 90vw;
+  margin: 0 auto;
 }

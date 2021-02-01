@@ -219,7 +219,7 @@ class ProjectCard extends Component {
           />
         ) : null}
         {this.state.showCommentSection ? (
-          <div>
+          <div className="comment-section">
             {this.props.showCommentInput ? (
               <AddComment
                 project={this.props.project}
@@ -232,19 +232,20 @@ class ProjectCard extends Component {
                 <button onClick={this.showAlert}>Post</button>
               </div>
             )}
-
-            {this.state.comments
-              .map((comment) => {
-                return (
-                  <div key={comment._id}>
-                    <Comment
-                      comment={comment}
-                      displayComments={this.displayComments}
-                    />
-                  </div>
-                );
-              })
-              .reverse()}
+            <div>
+              {this.state.comments
+                .map((comment) => {
+                  return (
+                    <div key={comment._id}>
+                      <Comment
+                        comment={comment}
+                        displayComments={this.displayComments}
+                      />
+                    </div>
+                  );
+                })
+                .reverse()}
+            </div>
           </div>
         ) : null}
       </div>

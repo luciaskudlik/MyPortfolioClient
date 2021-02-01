@@ -72,7 +72,7 @@
 
 .user-details {
   /* display: flex; */
-  height: 200px;
+  height: 170px;
   width: 90vw;
   margin: 20px auto;
   padding: 10px;
@@ -112,7 +112,7 @@
 
 .followers-following {
   display: flex;
-  width: 170px;
+  width: 150px;
   justify-content: space-between;
   font-size: 0.9rem;
 }
@@ -141,9 +141,16 @@
 }
 
 .user-details h2 {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 }
 
 .user-details h4 {
   font-size: 1rem;
+}
+
+.follow-button {
+  border: 2px solid white;
+  margin: 10px;
+  font-size: 0.8rem;
+  width: 80px;
 }

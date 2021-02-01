@@ -36,13 +36,17 @@ class Comment extends Component {
 
     return (
       <div className="comment">
-        <img src={this.state.writtenBy.image} />
-        <div className="comment-center">
-          <div>{this.props.comment.text}</div>
-          <p>commented {commentedAt}</p>
+        <div className="comment-left">
+          <img src={this.state.writtenBy.image} />
+          <div className="comment-center">
+            <div>{this.props.comment.text}</div>
+            <p>commented {commentedAt}</p>
+          </div>
         </div>
         {this.props.user && this.state.writtenBy._id === this.props.user._id ? (
-          <p onClick={this.deleteComment} className="delete-x">x</p>
+          <p onClick={this.deleteComment} className="delete-x">
+            x
+          </p>
         ) : null}
       </div>
     );

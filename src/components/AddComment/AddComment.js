@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withAuth } from "./../../context/auth-context";
 import axios from "axios";
+import "./AddComment.css";
 
 class AddComment extends Component {
   state = {
@@ -42,7 +43,7 @@ class AddComment extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="comment-input">
         <input
           placeholder="write a comment"
           type="text"

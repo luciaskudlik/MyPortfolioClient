@@ -16,6 +16,7 @@ class UserProfile extends React.Component {
     loggedInUser: false,
     showFollowersPopUp: false,
     showFollowingPopUp: false,
+    showEmail: false,
   };
 
   componentDidMount = () => {
@@ -113,6 +114,10 @@ class UserProfile extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  displayEmail = () => {
+    this.setState({ showEmail: !this.state.showEmail });
+  };
+
   render() {
     console.log(this.state.userIsFollowing);
     return (
@@ -152,17 +157,24 @@ class UserProfile extends React.Component {
             </div>
           </div>
           <div className="user-details-bottom">
-            <div>
-              <i className="far fa-envelope"></i>
-              <p>{this.state.user.email}</p>
-            </div>
-
             {this.props.user && this.state.following ? (
-              <button onClick={this.unfollowUser}> - unfollow</button>
+              <button onClick={this.unfollowUser} className="follow-button">
+                {" "}
+                - unfollow
+              </button>
             ) : null}
             {this.props.user && !this.state.following ? (
-              <button onClick={this.followUser}> + Follow</button>
+              <button onClick={this.followUser} className="follow-button">
+                {" "}
+                + Follow
+              </button>
             ) : null}
+            <button className="follow-button">Message</button>
+            <button className="follow-button" onClick={this.displayEmail}>
+              Email
+            </button>
+
+            {this.state.showEmail ? <p>{this.state.user.email}</p> : null}
           </div>
         </div>
 
