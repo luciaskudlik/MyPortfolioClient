@@ -1,0 +1,17 @@
+.project-form {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.project-form input {
+  width: 80%;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.project-form textarea {
+  width: 80%;
+  margin: 10px auto;
+  border-radius: 5px;
+}

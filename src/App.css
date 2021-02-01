@@ -81,9 +81,33 @@
   background-color: #f0f0f0;
 }
 
+.edit-user {
+  display: flex;
+  align-items: flex-start;
+}
+
+#welcome-message {
+  text-align: center;
+  letter-spacing: 1px;
+  color: #9ec3c6;
+}
+
+#add-project {
+  text-align: center;
+  margin: 0 auto;
+  width: 250px;
+}
+
+#add-project > button {
+  border-radius: 5px;
+  border: none;
+  letter-spacing: 1px;
+  padding: 10px;
+}
+
 .private-user-details {
   display: flex;
-  height: 150px;
+  height: 120px;
 }
 
 .followers-following {
@@ -91,6 +115,11 @@
   width: 170px;
   justify-content: space-between;
   font-size: 0.9rem;
+}
+
+.edit-user > i {
+  font-size: 0.9rem;
+  margin-left: 10px;
 }
 
 /* .user-details-bottom {

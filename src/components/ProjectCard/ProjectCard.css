@@ -1,36 +1,70 @@
 .project-card {
-  border: 1px solid grey;
-  border-radius: 5px;
+  border: none;
+  border-radius: 10px;
   width: 90vw;
-  margin: 20px auto;
-  height: 300px;
+  margin: 60px auto;
+  height: 320px;
+  box-shadow: 4px 4px 5px 1px rgba(73, 84, 100, 0.86);
+  -webkit-box-shadow: 4px 4px 5px 1px rgba(73, 84, 100, 0.86);
+  -moz-box-shadow: 4px 4px 5px 1px rgba(73, 84, 100, 0.86);
+}
+
+.project-card:hover {
+  box-shadow: 2px 2px 2px 2px rgba(73, 84, 100, 0.86);
+  -webkit-box-shadow: 2px 2px 2px 1px rgba(73, 84, 100, 0.86);
+  -moz-box-shadow: 0px 0px 0px 0px rgba(73, 84, 100, 0.86);
 }
 
 .project-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .bottom-card {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 40px;
+  padding: 10px;
 }
 
 .project-name {
+  width: 90vw;
+}
+
+#colored-p {
+  color: #9ec3c6;
+  margin: 0px;
+}
+
+.card-icons {
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80px;
+  color: rgb(80, 78, 78);
+  margin-right: 10px;
+}
+
+.likes-comments {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#small-p {
+  font-size: 0.8rem;
 }
 
 .like-comment-calculator {
   font-size: 0.8rem;
+  width: 250px;
 }
 
 #mini-img-container {
   width: 10px;
-  
 }
 
 #mini-img {
@@ -40,20 +74,25 @@
   border-radius: 100%;
 }
 
-.likedBy-line {
-  display: flex;
-  
+.comment-line {
+  margin-bottom: 0px;
 }
 
-.likedBy-line > p {
+.likedBy-line {
+  display: flex;
+  margin-top: 0px;
+}
+
+.likedBy-line-written {
   margin-left: 12px;
+  display: flex;
 }
 
 .link-icons {
   display: flex;
   flex-direction: column;
-  width: 80px;
   text-align: center;
+  align-items: center;
 }
 
 .fa-github {
@@ -85,6 +124,8 @@
   height: 220px;
   padding: 10px;
   display: flex;
+  width: 80%;
+  margin: 0 auto;
   flex-direction: column;
   justify-content: space-between;
   color: grey;

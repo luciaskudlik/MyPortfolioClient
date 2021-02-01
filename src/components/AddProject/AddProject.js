@@ -92,13 +92,14 @@ class AddProject extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="project-form">
         <input
           type="text"
           name="title"
           value={this.state.title}
           onChange={this.handleInput}
           placeholder="name of your project"
+          maxlength="30"
           required
         />
 
@@ -119,7 +120,8 @@ class AddProject extends Component {
           name="about"
           value={this.state.about}
           onChange={this.handleInput}
-          placeholder="e.g restaurant finder"
+          placeholder="what kind of app - e.g restaurant finder"
+          maxlength="20"
           required
         />
         <textarea
@@ -127,7 +129,8 @@ class AddProject extends Component {
           name="description"
           value={this.state.description}
           onChange={this.handleInput}
-          placeholder="e.g. technologies used"
+          placeholder="description of the project"
+          maxlength="200"
           required
         />
         <input
@@ -135,7 +138,7 @@ class AddProject extends Component {
           name="technologies"
           value={this.state.technologies}
           onChange={this.handleInput}
-          placeholder="technolgies"
+          placeholder="technolgies used"
           required
         />
         <input

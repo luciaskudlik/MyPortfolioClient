@@ -119,74 +119,79 @@ class ProjectCard extends Component {
             <div className="bottom-card">
               <div>
                 <div className="project-name">
-                  <p>{this.props.project.title}</p>
-                  <p>{this.props.project.about}</p>
+                  <p id="colored-p">{this.props.project.title}</p>
+                  <p id="small-p">{this.props.project.about}</p>
                 </div>
-                <div className="like-comment-calculator">
-                  {this.state.comments.length > 0 ? (
-                    <p onClick={this.toggleComments}>
-                      {this.state.comments.length} comments
-                    </p>
-                  ) : null}
-                  {this.state.likedBy.length > 0 ? (
-                    <div
-                      className="likedBy-line"
-                      onClick={this.toggleLikesPopUp}
-                    >
-                      {this.state.likedBy.map((user, index) => {
-                        if (index <= 2) {
-                          return (
-                            <div key={user._id} id="mini-img-container">
-                              <img src={user.image} id="mini-img" />
-                            </div>
-                          );
-                        }
-                      })}
 
-                      <p>
-                        liked by{this.state.likedBy[0].username}
-                        {this.state.likedBy.length >= 2 ? (
-                          <p>
-                            and
-                            {this.state.likedBy.length - 1} others
-                          </p>
-                        ) : null}
+                <div className="likes-comments">
+                  <div className="like-comment-calculator">
+                    {this.state.comments.length > 0 ? (
+                      <p onClick={this.toggleComments} className="comment-line">
+                        {this.state.comments.length} comments
                       </p>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-              <div>
-                {this.props.showEditOptions ? (
-                  <div>
-                    <i className="fas fa-pen" onClick={this.toggleEditForm}></i>
-                    <i
-                      className="fas fa-trash"
-                      onClick={this.deleteProject}
-                    ></i>
+                    ) : null}
+                    {this.state.likedBy.length > 0 ? (
+                      <div
+                        className="likedBy-line"
+                        onClick={this.toggleLikesPopUp}
+                      >
+                        {this.state.likedBy.map((user, index) => {
+                          if (index <= 2) {
+                            return (
+                              <div key={user._id} id="mini-img-container">
+                                <img src={user.image} id="mini-img" />
+                              </div>
+                            );
+                          }
+                        })}
+
+                        <div className="likedBy-line-written">
+                          liked by {this.state.likedBy[0].username}
+                          {this.state.likedBy.length >= 2 ? (
+                            <p>
+                              and
+                              {this.state.likedBy.length - 1} others
+                            </p>
+                          ) : null}
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
-                ) : null}
-                <i className="far fa-comment" onClick={this.toggleComments}></i>
 
-                {this.props.enableLikes &&
-                this.state.likedBy.every((user) => {
-                  return user._id !== this.props.user._id;
-                }) ? (
-                  <i className="far fa-thumbs-up" onClick={this.like}></i>
-                ) : this.props.enableLikes &&
-                  this.state.likedBy.some((user) => {
-                    return user._id === this.props.user._id;
-                  }) ? (
-                  <i className="far fa-thumbs-down" onClick={this.dislike}></i>
-                ) : null}
+                  <div className="card-icons">
+                    {this.props.showEditOptions ? (
+                      <div>
+                        <i
+                          className="fas fa-pen"
+                          onClick={this.toggleEditForm}
+                        ></i>
+                        <i
+                          className="fas fa-trash"
+                          onClick={this.deleteProject}
+                        ></i>
+                      </div>
+                    ) : null}
+                    <i
+                      className="far fa-comment"
+                      onClick={this.toggleComments}
+                    ></i>
 
-                {/* {this.props.enableLikes &&
-                !this.props.project.likedBy.includes(this.props.user._id) ? (
-                  <i className="far fa-thumbs-up" onClick={this.like}></i>
-                ) : this.props.enableLikes &&
-                  this.props.project.likedBy.includes(this.props.user._id) ? (
-                  <i className="far fa-thumbs-down" onClick={this.dislike}></i>
-                ) : null} */}
+                    {this.props.enableLikes &&
+                    this.state.likedBy.every((user) => {
+                      return user._id !== this.props.user._id;
+                    }) ? (
+                      <i className="far fa-thumbs-up" onClick={this.like}></i>
+                    ) : this.props.enableLikes &&
+                      this.state.likedBy.some((user) => {
+                        return user._id === this.props.user._id;
+                      }) ? (
+                      <i
+                        className="far fa-thumbs-down"
+                        onClick={this.dislike}
+                      ></i>
+                    ) : null}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -202,7 +207,7 @@ class ProjectCard extends Component {
             </div>
             <div className="description">
               <p>{this.props.project.description} </p>
-              <p>technologies used:{this.props.project.technologies} </p>
+              <p>technologies used: {this.props.project.technologies} </p>
             </div>
           </div>
         )}
