@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withAuth } from "./../context/auth-context";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
 import AddProject from "./../components/AddProject/AddProject";
@@ -125,8 +126,12 @@ class Private extends Component {
                     />
                   ) : null}
                 </div>
+                <Link to={"/chat"}>
+                  <button className="follow-button">Chat</button>
+                </Link>
               </div>
             </div>
+
             <p id="welcome-message">Welcome back {this.props.user.username}!</p>
           </div>
         ) : null}

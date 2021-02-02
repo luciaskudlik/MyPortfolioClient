@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Private from "./pages/Private";
 import UserProfile from "./pages/UserProfile";
 import LandingPage from "./pages/LandingPage";
+import Chat from "./pages/Chat";
 
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
@@ -28,6 +29,7 @@ class App extends Component {
           <AnonRoute exact path="/login" component={Login} />
 
           <PrivateRoute exact path="/myprofile" component={Private} />
+          <PrivateRoute path="/chat" component={Chat} />
         </Switch>
       </div>
     );
