@@ -154,3 +154,75 @@
   font-size: 0.8rem;
   width: 80px;
 }
+
+/****************************** Chat /Conversation *****************************/
+
+.send-message-form {
+  position: fixed;
+  bottom: 0px;
+  width: 100vw;
+  z-index: 5;
+}
+
+.conversation {
+  margin: 70px 20px 50px 20px;
+}
+
+.chat-info-bar {
+  position: fixed;
+  width: 100vw;
+  z-index: 7;
+}
+
+.send-message-form input {
+  width: 100%;
+}
+
+.send-button {
+  position: absolute;
+  right: 0px;
+}
+
+.fa-angle-left {
+  font-size: 30px;
+  color: #d2d2d2;
+  margin-right: 10px;
+}
+
+.chat-info {
+  display: flex;
+  align-content: center;
+  padding: 10px;
+  height: 30px;
+}
+
+.chat-user-img {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.message {
+  padding: 8px;
+  border-radius: 20px;
+}
+
+.left-red {
+  border: 1px solid #b0b0b0;
+  margin-right: 40vw;
+}
+
+.right-blue {
+  background-color: #e8e8e8;
+  margin-left: 40vw;
+}
+
+.user-in-chat {
+  color: black;
+}
+
+#chatlist-scroll-bar {
+  max-height: 70vh;
+  overflow-x: scroll;
+}

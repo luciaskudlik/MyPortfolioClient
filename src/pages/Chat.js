@@ -5,7 +5,7 @@ import { withAuth } from "./../context/auth-context";
 import axios from "axios";
 import ChatUserCard from "../components/ChatUserCard/ChatUserCard";
 import Navbar from "../components/Navbar/Navbar";
-import Conversation from "./../components/Conversation/Conversation";
+import moment from "moment";
 
 // const ENDPOINT = "localhost:5000";
 // let socket = io(ENDPOINT);
@@ -13,6 +13,7 @@ import Conversation from "./../components/Conversation/Conversation";
 class Chat extends Component {
   state = {
     chats: [],
+    sortedChats: [],
     online: [],
     openChat: {},
   };
@@ -39,14 +40,38 @@ class Chat extends Component {
     axios
       .get("http://localhost:5000/api/user", { withCredentials: true })
       .then((response) => {
-        console.log(response.data);
-        this.setState({ chats: response.data.chats });
+        //convert updated_at into timestamp
+
+        const convertedArray = response.data.chats.map((chat) => {
+          chat.updated_at = Date.parse(chat.updated_at);
+          return chat;
+        });
+
+        console.log(convertedArray);
+
+        //sort the chats by the time they were last updated
+
+        const sortedByTime = convertedArray.sort((chat1, chat2) => {
+          return chat2.updated_at - chat1.updated_at;
+        });
+
+        this.setState({
+          chats: response.data.chats,
+          sortedChats: sortedByTime,
+        });
       })
       .catch((err) => console.log(err));
   };
 
-  openChat = (chat) => {
+  readChat = (chat) => {
     console.log(`chat with id ${chat._id} is now open`);
+    console.log(chat.messages)
+    // const messagesOfOtherUser = chat.messages.filter((message) => {
+    //   return message.sentBy !== this.props.user._id;
+    // });
+
+    // console.log("OTHER MESSAGES", messagesOfOtherUser);
+
     this.setState({ openChat: chat });
   };
 
@@ -55,12 +80,12 @@ class Chat extends Component {
       <div>
         <Navbar />
         <div id="chatlist-scroll-bar">
-          {this.state.chats.map((chat) => {
+          {this.state.sortedChats.map((chat) => {
             return (
               <div
                 key={chat._id}
                 onClick={() => {
-                  this.openChat(chat);
+                  this.readChat(chat);
                 }}
               >
                 <ChatUserCard chat={chat} />
@@ -68,7 +93,6 @@ class Chat extends Component {
             );
           })}
         </div>
-        <Conversation chat={this.state.openChat} />
       </div>
     );
   }

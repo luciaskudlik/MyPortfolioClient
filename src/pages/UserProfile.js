@@ -4,6 +4,8 @@ import Navbar from "./../components/Navbar/Navbar";
 import ProjectCard from "./../components/ProjectCard/ProjectCard";
 import { withAuth } from "./../context/auth-context";
 import PopUp from "./../components/PopUp/PopUp";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class UserProfile extends React.Component {
   state = {
@@ -17,6 +19,7 @@ class UserProfile extends React.Component {
     showFollowersPopUp: false,
     showFollowingPopUp: false,
     showEmail: false,
+    redirect: false,
   };
 
   componentDidMount = () => {
@@ -118,6 +121,34 @@ class UserProfile extends React.Component {
     this.setState({ showEmail: !this.state.showEmail });
   };
 
+  createChat = () => {
+    const { id } = this.props.match.params;
+    const currentUserId = this.props.user._id;
+
+    if (
+      this.state.user.chats.some((chat) => {
+        return chat.participants.includes(this.props.user._id);
+      })
+    ) {
+      console.log("chat already exists");
+      this.setState({ redirect: true });
+    } else {
+      axios
+        .post(
+          `http://localhost:5000/api/chat/${id}`,
+          { currentUserId },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          console.log("new chat created");
+          this.setState({ redirect: true });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   render() {
     console.log(this.state.userIsFollowing);
     return (
@@ -169,11 +200,14 @@ class UserProfile extends React.Component {
                 + Follow
               </button>
             ) : null}
-            <button className="follow-button">Message</button>
+            <button className="follow-button" onClick={this.createChat}>
+              Message
+            </button>
+            {this.state.redirect ? <Redirect to={"/chat"} /> : null}
+
             <button className="follow-button" onClick={this.displayEmail}>
               Email
             </button>
-
             {this.state.showEmail ? <p>{this.state.user.email}</p> : null}
           </div>
         </div>

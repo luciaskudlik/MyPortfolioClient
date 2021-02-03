@@ -8,3 +8,8 @@
   border-radius: 100%;
   object-fit: cover;
 }
+
+.new-message-alert {
+  margin-left: 90px;
+  background-color: red;
+}
