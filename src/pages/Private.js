@@ -133,6 +133,7 @@ class Private extends Component {
             </div>
 
             <p id="welcome-message">Welcome back {this.props.user.username}!</p>
+            <p>You have ... new messages.</p>
           </div>
         ) : null}
 

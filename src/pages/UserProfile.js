@@ -20,6 +20,7 @@ class UserProfile extends React.Component {
     showFollowingPopUp: false,
     showEmail: false,
     redirect: false,
+    chatId: "",
   };
 
   componentDidMount = () => {
@@ -131,7 +132,12 @@ class UserProfile extends React.Component {
       })
     ) {
       console.log("chat already exists");
-      this.setState({ redirect: true });
+
+      const filteredChat = this.state.user.chats.filter((chat) => {
+        return chat.participants.includes(this.props.user._id);
+      });
+
+      this.setState({ chatId: filteredChat[0]._id, redirect: true });
     } else {
       axios
         .post(
@@ -142,8 +148,8 @@ class UserProfile extends React.Component {
           }
         )
         .then((response) => {
-          console.log("new chat created");
-          this.setState({ redirect: true });
+          console.log("new chat created", response.data);
+          this.setState({ chatId: response.data, redirect: true });
         })
         .catch((err) => console.log(err));
     }
@@ -200,10 +206,14 @@ class UserProfile extends React.Component {
                 + Follow
               </button>
             ) : null}
-            <button className="follow-button" onClick={this.createChat}>
-              Message
-            </button>
-            {this.state.redirect ? <Redirect to={"/chat"} /> : null}
+            {this.props.user ? (
+              <button className="follow-button" onClick={this.createChat}>
+                Message
+              </button>
+            ) : null}
+            {this.state.redirect ? (
+              <Redirect to={`/conversation/${this.state.chatId}`} />
+            ) : null}
 
             <button className="follow-button" onClick={this.displayEmail}>
               Email

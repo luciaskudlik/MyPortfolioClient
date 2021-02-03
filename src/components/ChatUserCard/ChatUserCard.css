@@ -1,15 +1,40 @@
-#user-in-chat {
+.user-in-chat {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 20px;
 }
 
-#user-in-chat img {
-  width: 30px;
-  height: 30px;
+#user-chat-info-card {
+  display: flex;
+  align-items: center;
+}
+
+.user-in-chat p {
+  padding-top: 12px;
+}
+
+.user-in-chat img {
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
   object-fit: cover;
+  margin: 10px;
 }
 
 .new-message-alert {
   margin-left: 90px;
   background-color: red;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.new-message-alert > p {
+  font-size: 0.8rem;
+  text-align: center;
+  align-self: center;
 }

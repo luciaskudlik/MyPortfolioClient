@@ -157,6 +157,12 @@
 
 /****************************** Chat /Conversation *****************************/
 
+#empty-chat {
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 200px 20px;
+}
+
 .send-message-form {
   position: fixed;
   bottom: 0px;

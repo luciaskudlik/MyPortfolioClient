@@ -2,8 +2,41 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth } from "../../context/auth-context";
 import "./Navbar.css";
+import axios from "axios";
 
 class Navbar extends Component {
+  state = {
+    newUnreadMessages: [],
+  };
+
+  componentDidMount = () => {
+    axios
+      .get("http://localhost:5000/api/user", { withCredentials: true })
+      .then((response) => {
+        response.data.chats.forEach((chat) => {
+          axios
+            .get(`http://localhost:5000/api/chat/${chat._id}`)
+            .then((response) => {
+              console.log(response.data.messages);
+
+              const unreadMessages = response.data.messages.filter(
+                (message) => {
+                  return (
+                    !message.seen && message.sentBy !== this.props.user._id
+                  );
+                }
+              );
+
+              console.log("ALL UNREAD MESSAGES:", unreadMessages);
+
+              this.setState({ newUnreadMessages: [...this.state.newUnreadMessages, unreadMessages] });
+            })
+            .catch((err) => console.log(err));
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
     // const { user, logout, isLoggedin } = this.props;
     return (
@@ -12,6 +45,16 @@ class Navbar extends Component {
           <Link className="navbar-brand" to="/">
             MyPortfolio
           </Link>
+          {this.props.isLoggedIn ? (
+            <Link to="/chat">
+              <i class="far fa-paper-plane"></i>
+            </Link>
+          ) : null}
+
+          {this.state.newUnreadMessages.length === 0 ? null : (
+            <p>{this.state.newUnreadMessages.length}</p>
+          )}
+
           <button
             className="navbar-toggler"
             type="button"

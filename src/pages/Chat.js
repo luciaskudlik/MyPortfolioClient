@@ -6,6 +6,7 @@ import axios from "axios";
 import ChatUserCard from "../components/ChatUserCard/ChatUserCard";
 import Navbar from "../components/Navbar/Navbar";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 // const ENDPOINT = "localhost:5000";
 // let socket = io(ENDPOINT);
@@ -65,7 +66,7 @@ class Chat extends Component {
 
   readChat = (chat) => {
     console.log(`chat with id ${chat._id} is now open`);
-    console.log(chat.messages)
+    console.log(chat.messages);
     // const messagesOfOtherUser = chat.messages.filter((message) => {
     //   return message.sentBy !== this.props.user._id;
     // });
@@ -79,20 +80,28 @@ class Chat extends Component {
     return (
       <div>
         <Navbar />
-        <div id="chatlist-scroll-bar">
-          {this.state.sortedChats.map((chat) => {
-            return (
-              <div
-                key={chat._id}
-                onClick={() => {
-                  this.readChat(chat);
-                }}
-              >
-                <ChatUserCard chat={chat} />
-              </div>
-            );
-          })}
-        </div>
+        {this.state.sortedChats.length === 0 ? (
+          <p id="empty-chat">
+            You don't have any chats yet. <Link to={"/home"}>Search</Link> for a
+            user you want to connect with and start a conversation through their
+            profile page.
+          </p>
+        ) : (
+          <div id="chatlist-scroll-bar">
+            {this.state.sortedChats.map((chat) => {
+              return (
+                <div
+                  key={chat._id}
+                  onClick={() => {
+                    this.readChat(chat);
+                  }}
+                >
+                  <ChatUserCard chat={chat} />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     );
   }

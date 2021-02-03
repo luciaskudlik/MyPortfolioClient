@@ -9,6 +9,7 @@ class ChatUserCard extends Component {
     chat: {},
     otherUser: [],
     hasUnreadMessages: false,
+    unreadMessages: [],
   };
 
   componentDidMount = () => {
@@ -28,7 +29,11 @@ class ChatUserCard extends Component {
             return !message.seen && message.sentBy !== this.props.user._id;
           })
         ) {
-          this.setState({ hasUnreadMessages: true });
+          const filtered = response.data.messages.filter((message) => {
+            return !message.seen && message.sentBy !== this.props.user._id;
+          });
+
+          this.setState({ hasUnreadMessages: true, unreadMessages: filtered });
         }
       })
       .catch((err) => console.log(err));
@@ -58,12 +63,16 @@ class ChatUserCard extends Component {
     return (
       <div>
         <Link to={`/conversation/${this.state.chat._id}`} className="link">
-          <div className="user-card user-in-chat" onClick={this.readChat}>
-            <img src={this.state.otherUser.image} />
-            <p>{this.state.otherUser.username}</p>
+          <div className="user-in-chat" onClick={this.readChat}>
+            <div id="user-chat-info-card">
+              <img src={this.state.otherUser.image} />
+              <p>{this.state.otherUser.username}</p>
+            </div>
 
             {this.state.hasUnreadMessages ? (
-              <p className="new-message-alert">new</p>
+              <div className="new-message-alert">
+                <p>{this.state.unreadMessages.length}</p>
+              </div>
             ) : null}
           </div>
         </Link>
