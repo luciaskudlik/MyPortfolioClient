@@ -118,8 +118,8 @@
 }
 
 .edit-user > i {
-  font-size: 0.9rem;
-  margin-left: 10px;
+  font-size: 0.7rem;
+  margin-left: 5px;
 }
 
 /* .user-details-bottom {
@@ -153,6 +153,72 @@
   margin: 10px;
   font-size: 0.8rem;
   width: 80px;
+}
+
+.edit-user-image > i {
+  cursor: pointer;
+  position: absolute;
+  top: 145px;
+  left: 85px;
+  font-size: 0.9rem;
+  border: 3px solid white;
+  border-radius: 100%;
+  background-color: white;
+}
+
+.image-upload-form {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+}
+
+.image-upload {
+  font-size: 0.7rem;
+  width: 200px;
+  position: absolute;
+  top: 170px;
+  left: 31px;
+}
+
+#loading-message {
+  position: absolute;
+  top: 130px;
+  left: 50px;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.image-upload-form button {
+  position: absolute;
+  top: 170px;
+  left: 10px;
+  font-size: 0.5rem;
+}
+
+#notification-message {
+  color: rgb(227, 0, 0);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#black-comment-dots {
+  color: rgb(227, 0, 0);
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+#no-new-message {
+  color: grey;
+  text-align: center;
+  font-size: 0.85rem;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+#no-new-message #black-comment-dots {
+  color: grey;
+  font-size: 1rem;
 }
 
 /****************************** Chat /Conversation *****************************/
@@ -262,30 +328,4 @@
 #conversation-page {
   width: 100vw;
   overflow: hidden;
-}
-
-#notification-message {
-  color: rgb(227, 0, 0);
-  font-size: 0.8rem;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-#black-comment-dots {
-  color: rgb(227, 0, 0);
-  font-size: 1.2rem;
-  margin-right: 10px;
-}
-
-#no-new-message {
-  color: grey;
-  text-align: center;
-  font-size: 0.85rem;
-  margin-bottom: 40px;
-  cursor: pointer;
-}
-
-#no-new-message #black-comment-dots {
-  color: grey;
-  font-size: 1rem;
 }

@@ -8,17 +8,20 @@ import ProjectCard from "../components/ProjectCard/ProjectCard";
 import PopUp from "../components/PopUp/PopUp";
 import EditUserName from "../components/EditUser/EditUserName";
 import EditOccupation from "../components/EditUser/EditOccupation";
+import EditUserImage from "../components/EditUser/EditUserImage";
 
 class Private extends Component {
   state = {
     user: {},
     username: "",
+    image: "",
     portfolio: [],
     showForm: false,
     showFollowersPopUp: false,
     showFollowingPopUp: false,
     showUserNameInput: false,
     showOccupationInput: false,
+    showImageUpload: false,
     followers: [],
     following: [],
     unreadMessages: 0,
@@ -40,6 +43,7 @@ class Private extends Component {
           portfolio: response.data.portfolio,
           followers: response.data.followers,
           following: response.data.following,
+          image: response.data.image,
         });
 
         response.data.chats.forEach((chat) => {
@@ -75,6 +79,10 @@ class Private extends Component {
     this.setState({ showFollowingPopUp: !this.state.showFollowingPopUp });
   };
 
+  editUserImage = () => {
+    this.setState({ showImageUpload: !this.state.showImageUpload });
+  };
+
   editUsername = () => {
     this.setState({ showUserNameInput: !this.state.showUserNameInput });
   };
@@ -96,7 +104,22 @@ class Private extends Component {
         {this.props.user ? (
           <div>
             <div className="user-details private-user-details">
-              <img src={this.props.user.image} className="user-image" />
+              {this.state.showImageUpload ? (
+                <EditUserImage
+                  editUserImage={this.editUserImage}
+                  displayProjects={this.displayProjects}
+                  userToEdit={this.state.user}
+                />
+              ) : (
+                <div className="edit-user-image">
+                  <img src={this.state.image} className="user-image" />
+                  <i
+                    class="fas fa-plus-circle"
+                    onClick={this.editUserImage}
+                  ></i>
+                  {/* <i class="fas fa-pen" onClick={this.editUserImage}></i> */}
+                </div>
+              )}
               <div>
                 <div>
                   {this.state.showUserNameInput ? (

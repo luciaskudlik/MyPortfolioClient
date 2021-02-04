@@ -6,6 +6,7 @@ class EditOccupation extends Component {
   state = {
     username: this.props.userToEdit.username,
     occupation: this.props.userToEdit.occupation,
+    image: this.props.userToEdit.image,
   };
 
   handleInput = (event) => {
@@ -17,7 +18,7 @@ class EditOccupation extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { username, occupation } = this.state;
+    const { username, occupation, image } = this.state;
 
     const userId = this.props.user._id;
 
@@ -27,6 +28,7 @@ class EditOccupation extends Component {
         {
           username,
           occupation,
+          image,
         },
         { withCredentials: true }
       )
