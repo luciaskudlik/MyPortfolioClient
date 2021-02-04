@@ -8,6 +8,8 @@ class ChatUserCard extends Component {
   state = {
     chat: {},
     otherUser: [],
+    lastMessage: {},
+    lastMessageLength: 0,
     hasUnreadMessages: false,
     unreadMessages: [],
   };
@@ -22,7 +24,18 @@ class ChatUserCard extends Component {
           return user._id !== this.props.user._id;
         });
 
-        this.setState({ otherUser: otherParticipants[0] });
+        console.log(
+          response.data.messages[response.data.messages.length - 1].text.length
+        );
+
+        this.setState({
+          otherUser: otherParticipants[0],
+          lastMessage:
+            response.data.messages[response.data.messages.length - 1],
+          lastMessageLength:
+            response.data.messages[response.data.messages.length - 1].text
+              .length,
+        });
 
         if (
           response.data.messages.some((message) => {
@@ -60,13 +73,20 @@ class ChatUserCard extends Component {
   };
 
   render() {
+    console.log(this.state.messages);
     return (
       <div>
         <Link to={`/conversation/${this.state.chat._id}`} className="link">
           <div className="user-in-chat" onClick={this.readChat}>
             <div id="user-chat-info-card">
               <img src={this.state.otherUser.image} />
-              <p>{this.state.otherUser.username}</p>
+              <div>
+                <p id="chat-card-username">{this.state.otherUser.username}</p>
+                <div id="chat-preview-line">
+                  <p id="chat-preview">{this.state.lastMessage.text}</p>
+                  {this.state.lastMessageLength > 30 ? <span id="dots">...</span> : null}
+                </div>
+              </div>
             </div>
 
             {this.state.hasUnreadMessages ? (

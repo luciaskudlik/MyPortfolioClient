@@ -155,10 +155,14 @@
   width: 80px;
 }
 
+.edit-user-image > img {
+  margin-right: 0px;
+}
+
 .edit-user-image > i {
   cursor: pointer;
   position: relative;
-  right: 35px;
+  right: 23px;
   top: 25px;
   font-size: 0.9rem;
   border: 3px solid white;
@@ -237,7 +241,7 @@
 }
 
 .conversation {
-  margin: 70px 20px 50px 20px;
+  margin: 120px 20px 50px 20px;
 }
 
 #chat-navbar {

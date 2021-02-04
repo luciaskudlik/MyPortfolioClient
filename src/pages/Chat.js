@@ -61,6 +61,8 @@ class Chat extends Component {
           return chat2.updated_at - chat1.updated_at;
         });
 
+        console.log("CHATS:", response.data.chats);
+
         this.setState({
           chats: response.data.chats,
           sortedChats: sortedByTime,

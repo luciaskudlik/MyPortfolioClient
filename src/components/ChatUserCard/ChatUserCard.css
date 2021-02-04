@@ -8,10 +8,34 @@
 #user-chat-info-card {
   display: flex;
   align-items: center;
+  height: 60px;
 }
 
-.user-in-chat p {
-  padding-top: 12px;
+#chat-preview-line {
+  display: flex;
+  align-items: center;
+  padding: 0px;
+  color: grey;
+  width: 245px;
+  margin: 0px;
+}
+
+#chat-preview {
+  font-size: 0.7rem;
+  height: 17px;
+  overflow: hidden;
+}
+
+#chat-card-username {
+  margin: 15px 0px 0px 0px;
+}
+
+#dots {
+  margin-bottom: 20px;
+  margin-left: 0px;
+  height: 2px;
+  position: relative;
+  bottom: 12px;
 }
 
 .user-in-chat img {
@@ -19,22 +43,25 @@
   height: 40px;
   border-radius: 100%;
   object-fit: cover;
-  margin: 10px;
+  margin: 0px 10px 0px 10px;
 }
 
 .new-message-alert {
-  margin-left: 90px;
-  background-color: red;
+  margin-left: 30px;
+  background-color: rgb(255, 0, 0);
   border-radius: 100%;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   display: flex;
   justify-content: center;
   align-content: center;
 }
 
 .new-message-alert > p {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-align: center;
   align-self: center;
+  position: relative;
+  top: 8px;
+  color: white;
 }
