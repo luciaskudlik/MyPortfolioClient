@@ -4,14 +4,37 @@
   margin: 20px 0;
 }
 
-.project-form input {
-  width: 80%;
-  margin: 10px auto;
-  border-radius: 5px;
+.project-form textarea {
+  height: 60px;
 }
 
-.project-form textarea {
+.add-project-input {
   width: 80%;
   margin: 10px auto;
-  border-radius: 5px;
+  border-radius: 10px;
+  background-color: rgba(211, 211, 211, 0.228);
+  border: none;
+  height: 35px;
+  font-size: 0.8rem;
+}
+
+#project-image-upload {
+  display: flex;
+  align-items: center;
+}
+
+.project-image-input {
+  display: flex;
+  overflow: hidden;
+  width: 245px;
+  margin-right: 10px;
+}
+
+.project-form button {
+  width: 80%;
+  margin: 10px auto;
+  border-radius: 10px;
+  border: none;
+  height: 35px;
+  background-color: #9ec3c6;
 }

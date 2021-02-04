@@ -100,21 +100,24 @@ class AddProject extends Component {
           onChange={this.handleInput}
           placeholder="name of your project"
           maxlength="30"
+          className="add-project-input"
           required
         />
-
-        <input
-          name="image"
-          type="file"
-          onChange={this.handleFileUpload}
-        ></input>
-        <span>
-          <img
-            style={{ width: "100px" }}
-            src={this.state.image && this.state.image}
-            alt=""
-          ></img>
-        </span>
+        <div id="project-image-upload" className="add-project-input">
+          <input
+            name="image"
+            type="file"
+            onChange={this.handleFileUpload}
+            className="add-project-input project-image-input"
+          ></input>
+          <span>
+            <img
+              style={{ width: "40px", height: "auto", borderRadius: "10px" }}
+              src={this.state.image && this.state.image}
+              alt=""
+            ></img>
+          </span>
+        </div>
         <input
           type="text"
           name="about"
@@ -122,6 +125,7 @@ class AddProject extends Component {
           onChange={this.handleInput}
           placeholder="what kind of app - e.g restaurant finder"
           maxlength="20"
+          className="add-project-input"
           required
         />
         <textarea
@@ -131,6 +135,7 @@ class AddProject extends Component {
           onChange={this.handleInput}
           placeholder="description of the project"
           maxlength="200"
+          className="add-project-input"
           required
         />
         <input
@@ -139,6 +144,7 @@ class AddProject extends Component {
           value={this.state.technologies}
           onChange={this.handleInput}
           placeholder="technolgies used"
+          className="add-project-input"
           required
         />
         <input
@@ -147,6 +153,7 @@ class AddProject extends Component {
           value={this.state.deployedLink}
           onChange={this.handleInput}
           placeholder="link to the deployed website"
+          className="add-project-input"
           required
         />
         <input
@@ -155,6 +162,7 @@ class AddProject extends Component {
           value={this.state.githubLink}
           onChange={this.handleInput}
           placeholder="link to your github repository"
+          className="add-project-input"
           required
         />
         <button type="submit">Share your project</button>
