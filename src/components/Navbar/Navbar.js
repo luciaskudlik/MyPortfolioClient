@@ -29,7 +29,12 @@ class Navbar extends Component {
 
               console.log("ALL UNREAD MESSAGES:", unreadMessages);
 
-              this.setState({ newUnreadMessages: [...this.state.newUnreadMessages, unreadMessages] });
+              this.setState({
+                newUnreadMessages: [
+                  ...this.state.newUnreadMessages,
+                  unreadMessages,
+                ],
+              });
             })
             .catch((err) => console.log(err));
         });
@@ -79,6 +84,11 @@ class Navbar extends Component {
               </li>
               {this.props.isLoggedIn ? (
                 <>
+                  <li className="nav-item">
+                    <Link to="/chat" className="nav-link">
+                      Chat
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link to="/myprofile" className="nav-link">
                       My Profile

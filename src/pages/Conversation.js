@@ -4,6 +4,12 @@ import { withAuth } from "./../context/auth-context";
 import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
 
+/**SOCKET****/
+import io from "socket.io-client";
+const ENDPOINT = "http://localhost:5000";
+let socket = io(ENDPOINT);
+/********/
+
 class Conversation extends Component {
   state = {
     text: "",
@@ -11,6 +17,29 @@ class Conversation extends Component {
     messages: [],
     otherUser: {},
   };
+
+  /**********************SOCKET ********/
+  startSocket = () => {
+    socket.emit(
+      "join",
+      { room: this.state.chat._id, user: this.props.user._id },
+      (error) => {
+        if (error) {
+          console.log(error);
+        }
+      }
+    );
+
+    socket.on("message", (message) => {
+      this.componentDidMount();
+    });
+
+    socket.on("online", (user) => {
+      console.log("online");
+    });
+  };
+
+  /******************************/
 
   handleInput = (event) => {
     let { name, value, type } = event.target;
@@ -49,8 +78,6 @@ class Conversation extends Component {
   }
 
   componentDidMount = () => {
-    // this.scrollToBottom();
-
     const { id } = this.props.match.params;
     axios
       .get(`http://localhost:5000/api/chat/${id}`)
@@ -64,14 +91,18 @@ class Conversation extends Component {
           messages: response.data.messages,
           otherUser: otherParticipants[0],
         });
+
+        this.scrollToBottom();
       })
       .catch((err) => console.log(err));
   };
 
   render() {
     return (
-      <div>
-        <Navbar />
+      <div id="conversation-page">
+        <div id="chat-navbar">
+          <Navbar />
+        </div>
         <div className="chat-info-bar">
           <div className="chat-info">
             <Link to={"/chat"}>
@@ -83,11 +114,14 @@ class Conversation extends Component {
           <hr />
         </div>
         <div className="conversation">
-          {this.state.messages.map((message) => {
+          {this.state.messages.map((message, index) => {
             if (message.sentBy === this.props.user._id) {
               return (
                 <div key={message._id} className="message-container right">
                   <p className="message right-blue">{message.text}</p>
+                  {index === this.state.messages.length - 1 && message.seen ? (
+                    <p className="seen">Seen</p>
+                  ) : null}
                 </div>
               );
             } else {
@@ -98,6 +132,12 @@ class Conversation extends Component {
               );
             }
           })}
+          <div
+            ref={(el) => {
+              this.el = el;
+            }}
+            id="bottom-of-scroll"
+          ></div>
         </div>
 
         <form onSubmit={this.handleSubmit} className="send-message-form">
@@ -111,11 +151,6 @@ class Conversation extends Component {
           <button type="submit" className="send-button">
             Send
           </button>
-          <div
-            ref={(el) => {
-              this.el = el;
-            }}
-          ></div>
         </form>
       </div>
     );

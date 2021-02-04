@@ -174,19 +174,35 @@
   margin: 70px 20px 50px 20px;
 }
 
+#chat-navbar {
+  position: fixed;
+  z-index: 10;
+  width: 100vw;
+  top: 0;
+}
+
 .chat-info-bar {
   position: fixed;
   width: 100vw;
   z-index: 7;
+  background-color: white;
+  top: 55px;
 }
 
 .send-message-form input {
   width: 100%;
+  border: 1px solid #e8e8e8;
+  height: 35px;
+  outline: none;
+  font-size: 0.9rem;
 }
 
 .send-button {
   position: absolute;
   right: 0px;
+  border: 1px solid #e8e8e8;
+  height: 35px;
+  outline: none;
 }
 
 .fa-angle-left {
@@ -224,6 +240,16 @@
   margin-left: 40vw;
 }
 
+#bottom-of-scroll {
+  height: 10px;
+}
+
+.seen {
+  color: #b0b0b0;
+  font-size: 0.8rem;
+  margin-left: 80vw;
+}
+
 .user-in-chat {
   color: black;
 }
@@ -231,4 +257,9 @@
 #chatlist-scroll-bar {
   max-height: 70vh;
   overflow-x: scroll;
+}
+
+#conversation-page {
+  width: 100vw;
+  overflow: hidden;
 }
