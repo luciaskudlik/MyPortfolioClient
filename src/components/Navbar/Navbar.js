@@ -6,7 +6,7 @@ import axios from "axios";
 
 class Navbar extends Component {
   state = {
-    newUnreadMessages: [],
+    newUnreadMessages: 0,
   };
 
   componentDidMount = () => {
@@ -27,13 +27,9 @@ class Navbar extends Component {
                 }
               );
 
-              console.log("ALL UNREAD MESSAGES:", unreadMessages);
-
               this.setState({
-                newUnreadMessages: [
-                  ...this.state.newUnreadMessages,
-                  unreadMessages,
-                ],
+                newUnreadMessages:
+                  this.state.newUnreadMessages + unreadMessages.length,
               });
             })
             .catch((err) => console.log(err));
@@ -50,15 +46,17 @@ class Navbar extends Component {
           <Link className="navbar-brand" to="/">
             MyPortfolio
           </Link>
-          {this.props.isLoggedIn ? (
-            <Link to="/chat">
-              <i class="far fa-paper-plane"></i>
-            </Link>
-          ) : null}
 
-          {this.state.newUnreadMessages.length === 0 ? null : (
-            <p>{this.state.newUnreadMessages.length}</p>
-          )}
+          <div id="chat-notification-icon">
+            {this.state.newUnreadMessages === 0 ? null : (
+              <p className="notification-num">{this.state.newUnreadMessages}</p>
+            )}
+            {this.props.isLoggedIn ? (
+              <Link to="/chat">
+                <i class="fas fa-comment-dots"></i>
+              </Link>
+            ) : null}
+          </div>
 
           <button
             className="navbar-toggler"

@@ -21,6 +21,7 @@ class Private extends Component {
     showOccupationInput: false,
     followers: [],
     following: [],
+    unreadMessages: 0,
   };
 
   toggleForm = () => {
@@ -40,7 +41,30 @@ class Private extends Component {
           followers: response.data.followers,
           following: response.data.following,
         });
-      });
+
+        response.data.chats.forEach((chat) => {
+          axios
+            .get(`http://localhost:5000/api/chat/${chat._id}`)
+            .then((response) => {
+              const filtered = response.data.messages.filter((message) => {
+                return (
+                  message.seen === false &&
+                  message.sentBy !== this.props.user._id
+                );
+              });
+
+              this.setState({
+                unreadMessages: this.state.unreadMessages + filtered.length,
+              });
+              console.log(filtered.length);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+      })
+
+      .catch((err) => console.log(err));
   };
 
   toggleFollowersPopup = () => {
@@ -126,14 +150,33 @@ class Private extends Component {
                     />
                   ) : null}
                 </div>
-                <Link to={"/chat"}>
-                  <button className="follow-button">Chat</button>
-                </Link>
               </div>
             </div>
 
             <p id="welcome-message">Welcome back {this.props.user.username}!</p>
-            <p>You have ... new messages.</p>
+
+            {this.state.unreadMessages === 0 ? (
+              <Link to="/chat" className="link">
+                <p id="no-new-message">
+                  <i class="fas fa-comment-dots" id="black-comment-dots"></i>
+                  You have no new messages.
+                </p>
+              </Link>
+            ) : this.state.unreadMessages === 1 ? (
+              <Link to="/chat" className="link">
+                <p id="notification-message">
+                  <i class="fas fa-comment-dots" id="black-comment-dots"></i>
+                  You have {this.state.unreadMessages} new message.
+                </p>
+              </Link>
+            ) : (
+              <Link to="/chat" className="link">
+                <p id="notification-message">
+                  <i class="fas fa-comment-dots" id="black-comment-dots"></i>
+                  You have {this.state.unreadMessages} new messages.
+                </p>
+              </Link>
+            )}
           </div>
         ) : null}
 

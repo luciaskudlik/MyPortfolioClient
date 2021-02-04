@@ -16,6 +16,7 @@
   object-fit: cover;
   border-radius: 100%;
   margin-right: 10px;
+  margin-top: 4px;
 }
 
 .comment-center p {
