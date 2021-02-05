@@ -134,7 +134,7 @@ class AddProject extends Component {
           value={this.state.description}
           onChange={this.handleInput}
           placeholder="description of the project"
-          maxlength="250"
+          maxlength="300"
           className="add-project-input"
           required
         />

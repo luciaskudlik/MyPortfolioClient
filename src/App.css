@@ -43,14 +43,21 @@
   text-align: center;
 }
 
+#first-p {
+  padding-top: 15px;
+}
+
 #homepage h3 {
   font-size: 1.3rem;
   margin-top: 20px;
+  color: rgb(97, 97, 97);
+  letter-spacing: 1px;
 }
 
 #homepage p {
   font-size: 0.9rem;
-  margin: 20px;
+  margin: 10px 20px 20px 20px;
+  color: rgb(97, 97, 97);
 }
 
 #laptop-image {
@@ -168,7 +175,7 @@
 
 .follow-button {
   border: 2px solid white;
-  margin: 10px;
+  margin: 10px 10px 0px 10px;
   font-size: 0.8rem;
   width: 80px;
 }
@@ -241,6 +248,13 @@
 #no-new-message #black-comment-dots {
   color: grey;
   font-size: 1rem;
+}
+
+.email-show {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #787878;
+ padding: 5px;
 }
 
 /****************************** Chat /Conversation *****************************/

@@ -99,7 +99,8 @@
   flex-direction: column;
   text-align: center;
   align-items: center;
-  width: 60px;
+  padding-left: 10px;
+  width: 50px;
 }
 
 .fa-github {
@@ -129,10 +130,10 @@
 .description {
   /* border-left: 1px solid black; */
   font-size: 0.9rem;
-  height: 220px;
+  height: 270px;
   padding: 10px;
   display: flex;
-  width: 80%;
+  width: 300px;
   margin: 0 auto;
   flex-direction: column;
   justify-content: space-between;

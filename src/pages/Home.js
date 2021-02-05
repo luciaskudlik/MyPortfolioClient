@@ -73,7 +73,7 @@ class Home extends React.Component {
               greatest work.
             </p>
             <h3>Why do I need a portfolio</h3> */}
-            <p>
+            <p id="first-p">
               As young developers the projects we've built are what count most
               on the job market. Show employers what you have developed to
               increase your chances in getting a job.

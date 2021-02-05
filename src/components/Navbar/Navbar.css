@@ -25,6 +25,10 @@
   z-index: 2;
 }
 
+.logout-btn {
+  cursor: pointer;
+}
+
 #chat-notification-icon {
   position: relative;
 }
