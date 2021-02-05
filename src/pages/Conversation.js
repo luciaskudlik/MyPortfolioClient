@@ -16,6 +16,7 @@ class Conversation extends Component {
     chat: {},
     messages: [],
     otherUser: {},
+    typing: false,
   };
 
   /**********************SOCKET*************************************/
@@ -31,8 +32,13 @@ class Conversation extends Component {
     );
 
     socket.on("message", (message) => {
-      this.componentDidMount();
+      console.log("socket.on was calles");
+      this.getAllMessages();
     });
+
+    // socket.on("type", (message) => {
+    //   this.setState({ typing: true });
+    // });
 
     // socket.on("messageIsSeen", () => {
     //   this.componentDidMount();
@@ -55,6 +61,13 @@ class Conversation extends Component {
   handleInput = (event) => {
     let { name, value, type } = event.target;
     this.setState({ [name]: value });
+    // console.log("typing");
+
+    // socket.emit("typing", { room: this.state.chat._id }, (error) => {
+    //   if (error) {
+    //     console.log(error);
+    //   }
+    // });
   };
 
   handleSubmit = (event) => {
@@ -75,7 +88,7 @@ class Conversation extends Component {
         { withCredentials: true }
       )
       .then(() => {
-        this.componentDidMount();
+        this.getAllMessages();
 
         socket.emit(
           "sendMessage",
@@ -100,7 +113,12 @@ class Conversation extends Component {
 
   componentDidMount = () => {
     // setInterval(this.componentDidMount, 2000);
-    this.startSocket();
+    // this.startSocket();
+    // this.getAllMessages();
+    this.mountComponent();
+  };
+
+  getAllMessages = () => {
     const { id } = this.props.match.params;
     axios
       .get(`http://localhost:5000/api/chat/${id}`)
@@ -115,6 +133,26 @@ class Conversation extends Component {
           otherUser: otherParticipants[0],
         });
 
+        this.scrollToBottom();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  mountComponent = () => {
+    const { id } = this.props.match.params;
+    axios
+      .get(`http://localhost:5000/api/chat/${id}`)
+      .then((response) => {
+        const otherParticipants = response.data.participants.filter((user) => {
+          return user._id !== this.props.user._id;
+        });
+
+        this.setState({
+          chat: response.data,
+          messages: response.data.messages,
+          otherUser: otherParticipants[0],
+        });
+        this.startSocket();
         this.scrollToBottom();
       })
       .catch((err) => console.log(err));
@@ -161,6 +199,7 @@ class Conversation extends Component {
             }}
             id="bottom-of-scroll"
           ></div>
+          {this.state.typing ? <p>typing</p> : null}
         </div>
 
         <form onSubmit={this.handleSubmit} className="send-message-form">
