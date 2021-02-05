@@ -23,22 +23,6 @@ class Chat extends Component {
 
   componentDidMount = () => {
     this.getAllChats();
-
-    /*******SOCKET******/
-    window.scrollTo(0, 0);
-    socket.emit("join-main", { user: this.props.user._id }, (error) => {
-      if (error) {
-        console.log(error);
-      }
-    });
-    socket.on("online", (users) => {
-      // console.log("online");
-      // console.log(users);
-      const userIdArr = Object.values(users.users);
-
-      this.setState({ online: userIdArr });
-    });
-    /*************/
   };
 
   getAllChats = () => {

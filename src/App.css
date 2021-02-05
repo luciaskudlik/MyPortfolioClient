@@ -70,6 +70,22 @@
   margin-right: 15px;
 }
 
+/* .fa-comment-alt {
+  font-size: 5rem;
+  color: white;
+  background-color: white;
+  font-weight: 100;
+  position: absolute;
+  top: 110px;
+  left: 180px;
+}
+
+.fa-comment-alt > p {
+  font-size: 0.8rem;
+  position: relative;
+  bottom: 50px;
+} */
+
 .user-details {
   /* display: flex; */
   height: 170px;
@@ -103,6 +119,8 @@
   border: none;
   letter-spacing: 1px;
   padding: 10px;
+  background-color: #9ec3c6;
+  color: white;
 }
 
 .private-user-details {
@@ -265,6 +283,7 @@
   height: 35px;
   outline: none;
   font-size: 0.9rem;
+  padding-left: 10px;
 }
 
 .send-button {

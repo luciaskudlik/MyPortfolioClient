@@ -18,29 +18,6 @@ class Conversation extends Component {
     otherUser: {},
   };
 
-  /**********************SOCKET ********/
-  startSocket = () => {
-    socket.emit(
-      "join",
-      { room: this.state.chat._id, user: this.props.user._id },
-      (error) => {
-        if (error) {
-          console.log(error);
-        }
-      }
-    );
-
-    socket.on("message", (message) => {
-      this.componentDidMount();
-    });
-
-    socket.on("online", (user) => {
-      console.log("online");
-    });
-  };
-
-  /******************************/
-
   handleInput = (event) => {
     let { name, value, type } = event.target;
     this.setState({ [name]: value });

@@ -21,6 +21,7 @@ class UserProfile extends React.Component {
     showEmail: false,
     redirect: false,
     chatId: "",
+    displayLogInAlert: true,
   };
 
   componentDidMount = () => {
@@ -123,36 +124,44 @@ class UserProfile extends React.Component {
   };
 
   createChat = () => {
-    const { id } = this.props.match.params;
-    const currentUserId = this.props.user._id;
+    if (this.props.user) {
+      const { id } = this.props.match.params;
+      const currentUserId = this.props.user._id;
 
-    if (
-      this.state.user.chats.some((chat) => {
-        return chat.participants.includes(this.props.user._id);
-      })
-    ) {
-      console.log("chat already exists");
-
-      const filteredChat = this.state.user.chats.filter((chat) => {
-        return chat.participants.includes(this.props.user._id);
-      });
-
-      this.setState({ chatId: filteredChat[0]._id, redirect: true });
-    } else {
-      axios
-        .post(
-          `http://localhost:5000/api/chat/${id}`,
-          { currentUserId },
-          {
-            withCredentials: true,
-          }
-        )
-        .then((response) => {
-          console.log("new chat created", response.data);
-          this.setState({ chatId: response.data, redirect: true });
+      if (
+        this.state.user.chats.some((chat) => {
+          return chat.participants.includes(this.props.user._id);
         })
-        .catch((err) => console.log(err));
+      ) {
+        console.log("chat already exists");
+
+        const filteredChat = this.state.user.chats.filter((chat) => {
+          return chat.participants.includes(this.props.user._id);
+        });
+
+        this.setState({ chatId: filteredChat[0]._id, redirect: true });
+      } else {
+        axios
+          .post(
+            `http://localhost:5000/api/chat/${id}`,
+            { currentUserId },
+            {
+              withCredentials: true,
+            }
+          )
+          .then((response) => {
+            console.log("new chat created", response.data);
+            this.setState({ chatId: response.data, redirect: true });
+          })
+          .catch((err) => console.log(err));
+      }
+    } else {
+      alert("Please log in to contact " + this.state.user.username);
     }
+  };
+
+  followNotLoggedIn = () => {
+    alert("Please log in to follow " + this.state.user.username);
   };
 
   render() {
@@ -197,7 +206,17 @@ class UserProfile extends React.Component {
             {this.props.user && this.state.following ? (
               <button onClick={this.unfollowUser} className="follow-button">
                 {" "}
-                - unfollow
+                - Unfollow
+              </button>
+            ) : null}
+
+            {!this.props.user ? (
+              <button
+                onClick={this.followNotLoggedIn}
+                className="follow-button"
+              >
+                {" "}
+                + Follow
               </button>
             ) : null}
             {this.props.user && !this.state.following ? (
@@ -206,11 +225,15 @@ class UserProfile extends React.Component {
                 + Follow
               </button>
             ) : null}
-            {this.props.user ? (
-              <button className="follow-button" onClick={this.createChat}>
-                Message
-              </button>
-            ) : null}
+            {/* {this.state.displayLogInAlert ? (
+              <i class="far fa-comment-alt">
+                <p>You need to log in</p>
+              </i>
+            ) : null} */}
+            <button className="follow-button" onClick={this.createChat}>
+              Message
+            </button>
+
             {this.state.redirect ? (
               <Redirect to={`/conversation/${this.state.chatId}`} />
             ) : null}
