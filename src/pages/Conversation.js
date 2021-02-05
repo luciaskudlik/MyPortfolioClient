@@ -18,6 +18,40 @@ class Conversation extends Component {
     otherUser: {},
   };
 
+  /**********************SOCKET*************************************/
+  startSocket = () => {
+    socket.emit(
+      "join",
+      { room: this.state.chat._id, user: this.props.user._id },
+      (error) => {
+        if (error) {
+          console.log(error);
+        }
+      }
+    );
+
+    socket.on("message", (message) => {
+      this.componentDidMount();
+    });
+
+    // socket.on("messageIsSeen", () => {
+    //   this.componentDidMount();
+    // });
+
+    // socket.on("type", () => {
+    //   this.setState({ isTyping: true });
+    //   //   this.scrollToBottom();
+    // });
+
+    // socket.on("StopType", () => {
+    //   this.setState({ isTyping: false });
+    // });
+
+    // this.sendDelete();
+  };
+
+  /**************************************************************/
+
   handleInput = (event) => {
     let { name, value, type } = event.target;
     this.setState({ [name]: value });
@@ -42,6 +76,16 @@ class Conversation extends Component {
       )
       .then(() => {
         this.componentDidMount();
+
+        socket.emit(
+          "sendMessage",
+          { room: this.state.chat._id, user: this.props.user._id },
+          (error) => {
+            if (error) {
+              console.log(error);
+            }
+          }
+        );
       })
       .catch((err) => console.log(err));
 
@@ -55,6 +99,8 @@ class Conversation extends Component {
   }
 
   componentDidMount = () => {
+    // setInterval(this.componentDidMount, 2000);
+    this.startSocket();
     const { id } = this.props.match.params;
     axios
       .get(`http://localhost:5000/api/chat/${id}`)
