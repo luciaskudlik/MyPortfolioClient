@@ -34,6 +34,7 @@ class Conversation extends Component {
     socket.on("message", (message) => {
       console.log("socket.on was calles");
       this.getAllMessages();
+      
     });
 
     // socket.on("type", (message) => {
@@ -107,9 +108,9 @@ class Conversation extends Component {
     });
   };
 
-  scrollToBottom() {
+  scrollToBottom = () => {
     this.el.scrollIntoView({ behavior: "smooth" });
-  }
+  };
 
   componentDidMount = () => {
     // setInterval(this.componentDidMount, 2000);
@@ -133,9 +134,26 @@ class Conversation extends Component {
           otherUser: otherParticipants[0],
         });
 
+        this.setMessageToSeen();
+
         this.scrollToBottom();
       })
       .catch((err) => console.log(err));
+  };
+
+  setMessageToSeen = () => {
+    const newMessage = this.state.messages.filter((message) => {
+      return message.sentBy !== this.props.user._id && message.seen === false;
+    });
+    console.log("NEW MESSAGE", newMessage);
+    if (newMessage.length > 0) {
+      axios
+        .put(`http://localhost:5000/api/message/read/${newMessage[0]._id}`)
+        .then((response) => {
+          console.log("new message updated");
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   mountComponent = () => {

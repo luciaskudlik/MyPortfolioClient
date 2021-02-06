@@ -53,6 +53,7 @@ class EditUserName extends Component {
           value={this.state.username}
           onChange={this.handleInput}
           placeholder="username"
+          maxlength="20"
           required
         />
 

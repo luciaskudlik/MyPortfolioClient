@@ -53,6 +53,7 @@ class EditOccupation extends Component {
           value={this.state.occupation}
           onChange={this.handleInput}
           placeholder="occupation"
+          maxlength="25"
           required
         />
         <button type="submit">

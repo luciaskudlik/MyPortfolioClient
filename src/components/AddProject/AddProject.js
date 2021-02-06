@@ -99,7 +99,7 @@ class AddProject extends Component {
           value={this.state.title}
           onChange={this.handleInput}
           placeholder="name of your project"
-          maxlength="30"
+          maxlength="40"
           className="add-project-input"
           required
         />
@@ -124,7 +124,7 @@ class AddProject extends Component {
           value={this.state.about}
           onChange={this.handleInput}
           placeholder="what kind of app - e.g restaurant finder"
-          maxlength="20"
+          maxlength="30"
           className="add-project-input"
           required
         />

@@ -63,6 +63,7 @@ class Signup extends Component {
             name="username"
             value={username}
             onChange={this.handleChange}
+            maxlength="20"
             required
           />
 
@@ -86,6 +87,7 @@ class Signup extends Component {
             name="occupation"
             value={occupation}
             onChange={this.handleChange}
+            maxlength="25"
             required
           />
 
