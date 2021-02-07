@@ -41,7 +41,7 @@ class ProjectCard extends Component {
       } else {
         axios
           .post(
-            `http://localhost:5000/api/chat/${madeBy._id}`,
+            `${process.env.REACT_APP_API_URL}/api/chat/${madeBy._id}`,
             { currentUserId },
             {
               withCredentials: true,
@@ -66,7 +66,9 @@ class ProjectCard extends Component {
 
   deleteProject = () => {
     axios
-      .post(`http://localhost:5000/api/projects/${this.props.project._id}`)
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/projects/${this.props.project._id}`
+      )
       .then(() => this.props.displayProjects())
       .catch((err) => console.log(err));
   };
@@ -81,7 +83,9 @@ class ProjectCard extends Component {
 
   displayComments = () => {
     axios
-      .get(`http://localhost:5000/api/projects/${this.props.project._id}`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/projects/${this.props.project._id}`
+      )
       .then((response) => {
         this.setState({
           comments: response.data.comments,
@@ -103,7 +107,7 @@ class ProjectCard extends Component {
     const userId = this.props.user._id;
     axios
       .post(
-        `http://localhost:5000/api/projects/like/${this.props.project._id}`,
+        `${process.env.REACT_APP_API_URL}/api/projects/like/${this.props.project._id}`,
         { userId },
         {
           withCredentials: true,
@@ -120,7 +124,7 @@ class ProjectCard extends Component {
     const userId = this.props.user._id;
     axios
       .post(
-        `http://localhost:5000/api/projects/dislike/${this.props.project._id}`,
+        `${process.env.REACT_APP_API_URL}/api/projects/dislike/${this.props.project._id}`,
         { userId },
         {
           withCredentials: true,

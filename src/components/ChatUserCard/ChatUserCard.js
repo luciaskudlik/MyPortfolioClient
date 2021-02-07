@@ -16,7 +16,7 @@ class ChatUserCard extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`http://localhost:5000/api/chat/${this.props.chat._id}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/chat/${this.props.chat._id}`)
       .then((response) => {
         this.setState({ chat: response.data });
 
@@ -61,7 +61,7 @@ class ChatUserCard extends Component {
 
     messagesOfOtherUser.forEach((message) => {
       axios
-        .put(`http://localhost:5000/api/message/read/${message._id}`)
+        .put(`${process.env.REACT_APP_API_URL}/api/message/read/${message._id}`)
         .then(() => {
           console.log("message was read");
           this.setState({ hasUnreadMessages: false });
@@ -84,7 +84,9 @@ class ChatUserCard extends Component {
                 <p id="chat-card-username">{this.state.otherUser.username}</p>
                 <div id="chat-preview-line">
                   <p id="chat-preview">{this.state.lastMessage.text}</p>
-                  {this.state.lastMessageLength > 30 ? <span id="dots">...</span> : null}
+                  {this.state.lastMessageLength > 30 ? (
+                    <span id="dots">...</span>
+                  ) : null}
                 </div>
               </div>
             </div>

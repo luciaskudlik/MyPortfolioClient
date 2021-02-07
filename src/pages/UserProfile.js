@@ -27,7 +27,7 @@ class UserProfile extends React.Component {
   componentDidMount = () => {
     const { id } = this.props.match.params;
     axios
-      .get(`http://localhost:5000/api/user/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/user/${id}`)
       .then((response) => {
         this.setState({
           user: response.data,
@@ -82,7 +82,7 @@ class UserProfile extends React.Component {
     const currentUserId = this.props.user._id;
     axios
       .post(
-        `http://localhost:5000/api/user/follow/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/user/follow/${id}`,
         { currentUserId },
         {
           withCredentials: true,
@@ -103,7 +103,7 @@ class UserProfile extends React.Component {
     const currentUserId = this.props.user._id;
     axios
       .post(
-        `http://localhost:5000/api/user/unfollow/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/user/unfollow/${id}`,
         { currentUserId },
         {
           withCredentials: true,
@@ -143,7 +143,7 @@ class UserProfile extends React.Component {
       } else {
         axios
           .post(
-            `http://localhost:5000/api/chat/${id}`,
+            `${process.env.REACT_APP_API_URL}/api/chat/${id}`,
             { currentUserId },
             {
               withCredentials: true,

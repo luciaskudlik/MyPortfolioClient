@@ -38,7 +38,7 @@ class AddProject extends Component {
 
     axios
       .post(
-        "http://localhost:5000/api/projects",
+        `${process.env.REACT_APP_API_URL}/api/projects`,
         {
           title,
           image,
@@ -81,7 +81,7 @@ class AddProject extends Component {
     uploadData.append("image", file);
 
     axios
-      .post("http://localhost:5000/api/upload", uploadData, {
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
         withCredentials: true,
       })
       .then((response) => {

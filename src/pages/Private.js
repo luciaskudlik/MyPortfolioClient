@@ -33,7 +33,9 @@ class Private extends Component {
 
   displayProjects = () => {
     axios
-      .get(`http://localhost:5000/api/user`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/api/user`, {
+        withCredentials: true,
+      })
       .then((response) => {
         console.log("rendered");
         this.setState({
@@ -48,7 +50,7 @@ class Private extends Component {
 
         response.data.chats.forEach((chat) => {
           axios
-            .get(`http://localhost:5000/api/chat/${chat._id}`)
+            .get(`${process.env.REACT_APP_API_URL}/api/chat/${chat._id}`)
             .then((response) => {
               const filtered = response.data.messages.filter((message) => {
                 return (

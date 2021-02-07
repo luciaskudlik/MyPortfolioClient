@@ -42,7 +42,7 @@ class Home extends React.Component {
 
   componentDidMount = () => {
     axios
-      .get("http://localhost:5000/api/users")
+      .get(`${process.env.REACT_APP_API_URL}/api/users`)
       .then((response) => {
         this.setState({ allUsers: response.data });
       })

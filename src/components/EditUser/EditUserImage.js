@@ -25,7 +25,7 @@ class EditUserImage extends Component {
 
     axios
       .put(
-        `http://localhost:5000/api/user/${userId}`,
+        `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
         {
           username,
           occupation,
@@ -58,7 +58,7 @@ class EditUserImage extends Component {
     uploadData.append("image", file);
 
     axios
-      .post("http://localhost:5000/api/upload", uploadData, {
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
         withCredentials: true,
       })
       .then((response) => {

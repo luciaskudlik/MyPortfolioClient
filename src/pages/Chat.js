@@ -42,7 +42,7 @@ class Chat extends Component {
   getAllChats = () => {
     const userId = this.props.user._id;
     axios
-      .get("http://localhost:5000/api/user", { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/api/user`, { withCredentials: true })
       .then((response) => {
         //convert updated_at into timestamp
 

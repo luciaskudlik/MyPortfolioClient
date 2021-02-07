@@ -11,7 +11,9 @@ class Comment extends Component {
 
   deleteComment = () => {
     axios
-      .post(`http://localhost:5000/api/comments/${this.props.comment._id}`)
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/comments/${this.props.comment._id}`
+      )
       .then((response) => {
         this.props.displayComments();
       })
@@ -20,7 +22,9 @@ class Comment extends Component {
 
   componentDidMount = () => {
     axios
-      .get(`http://localhost:5000/api/comments/${this.props.comment._id}`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/comments/${this.props.comment._id}`
+      )
       .then((response) => {
         this.setState({ writtenBy: response.data.writtenBy });
       })

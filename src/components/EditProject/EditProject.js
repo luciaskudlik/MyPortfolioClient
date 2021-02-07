@@ -38,7 +38,7 @@ class EditProject extends Component {
     const id = this.props.project._id;
     axios
       .put(
-        `http://localhost:5000/api/projects/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/projects/${id}`,
         {
           title,
           image,
@@ -81,7 +81,7 @@ class EditProject extends Component {
     uploadData.append("image", file);
 
     axios
-      .post("http://localhost:5000/api/upload", uploadData, {
+      .post(`${process.env.REACT_APP_API_URL}/api/upload`, uploadData, {
         withCredentials: true,
       })
       .then((response) => {

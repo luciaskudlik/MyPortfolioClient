@@ -11,11 +11,13 @@ class Navbar extends Component {
 
   componentDidMount = () => {
     axios
-      .get("http://localhost:5000/api/user", { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/api/user`, {
+        withCredentials: true,
+      })
       .then((response) => {
         response.data.chats.forEach((chat) => {
           axios
-            .get(`http://localhost:5000/api/chat/${chat._id}`)
+            .get(`${process.env.REACT_APP_API_URL}/api/chat/${chat._id}`)
             .then((response) => {
               console.log(response.data.messages);
 

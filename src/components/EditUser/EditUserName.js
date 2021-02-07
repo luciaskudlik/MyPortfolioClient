@@ -24,7 +24,7 @@ class EditUserName extends Component {
 
     axios
       .put(
-        `http://localhost:5000/api/user/${userId}`,
+        `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
         {
           username,
           occupation,

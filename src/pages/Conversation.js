@@ -79,7 +79,7 @@ class Conversation extends Component {
 
     axios
       .post(
-        "http://localhost:5000/api/message",
+        `${process.env.REACT_APP_API_URL}/api/message`,
         {
           chat: this.state.chat._id,
           sentBy: userId,
@@ -121,7 +121,7 @@ class Conversation extends Component {
   getAllMessages = () => {
     const { id } = this.props.match.params;
     axios
-      .get(`http://localhost:5000/api/chat/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/chat/${id}`)
       .then((response) => {
         const otherParticipants = response.data.participants.filter((user) => {
           return user._id !== this.props.user._id;
@@ -147,7 +147,9 @@ class Conversation extends Component {
     console.log("NEW MESSAGE", newMessage);
     if (newMessage.length > 0) {
       axios
-        .put(`http://localhost:5000/api/message/read/${newMessage[0]._id}`)
+        .put(
+          `${process.env.REACT_APP_API_URL}/api/message/read/${newMessage[0]._id}`
+        )
         .then((response) => {
           console.log("new message updated");
         })
@@ -158,7 +160,7 @@ class Conversation extends Component {
   mountComponent = () => {
     const { id } = this.props.match.params;
     axios
-      .get(`http://localhost:5000/api/chat/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/chat/${id}`)
       .then((response) => {
         const otherParticipants = response.data.participants.filter((user) => {
           return user._id !== this.props.user._id;

@@ -18,7 +18,7 @@ class AddComment extends Component {
 
     axios
       .post(
-        "http://localhost:5000/api/comments",
+        `${process.env.REACT_APP_API_URL}/api/comments`,
         {
           text,
           projectId,
