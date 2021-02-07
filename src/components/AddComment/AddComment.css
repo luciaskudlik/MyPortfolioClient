@@ -13,6 +13,7 @@
   border: none;
   background-color: #e8e8e8;
   font-size: 0.9rem;
+  outline: none;
 }
 
 .comment-input > button {
@@ -20,4 +21,5 @@
   background-color: white;
   background-color: #e8e8e8;
   font-size: 0.9rem;
+  outline: none;
 }

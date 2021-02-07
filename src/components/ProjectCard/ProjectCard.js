@@ -7,6 +7,7 @@ import Comment from "./../Comment/Comment";
 import AddComment from "./../AddComment/AddComment";
 import { withAuth } from "./../../context/auth-context";
 import PopUp from "../PopUp/PopUp";
+import { Redirect } from "react-router-dom";
 
 class ProjectCard extends Component {
   state = {
@@ -16,6 +17,45 @@ class ProjectCard extends Component {
     comments: [],
     likedBy: [],
     showLikesPopUp: false,
+    chatId: "",
+    redirect: false,
+  };
+
+  createChat = () => {
+    if (this.props.user) {
+      const madeBy = this.props.madeBy;
+      const currentUserId = this.props.user._id;
+
+      if (
+        this.props.madeBy.chats.some((chat) => {
+          return chat.participants.includes(this.props.user._id);
+        })
+      ) {
+        console.log("chat already exists");
+
+        const filteredChat = this.props.madeBy.chats.filter((chat) => {
+          return chat.participants.includes(this.props.user._id);
+        });
+
+        this.setState({ chatId: filteredChat[0]._id, redirect: true });
+      } else {
+        axios
+          .post(
+            `http://localhost:5000/api/chat/${madeBy._id}`,
+            { currentUserId },
+            {
+              withCredentials: true,
+            }
+          )
+          .then((response) => {
+            console.log("new chat created", response.data);
+            this.setState({ chatId: response.data, redirect: true });
+          })
+          .catch((err) => console.log(err));
+      }
+    } else {
+      alert("Please log in to contact " + this.state.user.username);
+    }
   };
 
   toggleCard = () => {
@@ -118,6 +158,49 @@ class ProjectCard extends Component {
             <img src={this.props.project.image} onClick={this.toggleCard} />
             <div className="bottom-card">
               <div>
+                <div className="card-icons">
+                  <div className="like-icons">
+                    {this.props.enableLikes &&
+                    this.state.likedBy.every((user) => {
+                      return user._id !== this.props.user._id;
+                    }) ? (
+                      <i className="far fa-heart" onClick={this.like}></i>
+                    ) : this.props.enableLikes &&
+                      this.state.likedBy.some((user) => {
+                        return user._id === this.props.user._id;
+                      }) ? (
+                      <i className="fas fa-heart" onClick={this.dislike}></i>
+                    ) : null}
+                    <i
+                      className="far fa-comment"
+                      onClick={this.toggleComments}
+                    ></i>
+                    {!this.props.showEditOptions ? (
+                      <i
+                        class="far fa-paper-plane"
+                        onClick={this.createChat}
+                      ></i>
+                    ) : null}
+                  </div>
+                  {this.state.redirect ? (
+                    <Redirect to={`/conversation/${this.state.chatId}`} />
+                  ) : null}
+                  <div className="edit-icons">
+                    {this.props.showEditOptions ? (
+                      <div>
+                        <i
+                          className="fas fa-pen"
+                          onClick={this.toggleEditForm}
+                        ></i>
+                        <i
+                          className="fas fa-trash"
+                          onClick={this.deleteProject}
+                        ></i>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+
                 <div className="project-name">
                   <p id="colored-p">{this.props.project.title}</p>
                   <p id="small-p">{this.props.project.about}</p>
@@ -146,49 +229,16 @@ class ProjectCard extends Component {
                         })}
 
                         <div className="likedBy-line-written">
-                          liked by {this.state.likedBy[0].username}
+                          <p>
+                            {`liked by ${this.state.likedBy[0].username} `}{" "}
+                          </p>
                           {this.state.likedBy.length >= 2 ? (
                             <p>
-                              and
-                              {this.state.likedBy.length - 1} others
+                              {` and ${this.state.likedBy.length - 1} others`}{" "}
                             </p>
                           ) : null}
                         </div>
                       </div>
-                    ) : null}
-                  </div>
-
-                  <div className="card-icons">
-                    {this.props.showEditOptions ? (
-                      <div>
-                        <i
-                          className="fas fa-pen"
-                          onClick={this.toggleEditForm}
-                        ></i>
-                        <i
-                          className="fas fa-trash"
-                          onClick={this.deleteProject}
-                        ></i>
-                      </div>
-                    ) : null}
-                    <i
-                      className="far fa-comment"
-                      onClick={this.toggleComments}
-                    ></i>
-
-                    {this.props.enableLikes &&
-                    this.state.likedBy.every((user) => {
-                      return user._id !== this.props.user._id;
-                    }) ? (
-                      <i className="far fa-thumbs-up" onClick={this.like}></i>
-                    ) : this.props.enableLikes &&
-                      this.state.likedBy.some((user) => {
-                        return user._id === this.props.user._id;
-                      }) ? (
-                      <i
-                        className="far fa-thumbs-down"
-                        onClick={this.dislike}
-                      ></i>
                     ) : null}
                   </div>
                 </div>

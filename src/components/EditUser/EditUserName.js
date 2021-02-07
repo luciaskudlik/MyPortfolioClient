@@ -53,11 +53,12 @@ class EditUserName extends Component {
           value={this.state.username}
           onChange={this.handleInput}
           placeholder="username"
+          className="edit-input"
           maxlength="20"
           required
         />
 
-        <button type="submit">
+        <button type="submit" className="edit-input-button">
           <i class="fas fa-pen" type="submit"></i>
         </button>
       </form>

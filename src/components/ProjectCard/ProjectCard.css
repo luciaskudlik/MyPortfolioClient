@@ -2,8 +2,9 @@
   border: none;
   border-radius: 10px;
   width: 90vw;
-  margin: 40px auto;
-  height: 320px;
+  margin: 15px auto;
+  margin-top: 40px;
+  height: 345px;
   box-shadow: 4px 4px 5px 1px rgba(113, 127, 147, 0.598);
   -webkit-box-shadow: 4px 4px 5px 1px rgba(113, 127, 147, 0.598);
   -moz-box-shadow: 4px 4px 5px 1px rgba(113, 127, 147, 0.598);
@@ -32,6 +33,7 @@
 
 .project-name {
   width: 90vw;
+  margin-bottom: 15px;
 }
 
 #colored-p {
@@ -42,9 +44,24 @@
 .card-icons {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: 80px;
-  color: rgb(80, 78, 78);
+  justify-content: space-between;
+  width: 90vw;
+  color: rgb(138, 138, 138);
+  margin: 0px;
+  padding-right: 10px;
+  font-size: 1.2rem;
+}
+
+.edit-icons {
+  position: relative;
+  color: rgb(138, 138, 138);
+}
+
+.like-icons {
+  position: relative;
+}
+
+.card-icons i {
   margin-right: 10px;
 }
 
@@ -57,11 +74,12 @@
 #small-p {
   font-size: 0.8rem;
   color: grey;
+  margin-bottom: 0px;
 }
 
 .like-comment-calculator {
   font-size: 0.8rem;
-  width: 250px;
+  width: 350px;
 }
 
 #mini-img-container {
@@ -84,10 +102,16 @@
   margin-top: 0px;
 }
 
+.likedBy-line p {
+  margin-right: 0px;
+  margin-left: 5px;
+}
+
 .likedBy-line-written {
-  margin-left: 12px;
+  margin-left: 7px;
   display: flex;
   margin-top: 2px;
+  height: 20px;
 }
 
 .back {

@@ -83,13 +83,13 @@ class Home extends React.Component {
             <p>
               If you are a company, you can start searching for a user by name
               and check out their profile. If you want to contact a user you can
-              create an account and use the chat. Otherwise you can retrieve the
+              create an account and use the chat. Otherwise you can find the
               user's email address on the top of his profile page.
             </p>
             <img src={image2} id="laptop-image" />
             <h3>Developers</h3>
             <p>
-              If you are a developer you need to create an account with us to
+              If you are a developer, you need to create an account with us to
               build your profile and share your projects.
             </p>
           </div>

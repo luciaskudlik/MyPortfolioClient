@@ -7,11 +7,11 @@ import Navbar from "../components/Navbar/Navbar";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-/**SOCKET****/
-import io from "socket.io-client";
-const ENDPOINT = "http://localhost:5000";
-let socket = io(ENDPOINT);
-/********/
+// /**SOCKET****/
+// import io from "socket.io-client";
+// const ENDPOINT = "http://localhost:5000";
+// let socket = io(ENDPOINT);
+// /********/
 
 class Chat extends Component {
   state = {
@@ -21,8 +21,22 @@ class Chat extends Component {
     openChat: {},
   };
 
+  // startSocket = () => {
+  //   socket.emit("join-main", { user: this.props.user._id }, (error) => {
+  //     if (error) {
+  //       console.log(error);
+  //     }
+  //   });
+
+  //   socket.on("message", (message) => {
+  //     console.log("New message received in one of the chats");
+  //     this.getAllChats();
+  //   });
+  // };
+
   componentDidMount = () => {
     this.getAllChats();
+    // this.startSocket();
   };
 
   getAllChats = () => {

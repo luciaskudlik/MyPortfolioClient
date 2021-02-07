@@ -241,7 +241,9 @@ class UserProfile extends React.Component {
             <button className="follow-button" onClick={this.displayEmail}>
               Email
             </button>
-            {this.state.showEmail ? <p className="email-show">{this.state.user.email}</p> : null}
+            {this.state.showEmail ? (
+              <p className="email-show">{this.state.user.email}</p>
+            ) : null}
           </div>
         </div>
 
@@ -251,6 +253,7 @@ class UserProfile extends React.Component {
                 return (
                   <div key={project._id}>
                     <ProjectCard
+                      madeBy={this.state.user}
                       project={project}
                       showEditOptions={false}
                       showCommentInput={this.state.loggedInUser}

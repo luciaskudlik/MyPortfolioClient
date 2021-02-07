@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+.navbar-brand {
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
 .fa-comment-dots {
   font-size: 27px;
   color: white;
@@ -31,4 +36,8 @@
 
 #chat-notification-icon {
   position: relative;
+}
+
+button.navbar-toggler.collapsed {
+  outline: none;
 }

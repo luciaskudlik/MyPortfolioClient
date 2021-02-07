@@ -50,13 +50,14 @@ class EditOccupation extends Component {
         <input
           type="text"
           name="occupation"
+          className="edit-input"
           value={this.state.occupation}
           onChange={this.handleInput}
           placeholder="occupation"
           maxlength="25"
           required
         />
-        <button type="submit">
+        <button type="submit" className="edit-input-button">
           <i class="fas fa-pen" type="submit"></i>
         </button>
       </form>

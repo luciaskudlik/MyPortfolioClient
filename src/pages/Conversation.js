@@ -32,9 +32,8 @@ class Conversation extends Component {
     );
 
     socket.on("message", (message) => {
-      console.log("socket.on was calles");
+      console.log("socket.on was called");
       this.getAllMessages();
-      
     });
 
     // socket.on("type", (message) => {
