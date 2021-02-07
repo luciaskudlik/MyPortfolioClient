@@ -46,7 +46,7 @@
   align-items: center;
   justify-content: space-between;
   width: 90vw;
-  color: rgb(138, 138, 138);
+  color: rgb(121, 121, 121);
   margin: 0px;
   padding-right: 10px;
   font-size: 1.2rem;
@@ -54,7 +54,7 @@
 
 .edit-icons {
   position: relative;
-  color: rgb(138, 138, 138);
+  font-size: 1rem;
 }
 
 .like-icons {
@@ -63,6 +63,10 @@
 
 .card-icons i {
   margin-right: 10px;
+}
+
+.liked-heart {
+  color: rgb(223, 0, 0);
 }
 
 .likes-comments {

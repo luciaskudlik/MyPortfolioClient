@@ -12,6 +12,7 @@ class Signup extends Component {
     occupation: "",
     email: "",
     password: "",
+    showLoadingMessage: false,
   };
 
   handleFormSubmit = (event) => {
@@ -27,6 +28,9 @@ class Signup extends Component {
   };
 
   handleFileUpload = (e) => {
+    this.setState({
+      showLoadingMessage: true,
+    });
     console.log("The file to be uploaded is: ", e.target.files);
     const file = e.target.files[0];
 
@@ -42,7 +46,10 @@ class Signup extends Component {
       .then((response) => {
         console.log("response is: ", response);
         // after the console.log we can see that response carries 'secure_url' which we can use to update the state
-        this.setState({ image: response.data.secure_url });
+        this.setState({
+          image: response.data.secure_url,
+          showLoadingMessage: false,
+        });
       })
       .catch((err) => {
         console.log("Error while uploading the file: ", err);
@@ -54,66 +61,83 @@ class Signup extends Component {
     return (
       <div>
         <Navbar />
-        <h1>Sign Up</h1>
+        <h1 className="signup-heading">
+          Create an account to use all our features
+        </h1>
 
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
+        <form onSubmit={this.handleFormSubmit} className="project-form">
           <input
             type="text"
             name="username"
             value={username}
             onChange={this.handleChange}
             maxlength="20"
+            className="add-project-input"
+            placeholder="username"
             required
           />
 
-          <label>Image</label>
-          <input
-            name="image"
-            type="file"
-            onChange={this.handleFileUpload}
-          ></input>
-          <span>
-            <img
-              style={{ width: "100px", height: "auto" }}
-              src={this.state.image && this.state.image}
-              alt=""
-            ></img>
-          </span>
+          <div id="signup-image-upload">
+            {this.state.showLoadingMessage ? (
+              <p id="loading-message-signup">loading ...</p>
+            ) : (
+              <input
+                name="image"
+                type="file"
+                onChange={this.handleFileUpload}
+              ></input>
+            )}
 
-          <label>Occupation:</label>
+            <span>
+              <img
+                // style={{ width: "100px", height: "auto" }}
+                src={this.state.image && this.state.image}
+                alt=""
+              ></img>
+            </span>
+          </div>
+
           <input
             type="text"
             name="occupation"
             value={occupation}
             onChange={this.handleChange}
+            className="add-project-input"
             maxlength="25"
+            placeholder="occupation"
             required
           />
 
-          <label>Email:</label>
           <input
             type="email"
             name="email"
             value={email}
             onChange={this.handleChange}
+            className="add-project-input"
+            placeholder="email"
             required
           />
 
-          <label>Password:</label>
           <input
             type="password"
             name="password"
             value={password}
             onChange={this.handleChange}
+            className="add-project-input"
+            placeholder="password"
             required
           />
 
-          <input type="submit" value="Signup" />
+          <input
+            type="submit"
+            value="Signup"
+            className="add-project-input"
+            id="signup-button"
+          />
         </form>
 
-        <p>Already have account?</p>
-        <Link to={"/login"}> Login</Link>
+        {/* <p>Already have account?</p>
+        <Link to={"/login"}> Login</Link> */}
       </div>
     );
   }

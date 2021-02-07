@@ -12,6 +12,7 @@ class EditProject extends Component {
     technologies: this.props.project.technologies,
     deployedLink: this.props.project.deployedLink,
     githubLink: this.props.project.githubLink,
+    showLoadingMessage: false,
   };
 
   handleInput = (event) => {
@@ -68,6 +69,9 @@ class EditProject extends Component {
   };
 
   handleFileUpload = (e) => {
+    this.setState({
+      showLoadingMessage: true,
+    });
     console.log("The file to be uploaded is: ", e.target.files);
     const file = e.target.files[0];
 
@@ -83,7 +87,10 @@ class EditProject extends Component {
       .then((response) => {
         console.log("response is: ", response);
         // after the console.log we can see that response carries 'secure_url' which we can use to update the state
-        this.setState({ image: response.data.secure_url });
+        this.setState({
+          image: response.data.secure_url,
+          showLoadingMessage: false,
+        });
       })
       .catch((err) => {
         console.log("Error while uploading the file: ", err);
@@ -92,30 +99,41 @@ class EditProject extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="project-form">
         <input
           type="text"
           name="title"
           value={this.state.title}
           onChange={this.handleInput}
+          className="add-project-input"
           placeholder="name of your project"
           required
         />
-
-        <input
-          name="image"
-          type="file"
-          onChange={this.handleFileUpload}
-        ></input>
-        <span>
-          <img style={{ width: "100px" }} src={this.state.image} alt=""></img>
-        </span>
+        <div id="project-image-upload" className="add-project-input">
+          <input
+            name="image"
+            type="file"
+            onChange={this.handleFileUpload}
+            className="add-project-input project-image-input"
+          ></input>
+          {this.state.showLoadingMessage ? (
+            <p id="loading-message-project">loading</p>
+          ) : null}
+          <span>
+            <img
+              style={{ width: "30px", height: "auto", borderRadius: "10px" }}
+              src={this.state.image}
+              alt=""
+            ></img>
+          </span>
+        </div>
         <input
           type="text"
           name="about"
           value={this.state.about}
           onChange={this.handleInput}
           placeholder="e.g restaurant finder"
+          className="add-project-input"
           required
         />
         <textarea
@@ -123,6 +141,7 @@ class EditProject extends Component {
           name="description"
           value={this.state.description}
           onChange={this.handleInput}
+          className="add-project-input"
           placeholder="e.g. technologies used"
           required
         />
@@ -131,6 +150,7 @@ class EditProject extends Component {
           name="technologies"
           value={this.state.technologies}
           onChange={this.handleInput}
+          className="add-project-input"
           placeholder="technolgies"
           required
         />
@@ -140,6 +160,7 @@ class EditProject extends Component {
           value={this.state.deployedLink}
           onChange={this.handleInput}
           placeholder="link to the deployed website"
+          className="add-project-input"
           required
         />
         <input
@@ -148,6 +169,7 @@ class EditProject extends Component {
           value={this.state.githubLink}
           onChange={this.handleInput}
           placeholder="link to your github repository"
+          className="add-project-input"
           required
         />
         <button type="submit">Update changes</button>

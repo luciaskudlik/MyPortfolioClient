@@ -176,7 +176,7 @@ class Private extends Component {
               </div>
             </div>
 
-            <p id="welcome-message">Welcome back {this.props.user.username}!</p>
+            <p id="welcome-message">Welcome back {this.state.username}!</p>
 
             {this.state.unreadMessages === 0 ? (
               <Link to="/chat" className="link">

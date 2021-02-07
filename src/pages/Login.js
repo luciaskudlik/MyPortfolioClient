@@ -23,27 +23,34 @@ class Login extends Component {
     return (
       <div>
         <Navbar />
-        <h1>Login</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Email:</label>
+        <h1 className="signup-heading">Login</h1>
+        <form onSubmit={this.handleFormSubmit} className="project-form">
           <input
             type="email"
             name="email"
             value={email}
             onChange={this.handleChange}
+            className="add-project-input"
+            placeholder="email"
             required
           />
 
-          <label>Password:</label>
           <input
             type="password"
             name="password"
             value={password}
             onChange={this.handleChange}
+            className="add-project-input"
+            placeholder="password"
             required
           />
 
-          <input type="submit" value="Login" />
+          <input
+            type="submit"
+            value="Login"
+            className="add-project-input"
+            id="signup-button"
+          />
         </form>
       </div>
     );

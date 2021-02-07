@@ -38,6 +38,6 @@
   position: relative;
 }
 
-button.navbar-toggler.collapsed {
+.navbar-toggler:focus {
   outline: none;
 }

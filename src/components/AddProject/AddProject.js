@@ -12,6 +12,7 @@ class AddProject extends Component {
     technologies: "",
     deployedLink: "",
     githubLink: "",
+    showLoadingMessage: false,
   };
 
   handleInput = (event) => {
@@ -68,6 +69,9 @@ class AddProject extends Component {
   };
 
   handleFileUpload = (e) => {
+    this.setState({
+      showLoadingMessage: true,
+    });
     console.log("The file to be uploaded is: ", e.target.files);
     const file = e.target.files[0];
 
@@ -83,7 +87,10 @@ class AddProject extends Component {
       .then((response) => {
         console.log("response is: ", response);
         // after the console.log we can see that response carries 'secure_url' which we can use to update the state
-        this.setState({ image: response.data.secure_url });
+        this.setState({
+          image: response.data.secure_url,
+          showLoadingMessage: false,
+        });
       })
       .catch((err) => {
         console.log("Error while uploading the file: ", err);
@@ -110,9 +117,12 @@ class AddProject extends Component {
             onChange={this.handleFileUpload}
             className="add-project-input project-image-input"
           ></input>
+          {this.state.showLoadingMessage ? (
+            <p id="loading-message-project">loading</p>
+          ) : null}
           <span>
             <img
-              style={{ width: "40px", height: "auto", borderRadius: "10px" }}
+              style={{ width: "30px", height: "auto", borderRadius: "10px" }}
               src={this.state.image && this.state.image}
               alt=""
             ></img>
@@ -123,7 +133,7 @@ class AddProject extends Component {
           name="about"
           value={this.state.about}
           onChange={this.handleInput}
-          placeholder="what kind of app - e.g restaurant finder"
+          placeholder="what kind of app / e.g 'e-commerce site'"
           maxlength="30"
           className="add-project-input"
           required
@@ -162,7 +172,7 @@ class AddProject extends Component {
           name="githubLink"
           value={this.state.githubLink}
           onChange={this.handleInput}
-          placeholder="link to your github repository"
+          placeholder="link to the github repository"
           className="add-project-input"
           required
         />

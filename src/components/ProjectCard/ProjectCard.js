@@ -54,7 +54,7 @@ class ProjectCard extends Component {
           .catch((err) => console.log(err));
       }
     } else {
-      alert("Please log in to contact " + this.state.user.username);
+      alert("Please log in to contact " + this.props.madeBy.username);
     }
   };
 
@@ -169,7 +169,10 @@ class ProjectCard extends Component {
                       this.state.likedBy.some((user) => {
                         return user._id === this.props.user._id;
                       }) ? (
-                      <i className="fas fa-heart" onClick={this.dislike}></i>
+                      <i
+                        className="fas fa-heart liked-heart"
+                        onClick={this.dislike}
+                      ></i>
                     ) : null}
                     <i
                       className="far fa-comment"
@@ -277,10 +280,10 @@ class ProjectCard extends Component {
                 toggleComments={this.toggleComments}
               />
             ) : (
-              <div>
+              <form className="comment-input">
                 <input placeholder="log in to write a comment" />
                 <button onClick={this.showAlert}>Post</button>
-              </div>
+              </form>
             )}
             <div>
               {this.state.comments

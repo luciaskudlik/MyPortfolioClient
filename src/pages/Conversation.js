@@ -226,6 +226,7 @@ class Conversation extends Component {
             value={this.state.text}
             onChange={this.handleInput}
             placeholder="type something here..."
+            required
           />
           <button type="submit" className="send-button">
             Send
