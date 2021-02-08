@@ -75,7 +75,7 @@ class Signup extends Component {
               onChange={this.handleChange}
               maxlength="20"
               className="add-project-input"
-              placeholder="username"
+              placeholder="full name"
               required
             />
 
