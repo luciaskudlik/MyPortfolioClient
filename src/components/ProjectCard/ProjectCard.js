@@ -19,6 +19,7 @@ class ProjectCard extends Component {
     showLikesPopUp: false,
     chatId: "",
     redirect: false,
+    commentIds: [],
   };
 
   createChat = () => {
@@ -87,9 +88,15 @@ class ProjectCard extends Component {
         `${process.env.REACT_APP_API_URL}/api/projects/${this.props.project._id}`
       )
       .then((response) => {
+        //get comments ids
+        const commentIdsExtracted = response.data.comments.map((comment) => {
+          return comment._id;
+        });
+
         this.setState({
           comments: response.data.comments,
           likedBy: response.data.likedBy,
+          commentIds: commentIdsExtracted,
         });
       })
       .catch((err) => console.log(err));
@@ -271,6 +278,7 @@ class ProjectCard extends Component {
         {this.state.showEditForm ? (
           <EditProject
             project={this.props.project}
+            commentIds={this.state.commentIds}
             toggleForm={this.toggleEditForm}
             displayProjects={this.props.displayProjects}
           />
