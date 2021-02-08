@@ -9,6 +9,7 @@ import PopUp from "../components/PopUp/PopUp";
 import EditUserName from "../components/EditUser/EditUserName";
 import EditOccupation from "../components/EditUser/EditOccupation";
 import EditUserImage from "../components/EditUser/EditUserImage";
+import Footer from "../components/Footer/Footer";
 
 class Private extends Component {
   state = {
@@ -103,133 +104,140 @@ class Private extends Component {
     return (
       <div className="user-profile">
         <Navbar />
-        {this.props.user ? (
-          <div>
-            <div className="user-details private-user-details">
-              {this.state.showImageUpload ? (
-                <EditUserImage
-                  editUserImage={this.editUserImage}
-                  displayProjects={this.displayProjects}
-                  userToEdit={this.state.user}
-                />
-              ) : (
-                <div className="edit-user-image">
-                  <img src={this.state.image} className="user-image" />
-                  <i
-                    class="fas fa-plus-circle"
-                    onClick={this.editUserImage}
-                  ></i>
-                  {/* <i class="fas fa-pen" onClick={this.editUserImage}></i> */}
-                </div>
-              )}
-              <div>
+        <div className="page-content">
+          {this.props.user ? (
+            <div>
+              <div className="user-details private-user-details">
+                {this.state.showImageUpload ? (
+                  <div>
+                    <EditUserImage
+                      editUserImage={this.editUserImage}
+                      displayProjects={this.displayProjects}
+                      userToEdit={this.state.user}
+                    />
+                  </div>
+                ) : (
+                  <div className="edit-user-image">
+                    <img src={this.state.image} className="user-image" />
+                    <i
+                      class="fas fa-plus-circle"
+                      onClick={this.editUserImage}
+                    ></i>
+                    {/* <i class="fas fa-pen" onClick={this.editUserImage}></i> */}
+                  </div>
+                )}
                 <div>
-                  {this.state.showUserNameInput ? (
-                    <EditUserName
-                      editUserName={this.editUsername}
-                      displayProjects={this.displayProjects}
-                      userToEdit={this.state.user}
-                    />
-                  ) : (
-                    <div className="edit-user">
-                      <h2>{this.state.username}</h2>
-                      <i class="fas fa-pen" onClick={this.editUsername}></i>
-                    </div>
-                  )}
+                  <div>
+                    {this.state.showUserNameInput ? (
+                      <EditUserName
+                        editUserName={this.editUsername}
+                        displayProjects={this.displayProjects}
+                        userToEdit={this.state.user}
+                      />
+                    ) : (
+                      <div className="edit-user">
+                        <h2>{this.state.username}</h2>
+                        <i class="fas fa-pen" onClick={this.editUsername}></i>
+                      </div>
+                    )}
 
-                  {this.state.showOccupationInput ? (
-                    <EditOccupation
-                      editOccupation={this.editOccupation}
-                      displayProjects={this.displayProjects}
-                      userToEdit={this.state.user}
-                    />
-                  ) : (
-                    <div className="edit-user">
-                      <h4>{this.state.occupation}</h4>
-                      <i class="fas fa-pen" onClick={this.editOccupation}></i>
-                    </div>
-                  )}
-                </div>
-                <div className="followers-following">
-                  <p onClick={this.toggleFollowersPopup}>
-                    {this.state.followers.length} followers
-                  </p>
+                    {this.state.showOccupationInput ? (
+                      <EditOccupation
+                        editOccupation={this.editOccupation}
+                        displayProjects={this.displayProjects}
+                        userToEdit={this.state.user}
+                      />
+                    ) : (
+                      <div className="edit-user">
+                        <h4>{this.state.occupation}</h4>
+                        <i class="fas fa-pen" onClick={this.editOccupation}></i>
+                      </div>
+                    )}
+                  </div>
+                  <div className="followers-following">
+                    <p onClick={this.toggleFollowersPopup}>
+                      {this.state.followers.length} followers
+                    </p>
 
-                  {this.state.showFollowersPopUp &&
-                  this.state.followers.length > 0 ? (
-                    <PopUp
-                      userArray={this.state.followers}
-                      togglePopUp={this.toggleFollowersPopup}
-                    />
-                  ) : null}
+                    {this.state.showFollowersPopUp &&
+                    this.state.followers.length > 0 ? (
+                      <PopUp
+                        userArray={this.state.followers}
+                        togglePopUp={this.toggleFollowersPopup}
+                      />
+                    ) : null}
 
-                  <p onClick={this.toggleFollowingPopup}>
-                    {this.state.following.length} following
-                  </p>
+                    <p onClick={this.toggleFollowingPopup}>
+                      {this.state.following.length} following
+                    </p>
 
-                  {this.state.showFollowingPopUp &&
-                  this.state.following.length > 0 ? (
-                    <PopUp
-                      userArray={this.state.following}
-                      togglePopUp={this.toggleFollowingPopup}
-                    />
-                  ) : null}
+                    {this.state.showFollowingPopUp &&
+                    this.state.following.length > 0 ? (
+                      <PopUp
+                        userArray={this.state.following}
+                        togglePopUp={this.toggleFollowingPopup}
+                      />
+                    ) : null}
+                  </div>
                 </div>
               </div>
+
+              <p id="welcome-message">Welcome back {this.state.username}!</p>
+
+              {this.state.unreadMessages === 0 ? (
+                <Link to="/chat" className="link">
+                  <p id="no-new-message">
+                    <i class="fas fa-comment-dots" id="black-comment-dots"></i>
+                    You have no new messages.
+                  </p>
+                </Link>
+              ) : this.state.unreadMessages === 1 ? (
+                <Link to="/chat" className="link">
+                  <p id="notification-message">
+                    <i class="fas fa-comment-dots" id="black-comment-dots"></i>
+                    You have {this.state.unreadMessages} new message.
+                  </p>
+                </Link>
+              ) : (
+                <Link to="/chat" className="link">
+                  <p id="notification-message">
+                    <i class="fas fa-comment-dots" id="black-comment-dots"></i>
+                    You have {this.state.unreadMessages} new messages.
+                  </p>
+                </Link>
+              )}
             </div>
+          ) : null}
 
-            <p id="welcome-message">Welcome back {this.state.username}!</p>
-
-            {this.state.unreadMessages === 0 ? (
-              <Link to="/chat" className="link">
-                <p id="no-new-message">
-                  <i class="fas fa-comment-dots" id="black-comment-dots"></i>
-                  You have no new messages.
-                </p>
-              </Link>
-            ) : this.state.unreadMessages === 1 ? (
-              <Link to="/chat" className="link">
-                <p id="notification-message">
-                  <i class="fas fa-comment-dots" id="black-comment-dots"></i>
-                  You have {this.state.unreadMessages} new message.
-                </p>
-              </Link>
-            ) : (
-              <Link to="/chat" className="link">
-                <p id="notification-message">
-                  <i class="fas fa-comment-dots" id="black-comment-dots"></i>
-                  You have {this.state.unreadMessages} new messages.
-                </p>
-              </Link>
-            )}
+          <div id="add-project">
+            <button onClick={this.toggleForm}>Add a new project</button>
           </div>
-        ) : null}
 
-        <div id="add-project">
-          <button onClick={this.toggleForm}>Add a new project</button>
+          {this.state.showForm ? (
+            <AddProject
+              displayProjects={this.displayProjects}
+              toggleForm={this.toggleForm}
+            />
+          ) : null}
+
+          <div id="projects-scroll-bar">
+            {this.state.portfolio
+              .map((project) => {
+                return (
+                  <ProjectCard
+                    project={project}
+                    displayProjects={this.displayProjects}
+                    showEditOptions={true}
+                    showCommentInput={true}
+                    enableLikes={true}
+                    updateLikes={this.displayProjects}
+                  />
+                );
+              })
+              .reverse()}
+          </div>
         </div>
-
-        {this.state.showForm ? (
-          <AddProject
-            displayProjects={this.displayProjects}
-            toggleForm={this.toggleForm}
-          />
-        ) : null}
-
-        {this.state.portfolio
-          .map((project) => {
-            return (
-              <ProjectCard
-                project={project}
-                displayProjects={this.displayProjects}
-                showEditOptions={true}
-                showCommentInput={true}
-                enableLikes={true}
-                updateLikes={this.displayProjects}
-              />
-            );
-          })
-          .reverse()}
+        <Footer />
       </div>
     );
   }

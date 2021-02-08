@@ -42,7 +42,9 @@ class Chat extends Component {
   getAllChats = () => {
     const userId = this.props.user._id;
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/user`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_API_URL}/api/user`, {
+        withCredentials: true,
+      })
       .then((response) => {
         //convert updated_at into timestamp
 
@@ -83,13 +85,16 @@ class Chat extends Component {
 
   render() {
     return (
-      <div>
+      <div id="chat-list">
         <Navbar />
         {this.state.sortedChats.length === 0 ? (
           <p id="empty-chat">
-            You don't have any chats yet. <Link to={"/home"}>Search</Link> for a
-            user you want to connect with and start a conversation through their
-            profile page.
+            You don't have any chats yet.{" "}
+            <Link to={"/home"} className="link">
+              Search
+            </Link>{" "}
+            for a user you want to connect with and start a conversation through
+            their profile page.
           </p>
         ) : (
           <div id="chatlist-scroll-bar">

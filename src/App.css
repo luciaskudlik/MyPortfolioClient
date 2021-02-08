@@ -6,6 +6,10 @@
   outline: none;
 }
 
+.App#text {
+  color: white;
+}
+
 /**************************** landing page ******************************/
 
 #landing-page {
@@ -38,10 +42,18 @@
 }
 
 .landing-btn:hover {
-  background-color: orange;
+  background-color: rgb(66, 108, 187);
+  color: white;
 }
 
 /****************************** home page *****************************/
+
+#search-error {
+  text-align: center;
+  margin-top: 150px;
+  color: #728f91;
+  font-size: 0.9rem;
+}
 
 #homepage {
   text-align: center;
@@ -70,6 +82,10 @@
   object-fit: cover;
 }
 
+#home-page-content {
+  min-height: 400px;
+}
+
 /****************************** user profile / private*****************************/
 
 .user-image {
@@ -79,6 +95,10 @@
   border-radius: 50%;
   border: 3px solid white;
   margin-right: 15px;
+}
+
+.page-content {
+  min-height: 500px;
 }
 
 /* .fa-comment-alt {
@@ -149,6 +169,7 @@
 .edit-user > i {
   font-size: 0.7rem;
   margin-left: 5px;
+  color: grey;
 }
 
 .edit-input-button {
@@ -233,17 +254,17 @@
 }
 
 #loading-message {
-  position: absolute;
-  top: 130px;
-  left: 50px;
-  font-size: 1rem;
-  background-color: white;
+  font-size: 0.8rem;
+  background-color: #f0f0f0;
+
+  margin-top: 5px;
+  text-align: center;
 }
 
 .image-upload-form button {
   position: relative;
   top: 2px;
-  left: 170px;
+  left: 160px;
   font-size: 0.8rem;
   border: none;
   width: 20px;
@@ -289,6 +310,11 @@
   font-size: 0.8rem;
   text-align: center;
   margin: 200px 20px;
+  color: grey;
+}
+
+#empty-chat > .link {
+  color: rgb(67, 118, 211);
 }
 
 .send-message-form {
@@ -396,7 +422,11 @@
   overflow: hidden;
 }
 
-/********************SIGNUP**************************/
+/********************SIGNUP /LOGIN**************************/
+
+#login-page {
+  min-height: 500px;
+}
 
 #signup-button {
   background-color: #9ec3c6;
@@ -448,4 +478,162 @@
   width: 200px;
   margin: 20px;
   font-size: 0.9rem;
+}
+
+/**************************TABLET***************************/
+
+@media (min-width: 768px) {
+  /***********LANDING PAGE************/
+  #landing-page {
+    padding-top: 100px;
+  }
+
+  #landing-page > p {
+    margin: 0px 80px;
+    font-size: 1.3rem;
+  }
+
+  #landing-page button {
+    font-size: 1.1rem;
+  }
+
+  /***********HOME PAGE************/
+
+  #home-page-content {
+    width: 70vw;
+    margin: 0 auto;
+    min-height: 550px;
+  }
+
+  /***********PRIVATE/ USERPROFILE************/
+  #projects-scroll-bar {
+    display: flex;
+
+    width: 100vw;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* width: 500px; */
+  }
+
+  .top-left {
+    align-content: baseline;
+  }
+
+  .private-user-details {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .private-user-details .edit-user-image {
+    margin-bottom: 20px;
+  }
+
+  .page-content {
+    min-height: 550px;
+  }
+
+  .image-upload-form {
+    width: 100px;
+  }
+
+  .image-upload-form img {
+    height: 80px;
+    width: 80px;
+    margin-top: 200px;
+    margin-right: 20px;
+  }
+
+  .image-upload {
+    position: static;
+  }
+
+  .image-upload-form button {
+    position: static;
+    z-index: 1;
+  }
+
+  .image-upload-form div {
+    display: flex;
+    width: 300px;
+  }
+
+  #loading-message {
+  }
+
+  /***********CHAT************/
+
+  #chat-list {
+    background-color: #e8e8e8;
+    height: 100vh;
+  }
+
+  #chatlist-scroll-bar {
+    width: 60vw;
+    margin: 0 auto;
+    background-color: white;
+    height: 100vh;
+  }
+
+  /***********CONVERSATION************/
+  .conversation {
+    width: 90vw;
+    margin: 0 auto;
+    margin-top: 150px;
+    margin-bottom: 50px;
+  }
+
+  .message-container {
+    width: 600px;
+  }
+
+  .right-blue {
+    width: 300px;
+    margin-left: 380px;
+  }
+
+  .left-red {
+    width: 300px;
+  }
+
+  /***********************LOGIN/SIGNUP**********************/
+
+  #login-page {
+    width: 60vw;
+    margin: 0px auto;
+    min-height: 550px;
+    padding-top: 100px;
+  }
+
+  #signup-page {
+    width: 60vw;
+    margin: 0px auto;
+    min-height: 550px;
+  }
+}
+
+/**************************DESKTOP*****************************/
+
+@media (min-width: 1024px) {
+  /********************HOME************************/
+
+  #home-page-content {
+    width: 50vw;
+  }
+
+  .user-details {
+    width: 800px;
+  }
+
+  .page-content {
+    width: 60vw;
+    margin: 0 auto;
+  }
 }

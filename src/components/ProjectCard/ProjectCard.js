@@ -147,7 +147,7 @@ class ProjectCard extends Component {
     // );
     // console.log(alreadyLiked);
     return (
-      <div>
+      <div className="project-card-container">
         {this.state.showLikesPopUp ? (
           <div>
             <PopUp

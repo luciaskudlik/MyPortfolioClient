@@ -1,7 +1,12 @@
+.project-card-container {
+  width: 340px;
+  margin: 0 auto;
+}
+
 .project-card {
   border: none;
   border-radius: 10px;
-  width: 90vw;
+  width: 340px;
   margin: 15px auto;
   margin-top: 40px;
   height: 345px;
@@ -45,7 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90vw;
+  width: 340px;
   color: rgb(121, 121, 121);
   margin: 0px;
   padding-right: 10px;
@@ -53,7 +58,6 @@
 }
 
 .edit-icons {
-  position: relative;
   font-size: 1rem;
 }
 
@@ -170,6 +174,18 @@
 }
 
 .comment-section {
-  width: 90vw;
+  width: 340px;
   margin: 0 auto;
+}
+
+.comment-input {
+  width: 340px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .project-card {
+    margin: 30px auto;
+    margin-top: 40px;
+  }
 }

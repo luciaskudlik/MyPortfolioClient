@@ -3,7 +3,8 @@
   font-size: 0.9rem;
   justify-content: space-between;
   align-items: center;
-  width: 90vw;
+  width: 340px;
+  margin: 0 auto;
 }
 
 .comment-left {
@@ -27,3 +28,5 @@
   margin-right: 10px;
   font-size: 0.8rem;
 }
+
+

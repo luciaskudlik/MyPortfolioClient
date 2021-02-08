@@ -74,11 +74,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link
-                  to="/home"
-                  className="nav-link active"
-                  aria-current="page"
-                >
+                <Link to="/home" className="nav-link" aria-current="page">
                   Home
                 </Link>
               </li>
@@ -94,13 +90,11 @@ class Navbar extends Component {
                       My Profile
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <p
-                      className="nav-link logout-btn"
-                      onClick={this.props.logout}
-                    >
-                      Logout
-                    </p>
+                  <li
+                    className="nav-item nav-link logout-btn"
+                    onClick={this.props.logout}
+                  >
+                    Logout
                     {/* <Link
                       to="/login"
                       className="nav-link"

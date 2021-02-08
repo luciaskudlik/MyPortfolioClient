@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withAuth } from "./../context/auth-context";
 import axios from "axios";
 import Navbar from "./../components/Navbar/Navbar";
+import Footer from "./../components/Footer/Footer";
 
 class Signup extends Component {
   state = {
@@ -61,83 +62,85 @@ class Signup extends Component {
     return (
       <div>
         <Navbar />
-        <h1 className="signup-heading">
-          Create an account to use all our features
-        </h1>
+        <div id="signup-page">
+          <h1 className="signup-heading">
+            Create an account to use all our features
+          </h1>
 
-        <form onSubmit={this.handleFormSubmit} className="project-form">
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-            maxlength="20"
-            className="add-project-input"
-            placeholder="username"
-            required
-          />
+          <form onSubmit={this.handleFormSubmit} className="project-form">
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={this.handleChange}
+              maxlength="20"
+              className="add-project-input"
+              placeholder="username"
+              required
+            />
 
-          <div id="signup-image-upload">
-            {this.state.showLoadingMessage ? (
-              <p id="loading-message-signup">loading ...</p>
-            ) : (
-              <input
-                name="image"
-                type="file"
-                onChange={this.handleFileUpload}
-              ></input>
-            )}
+            <div id="signup-image-upload">
+              {this.state.showLoadingMessage ? (
+                <p id="loading-message-signup">loading ...</p>
+              ) : (
+                <input
+                  name="image"
+                  type="file"
+                  onChange={this.handleFileUpload}
+                ></input>
+              )}
 
-            <span>
-              <img
-                // style={{ width: "100px", height: "auto" }}
-                src={this.state.image && this.state.image}
-                alt=""
-              ></img>
-            </span>
-          </div>
+              <span>
+                <img
+                  // style={{ width: "100px", height: "auto" }}
+                  src={this.state.image && this.state.image}
+                  alt=""
+                ></img>
+              </span>
+            </div>
 
-          <input
-            type="text"
-            name="occupation"
-            value={occupation}
-            onChange={this.handleChange}
-            className="add-project-input"
-            maxlength="25"
-            placeholder="occupation"
-            required
-          />
+            <input
+              type="text"
+              name="occupation"
+              value={occupation}
+              onChange={this.handleChange}
+              className="add-project-input"
+              maxlength="25"
+              placeholder="occupation"
+              required
+            />
 
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={this.handleChange}
-            className="add-project-input"
-            placeholder="email"
-            required
-          />
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+              className="add-project-input"
+              placeholder="email"
+              required
+            />
 
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={this.handleChange}
-            className="add-project-input"
-            placeholder="password"
-            required
-          />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={this.handleChange}
+              className="add-project-input"
+              placeholder="password"
+              required
+            />
 
-          <input
-            type="submit"
-            value="Signup"
-            className="add-project-input"
-            id="signup-button"
-          />
-        </form>
-
+            <input
+              type="submit"
+              value="Signup"
+              className="add-project-input"
+              id="signup-button"
+            />
+          </form>
+        </div>
         {/* <p>Already have account?</p>
         <Link to={"/login"}> Login</Link> */}
+        <Footer />
       </div>
     );
   }

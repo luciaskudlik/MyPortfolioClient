@@ -6,6 +6,7 @@ import { withAuth } from "./../context/auth-context";
 import PopUp from "./../components/PopUp/PopUp";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import Footer from "../components/Footer/Footer";
 
 class UserProfile extends React.Component {
   state = {
@@ -169,102 +170,106 @@ class UserProfile extends React.Component {
     return (
       <div className="user-profile">
         <Navbar />
-        <div className="user-details">
-          <div className="top-left">
-            <img src={this.state.user.image} className="user-image" />
-            <div>
-              <h2>{this.state.user.username}</h2>
-              <h4>{this.state.user.occupation}</h4>
-              <div className="followers-following">
-                <p onClick={this.toggleFollowersPopup}>
-                  {this.state.followers.length} followers
-                </p>
+        <div className="page-content">
+          <div className="user-details">
+            <div className="top-left">
+              <img src={this.state.user.image} className="user-image" />
+              <div>
+                <h2>{this.state.user.username}</h2>
+                <h4>{this.state.user.occupation}</h4>
+                <div className="followers-following">
+                  <p onClick={this.toggleFollowersPopup}>
+                    {this.state.followers.length} followers
+                  </p>
 
-                {this.state.showFollowersPopUp &&
-                this.state.followers.length > 0 ? (
-                  <PopUp
-                    userArray={this.state.followers}
-                    togglePopUp={this.toggleFollowersPopup}
-                  />
-                ) : null}
+                  {this.state.showFollowersPopUp &&
+                  this.state.followers.length > 0 ? (
+                    <PopUp
+                      userArray={this.state.followers}
+                      togglePopUp={this.toggleFollowersPopup}
+                    />
+                  ) : null}
 
-                <p onClick={this.toggleFollowingPopup}>
-                  {this.state.userIsFollowing.length} following
-                </p>
+                  <p onClick={this.toggleFollowingPopup}>
+                    {this.state.userIsFollowing.length} following
+                  </p>
 
-                {this.state.showFollowingPopUp &&
-                this.state.userIsFollowing.length > 0 ? (
-                  <PopUp
-                    userArray={this.state.userIsFollowing}
-                    togglePopUp={this.toggleFollowingPopup}
-                  />
-                ) : null}
+                  {this.state.showFollowingPopUp &&
+                  this.state.userIsFollowing.length > 0 ? (
+                    <PopUp
+                      userArray={this.state.userIsFollowing}
+                      togglePopUp={this.toggleFollowingPopup}
+                    />
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
-          <div className="user-details-bottom">
-            {this.props.user && this.state.following ? (
-              <button onClick={this.unfollowUser} className="follow-button">
-                {" "}
-                - Unfollow
-              </button>
-            ) : null}
+            <div className="user-details-bottom">
+              {this.props.user && this.state.following ? (
+                <button onClick={this.unfollowUser} className="follow-button">
+                  {" "}
+                  - Unfollow
+                </button>
+              ) : null}
 
-            {!this.props.user ? (
-              <button
-                onClick={this.followNotLoggedIn}
-                className="follow-button"
-              >
-                {" "}
-                + Follow
-              </button>
-            ) : null}
-            {this.props.user && !this.state.following ? (
-              <button onClick={this.followUser} className="follow-button">
-                {" "}
-                + Follow
-              </button>
-            ) : null}
-            {/* {this.state.displayLogInAlert ? (
+              {!this.props.user ? (
+                <button
+                  onClick={this.followNotLoggedIn}
+                  className="follow-button"
+                >
+                  {" "}
+                  + Follow
+                </button>
+              ) : null}
+              {this.props.user && !this.state.following ? (
+                <button onClick={this.followUser} className="follow-button">
+                  {" "}
+                  + Follow
+                </button>
+              ) : null}
+              {/* {this.state.displayLogInAlert ? (
               <i class="far fa-comment-alt">
                 <p>You need to log in</p>
               </i>
             ) : null} */}
-            <button className="follow-button" onClick={this.createChat}>
-              Message
-            </button>
+              <button className="follow-button" onClick={this.createChat}>
+                Message
+              </button>
 
-            {this.state.redirect ? (
-              <Redirect to={`/conversation/${this.state.chatId}`} />
-            ) : null}
+              {this.state.redirect ? (
+                <Redirect to={`/conversation/${this.state.chatId}`} />
+              ) : null}
 
-            <button className="follow-button" onClick={this.displayEmail}>
-              Email
-            </button>
-            {this.state.showEmail ? (
-              <p className="email-show">{this.state.user.email}</p>
-            ) : null}
+              <button className="follow-button" onClick={this.displayEmail}>
+                Email
+              </button>
+              {this.state.showEmail ? (
+                <p className="email-show">{this.state.user.email}</p>
+              ) : null}
+            </div>
+          </div>
+          <div id="projects-scroll-bar">
+            {this.state.portfolio.length > 0
+              ? this.state.user.portfolio
+                  .map((project) => {
+                    return (
+                      <div key={project._id}>
+                        <ProjectCard
+                          madeBy={this.state.user}
+                          project={project}
+                          showEditOptions={false}
+                          showCommentInput={this.state.loggedInUser}
+                          enableLikes={this.state.loggedInUser}
+                          updateLikes={this.componentDidMount}
+                        />
+                      </div>
+                    );
+                  })
+                  .reverse()
+              : null}
           </div>
         </div>
-
-        {this.state.portfolio.length > 0
-          ? this.state.user.portfolio
-              .map((project) => {
-                return (
-                  <div key={project._id}>
-                    <ProjectCard
-                      madeBy={this.state.user}
-                      project={project}
-                      showEditOptions={false}
-                      showCommentInput={this.state.loggedInUser}
-                      enableLikes={this.state.loggedInUser}
-                      updateLikes={this.componentDidMount}
-                    />
-                  </div>
-                );
-              })
-              .reverse()
-          : null}
+        <Footer />
       </div>
     );
   }

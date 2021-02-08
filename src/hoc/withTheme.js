@@ -14,7 +14,7 @@ function withTheme(WrappedComonent, mode) {
   const styleToApply = mode === "dark" ? darkModeStyle : lightModeStyle;
 
   return function (props) {
-    return <WrappedComonent {...props} style={styleToApply} />;
+    return <WrappedComonent {...props} style={styleToApply} />
   };
 }
 

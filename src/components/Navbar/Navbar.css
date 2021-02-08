@@ -2,6 +2,7 @@
   background-color: #9ec3c6 !important;
   display: flex;
   align-items: center;
+  width: 100vw;
 }
 
 .navbar-brand {
@@ -40,4 +41,15 @@
 
 .navbar-toggler:focus {
   outline: none;
+}
+
+@media (min-width: 1024px) {
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar {
+    padding-left: 30px;
+  }
 }

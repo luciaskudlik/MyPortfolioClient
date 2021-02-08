@@ -86,19 +86,22 @@ class EditUserImage extends Component {
         </span>
 
         {this.state.showLoadingMessage ? (
-          <p id="loading-message">loading</p>
-        ) : null}
-        <div>
-          <input
-            className="image-upload"
-            name="image"
-            type="file"
-            onChange={this.handleFileUpload}
-          ></input>
-          <button type="submit">
-            <i class="fas fa-upload" type="submit"></i>
-          </button>
-        </div>
+          <div>
+            <p id="loading-message">loading</p>
+          </div>
+        ) : (
+          <div>
+            <input
+              className="image-upload"
+              name="image"
+              type="file"
+              onChange={this.handleFileUpload}
+            ></input>
+            <button type="submit">
+              <i class="fas fa-upload" type="submit"></i>
+            </button>
+          </div>
+        )}
       </form>
     );
   }

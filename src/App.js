@@ -3,7 +3,7 @@ import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import withTheme from "./hoc/withTheme";
 
-import Navbar from "./components/Navbar/Navbar";
+
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -15,7 +15,7 @@ import Conversation from "./pages/Conversation";
 
 import AnonRoute from "./components/AnonRoute";
 import PrivateRoute from "./components/PrivateRoute";
-import PublicRoute from "./components/PrivateRoute";
+
 
 class App extends Component {
   render() {
@@ -38,8 +38,8 @@ class App extends Component {
           />
         </Switch>
       </div>
-    );
+    )
   }
 }
 
-export default withTheme(App, "light");
+export default withTheme(App, "light")

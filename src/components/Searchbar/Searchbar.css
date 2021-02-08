@@ -33,3 +33,16 @@
 .search-icon {
   color: #888888;
 }
+
+@media (min-width: 768px) {
+  .search-container {
+    width: 70vw;
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .search-container {
+    width: 50vw;
+  }
+}

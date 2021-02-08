@@ -25,7 +25,7 @@ function AnonRoute(routeProps) {
         else if (!isLoggedIn)
           return (
             <div>
-              <ComponentToShow {...props} />;
+              <ComponentToShow {...props} />
             </div>
           );
       }}
