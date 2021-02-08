@@ -184,57 +184,63 @@ class Conversation extends Component {
         <div id="chat-navbar">
           <Navbar />
         </div>
-        <div className="chat-info-bar">
-          <div className="chat-info">
-            <Link to={"/chat"}>
-              <i class="fas fa-angle-left"></i>
-            </Link>
-            <img src={this.state.otherUser.image} className="chat-user-img" />
-            <p>{this.state.otherUser.username}</p>
+        <div id="conversation-container">
+          <div className="chat-info-bar">
+            <div className="chat-info">
+              <Link to={"/chat"}>
+                <i class="fas fa-angle-left"></i>
+              </Link>
+              <img src={this.state.otherUser.image} className="chat-user-img" />
+              <p>{this.state.otherUser.username}</p>
+            </div>
+            <hr />
           </div>
-          <hr />
-        </div>
-        <div className="conversation">
-          {this.state.messages.map((message, index) => {
-            if (message.sentBy === this.props.user._id) {
-              return (
-                <div key={message._id} className="message-container right">
-                  <p className="message right-blue">{message.text}</p>
-                  {index === this.state.messages.length - 1 && message.seen ? (
-                    <p className="seen">Seen</p>
-                  ) : null}
-                </div>
-              );
-            } else {
-              return (
-                <div key={message._id} className="message-container left">
-                  <p className="message left-red">{message.text}</p>
-                </div>
-              );
-            }
-          })}
-          <div
-            ref={(el) => {
-              this.el = el;
-            }}
-            id="bottom-of-scroll"
-          ></div>
-          {this.state.typing ? <p>typing</p> : null}
-        </div>
 
-        <form onSubmit={this.handleSubmit} className="send-message-form">
-          <input
-            type="text"
-            name="text"
-            value={this.state.text}
-            onChange={this.handleInput}
-            placeholder="type something here..."
-            required
-          />
-          <button type="submit" className="send-button">
-            Send
-          </button>
-        </form>
+          <div className="conversation">
+            <div>
+              {this.state.messages.map((message, index) => {
+                if (message.sentBy === this.props.user._id) {
+                  return (
+                    <div key={message._id} className="message-container right">
+                      <p className="message right-blue">{message.text}</p>
+                      {index === this.state.messages.length - 1 &&
+                      message.seen ? (
+                        <p className="seen">Seen</p>
+                      ) : null}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={message._id} className="message-container left">
+                      <p className="message left-red">{message.text}</p>
+                    </div>
+                  );
+                }
+              })}
+              <div
+                ref={(el) => {
+                  this.el = el;
+                }}
+                id="bottom-of-scroll"
+              ></div>
+              {this.state.typing ? <p>typing</p> : null}
+            </div>
+          </div>
+
+          <form onSubmit={this.handleSubmit} className="send-message-form">
+            <input
+              type="text"
+              name="text"
+              value={this.state.text}
+              onChange={this.handleInput}
+              placeholder="type something here..."
+              required
+            />
+            <button type="submit" className="send-button">
+              Send
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

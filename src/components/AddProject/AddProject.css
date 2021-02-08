@@ -1,7 +1,8 @@
 .project-form {
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: 20px auto;
+  width: 340px;
 }
 
 .project-form textarea {
@@ -9,7 +10,7 @@
 }
 
 .add-project-input {
-  width: 80%;
+  width: 100%;
   margin: 10px auto;
   border-radius: 10px;
   background-color: rgba(211, 211, 211, 0.228);
@@ -36,7 +37,7 @@
 }
 
 .project-form button {
-  width: 80%;
+  width: 100%;
   margin: 10px auto;
   border-radius: 10px;
   border: none;

@@ -6,10 +6,6 @@
   outline: none;
 }
 
-.App#text {
-  color: white;
-}
-
 /**************************** landing page ******************************/
 
 #landing-page {
@@ -508,9 +504,7 @@
   /***********PRIVATE/ USERPROFILE************/
   #projects-scroll-bar {
     display: flex;
-
-    width: 100vw;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin: 0 auto;
   }
 
@@ -538,6 +532,8 @@
 
   .page-content {
     min-height: 550px;
+    width: 90vw;
+    margin: 0 auto;
   }
 
   .image-upload-form {
@@ -565,9 +561,6 @@
     width: 300px;
   }
 
-  #loading-message {
-  }
-
   /***********CHAT************/
 
   #chat-list {
@@ -583,24 +576,58 @@
   }
 
   /***********CONVERSATION************/
+
+  #conversation-container {
+    width: 650px;
+    margin: 0px auto;
+    min-height: 730px;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    margin-bottom: 0px;
+  }
+
   .conversation {
-    width: 90vw;
+    width: 650px;
+    margin-top: 0px;
+    padding-top: 150px;
+    margin-bottom: 0px;
+    padding-bottom: 50px;
+  }
+
+  .conversation > div {
+    width: 90%;
     margin: 0 auto;
-    margin-top: 150px;
-    margin-bottom: 50px;
+  }
+
+  .chat-info-bar {
+    width: 650px;
+    border-right: 1px solid #e8e8e8;
+    margin: 0 auto;
+  }
+
+  .send-message-form {
+    width: 650px;
+    margin: 0 auto;
+    margin-top: 0px;
   }
 
   .message-container {
-    width: 600px;
+    width: 300px;
   }
 
   .right-blue {
     width: 300px;
-    margin-left: 380px;
+    margin-left: 250px;
+    margin-right: 0px;
   }
 
   .left-red {
     width: 300px;
+    margin-left: 20px;
+  }
+
+  .seen {
+    margin-left: 500px;
   }
 
   /***********************LOGIN/SIGNUP**********************/
@@ -628,12 +655,81 @@
     width: 50vw;
   }
 
+  /***********PRIVATE/ USER PROFILE************/
+
   .user-details {
-    width: 800px;
+    width: 600px;
   }
 
   .page-content {
-    width: 60vw;
     margin: 0 auto;
+  }
+
+  #projects-scroll-bar {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    overflow-x: scroll;
+  }
+
+  /***********CHAT************/
+
+  #chatlist-scroll-bar {
+    width: 50vw;
+  }
+
+  /***********CONVERSATION************/
+
+  #conversation-container {
+    width: 650px;
+    margin: 0px auto;
+    min-height: 730px;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    margin-bottom: 0px;
+  }
+
+  .conversation {
+    width: 650px;
+    margin-top: 0px;
+    padding-top: 150px;
+    margin-bottom: 0px;
+    padding-bottom: 50px;
+  }
+
+  .conversation > div {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .chat-info-bar {
+    width: 650px;
+    border-right: 1px solid #e8e8e8;
+    margin: 0 auto;
+  }
+
+  .send-message-form {
+    width: 650px;
+    margin: 0 auto;
+    margin-top: 0px;
+  }
+
+  .message-container {
+    width: 300px;
+  }
+
+  .right-blue {
+    width: 300px;
+    margin-left: 250px;
+    margin-right: 0px;
+  }
+
+  .left-red {
+    width: 300px;
+    margin-left: 20px;
+  }
+
+  .seen {
+    margin-left: 500px;
   }
 }

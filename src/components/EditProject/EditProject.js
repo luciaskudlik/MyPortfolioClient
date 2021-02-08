@@ -99,7 +99,7 @@ class EditProject extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="project-form">
+      <form onSubmit={this.handleSubmit} className="project-form" id="edit-form">
         <input
           type="text"
           name="title"
@@ -107,6 +107,7 @@ class EditProject extends Component {
           onChange={this.handleInput}
           className="add-project-input"
           placeholder="name of your project"
+          maxlength="40"
           required
         />
         <div id="project-image-upload" className="add-project-input">
@@ -132,8 +133,9 @@ class EditProject extends Component {
           name="about"
           value={this.state.about}
           onChange={this.handleInput}
-          placeholder="e.g restaurant finder"
+          placeholder="what kind of app / e.g 'e-commerce site'"
           className="add-project-input"
+          maxlength="30"
           required
         />
         <textarea
@@ -142,7 +144,8 @@ class EditProject extends Component {
           value={this.state.description}
           onChange={this.handleInput}
           className="add-project-input"
-          placeholder="e.g. technologies used"
+          placeholder="description of the project"
+          maxlength="300"
           required
         />
         <input
@@ -151,7 +154,8 @@ class EditProject extends Component {
           value={this.state.technologies}
           onChange={this.handleInput}
           className="add-project-input"
-          placeholder="technolgies"
+          placeholder="technolgies used"
+          maxlength="150"
           required
         />
         <input
@@ -168,7 +172,7 @@ class EditProject extends Component {
           name="githubLink"
           value={this.state.githubLink}
           onChange={this.handleInput}
-          placeholder="link to your github repository"
+          placeholder="link to the github repository"
           className="add-project-input"
           required
         />
