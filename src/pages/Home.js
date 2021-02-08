@@ -3,7 +3,7 @@ import Searchbar from "./../components/Searchbar/Searchbar";
 import Navbar from "./../components/Navbar/Navbar";
 import axios from "axios";
 import UserCard from "../components/UserCard/UserCard";
-import image1 from "./../images/windows-C6T6vr1sQI0-unsplash.jpg";
+import image1 from "./../images/windows.jpg";
 import image2 from "./../images/ramiro-mendes-CjS3QsRuxnE-unsplash.jpg";
 import Footer from "./../components/Footer/Footer";
 
