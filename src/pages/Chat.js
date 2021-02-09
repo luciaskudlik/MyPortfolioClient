@@ -6,6 +6,8 @@ import ChatUserCard from "../components/ChatUserCard/ChatUserCard";
 import Navbar from "../components/Navbar/Navbar";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import Searchbar from "./../components/Searchbar/Searchbar";
+import UserCard from "../components/UserCard/UserCard";
 
 // /**SOCKET****/
 // import io from "socket.io-client";
@@ -15,10 +17,14 @@ import { Link } from "react-router-dom";
 
 class Chat extends Component {
   state = {
+    allUser: [],
     chats: [],
     sortedChats: [],
     online: [],
     openChat: {},
+    filteredUsers: [],
+    showErrorMessage: false,
+    hidePageContent: false,
   };
 
   // startSocket = () => {
@@ -36,7 +42,17 @@ class Chat extends Component {
 
   componentDidMount = () => {
     this.getAllChats();
+    this.getAllUser();
     // this.startSocket();
+  };
+
+  getAllUser = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/api/users`)
+      .then((response) => {
+        this.setState({ allUsers: response.data });
+      })
+      .catch((err) => console.log(err));
   };
 
   getAllChats = () => {
@@ -83,10 +99,37 @@ class Chat extends Component {
     this.setState({ openChat: chat });
   };
 
+  filterUsers = (input) => {
+    const filtered = this.state.allUsers.filter((user) => {
+      const userName = user.username.toLowerCase();
+      const searchInput = input.toLowerCase();
+      return userName.includes(searchInput);
+    });
+
+    this.setState({
+      filteredUsers: filtered,
+      showErrorMessage: false,
+      hidePageContent: true,
+    });
+
+    if (filtered.length === 0) {
+      this.setState({ showErrorMessage: true, hidePageContent: true });
+    }
+
+    if (input === "") {
+      this.setState({
+        filteredUsers: [],
+        showErrorMessage: false,
+        hidePageContent: false,
+      });
+    }
+  };
+
   render() {
     return (
       <div id="chat-list">
         <Navbar />
+
         {this.state.sortedChats.length === 0 ? (
           <p id="empty-chat">
             You don't have any chats yet.{" "}
@@ -98,18 +141,34 @@ class Chat extends Component {
           </p>
         ) : (
           <div id="chatlist-scroll-bar">
-            {this.state.sortedChats.map((chat) => {
+            <div id="chat-searchbar">
+              <Searchbar filterUsers={this.filterUsers} />
+            </div>
+            {this.state.filteredUsers.map((user) => {
               return (
-                <div
-                  key={chat._id}
-                  onClick={() => {
-                    this.readChat(chat);
-                  }}
-                >
-                  <ChatUserCard chat={chat} />
+                <div>
+                  <UserCard userOnCard={user} />
                 </div>
               );
             })}
+            {this.state.showErrorMessage ? (
+              <p id="search-error">we couldn't match any results.</p>
+            ) : null}
+
+            {!this.state.hidePageContent
+              ? this.state.sortedChats.map((chat) => {
+                  return (
+                    <div
+                      key={chat._id}
+                      onClick={() => {
+                        this.readChat(chat);
+                      }}
+                    >
+                      <ChatUserCard chat={chat} />
+                    </div>
+                  );
+                })
+              : null}
           </div>
         )}
       </div>

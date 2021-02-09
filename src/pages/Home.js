@@ -55,7 +55,9 @@ class Home extends React.Component {
       <div>
         <Navbar />
         <div id="home-page-content">
-          <Searchbar filterUsers={this.filterUsers} />
+          <div id="home-searchbar">
+            <Searchbar filterUsers={this.filterUsers} />
+          </div>
           {this.state.showErrorMessage ? (
             <p id="search-error">
               <i class="fas fa-search"></i>sorry we didnt find any users under

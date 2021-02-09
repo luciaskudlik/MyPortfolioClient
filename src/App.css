@@ -564,6 +564,11 @@
 
   /***********CHAT************/
 
+  #chat-searchbar {
+    width: 58vw;
+    margin: 0px auto;
+  }
+
   #chat-list {
     background-color: #e8e8e8;
     height: 100vh;
@@ -686,6 +691,11 @@
 
   /***********CHAT************/
 
+  #chat-searchbar {
+    width: 48vw;
+    margin: 0px auto;
+  }
+
   #chatlist-scroll-bar {
     width: 50vw;
   }
@@ -695,7 +705,7 @@
   #conversation-container {
     width: 650px;
     margin: 0px auto;
-    min-height: 730px;
+    min-height: 760px;
     border-left: 1px solid #e8e8e8;
     border-right: 1px solid #e8e8e8;
     margin-bottom: 0px;
@@ -706,7 +716,7 @@
     margin-top: 0px;
     padding-top: 150px;
     margin-bottom: 0px;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
   }
 
   .conversation > div {
