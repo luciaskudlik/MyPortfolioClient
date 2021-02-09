@@ -8,6 +8,8 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import Searchbar from "./../components/Searchbar/Searchbar";
 import UserCard from "../components/UserCard/UserCard";
+import { Redirect } from "react-router-dom";
+import ChatSearchUserCard from "./../components/ChatSearchUserCard/ChatSearchUserCard";
 
 // /**SOCKET****/
 // import io from "socket.io-client";
@@ -25,6 +27,8 @@ class Chat extends Component {
     filteredUsers: [],
     showErrorMessage: false,
     hidePageContent: false,
+    redirect: false,
+    chatId: "",
   };
 
   // startSocket = () => {
@@ -125,6 +129,40 @@ class Chat extends Component {
     }
   };
 
+  openChat = (userId) => {
+    console.log("chat with " + userId + "was openend");
+
+    const currentUserId = this.props.user._id;
+
+    if (
+      this.state.chats.some((chat) => {
+        return chat.participants.includes(userId);
+      })
+    ) {
+      console.log("chat already exists");
+
+      const filteredChat = this.state.chats.filter((chat) => {
+        return chat.participants.includes(userId);
+      });
+
+      this.setState({ chatId: filteredChat[0]._id, redirect: true });
+    } else {
+      axios
+        .post(
+          `${process.env.REACT_APP_API_URL}/api/chat/${userId}`,
+          { currentUserId },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          console.log("new chat created", response.data);
+          this.setState({ chatId: response.data, redirect: true });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   render() {
     return (
       <div id="chat-list">
@@ -145,12 +183,21 @@ class Chat extends Component {
               <Searchbar filterUsers={this.filterUsers} />
             </div>
             {this.state.filteredUsers.map((user) => {
-              return (
-                <div>
-                  <UserCard userOnCard={user} />
-                </div>
-              );
+              if (user._id !== this.props.user._id) {
+                return (
+                  <div
+                    onClick={() => {
+                      this.openChat(user._id);
+                    }}
+                  >
+                    <ChatSearchUserCard userOnCard={user} />
+                  </div>
+                );
+              }
             })}
+            {this.state.redirect ? (
+              <Redirect to={`/conversation/${this.state.chatId}`} />
+            ) : null}
             {this.state.showErrorMessage ? (
               <p id="search-error">we couldn't match any results.</p>
             ) : null}
