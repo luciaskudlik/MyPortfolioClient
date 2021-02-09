@@ -109,7 +109,7 @@ class Conversation extends Component {
   };
 
   scrollToBottom = () => {
-    this.el.scrollIntoView({ behavior: "smooth" });
+    this.el.scrollIntoView({ behavior: "auto" });
   };
 
   componentDidMount = () => {

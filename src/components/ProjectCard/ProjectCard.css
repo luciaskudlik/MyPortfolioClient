@@ -27,6 +27,7 @@
   object-fit: cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border-bottom: 1px solid rgb(233, 233, 233);
 }
 
 .bottom-card {
@@ -190,7 +191,8 @@
 
 @media (min-width: 1024px) {
   .project-card-container {
-    margin-right: 40px;
+    margin-right: 20px;
+    margin-left: 20px;
     margin-bottom: 40px;
   }
 }

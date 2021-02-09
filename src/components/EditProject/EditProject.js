@@ -12,8 +12,8 @@ class EditProject extends Component {
     technologies: this.props.project.technologies,
     deployedLink: this.props.project.deployedLink,
     githubLink: this.props.project.githubLink,
-    comments: this.props.commentIds,
-    likedBy: this.props.project.likedBy,
+    // comments: this.props.commentIds,
+    // likedBy: this.props.project.likedBy,
     showLoadingMessage: false,
   };
 
@@ -34,8 +34,8 @@ class EditProject extends Component {
       technologies,
       deployedLink,
       githubLink,
-      comments,
-      likedBy,
+      // comments,
+      // likedBy,
     } = this.state;
 
     const userId = this.props.user._id;
@@ -52,8 +52,8 @@ class EditProject extends Component {
           deployedLink,
           githubLink,
           userId,
-          comments,
-          likedBy,
+          // comments,
+          // likedBy,
         },
         { withCredentials: true }
       )

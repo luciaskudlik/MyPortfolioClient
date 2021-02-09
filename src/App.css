@@ -37,11 +37,6 @@
   letter-spacing: 1px;
 }
 
-.landing-btn:hover {
-  background-color: rgb(66, 108, 187);
-  color: white;
-}
-
 /****************************** home page *****************************/
 
 #search-error {
@@ -79,7 +74,7 @@
 }
 
 #home-page-content {
-  min-height: 400px;
+  min-height: 550px;
 }
 
 /****************************** user profile / private*****************************/
@@ -166,6 +161,10 @@
   font-size: 0.7rem;
   margin-left: 5px;
   color: grey;
+}
+
+.edit-input {
+  width: 150px;
 }
 
 .edit-input-button {
@@ -498,7 +497,7 @@
   #home-page-content {
     width: 70vw;
     margin: 0 auto;
-    min-height: 550px;
+    min-height: 750px;
   }
 
   /***********PRIVATE/ USERPROFILE************/
@@ -577,6 +576,10 @@
 
   /***********CONVERSATION************/
 
+  .send-message-form input {
+    border-left: none;
+  }
+
   #conversation-container {
     width: 650px;
     margin: 0px auto;
@@ -600,13 +603,13 @@
   }
 
   .chat-info-bar {
-    width: 650px;
+    width: 649px;
     border-right: 1px solid #e8e8e8;
     margin: 0 auto;
   }
 
   .send-message-form {
-    width: 650px;
+    width: 649px;
     margin: 0 auto;
     margin-top: 0px;
   }
@@ -617,13 +620,13 @@
 
   .right-blue {
     width: 300px;
-    margin-left: 250px;
+    margin-left: 245px;
     margin-right: 0px;
   }
 
   .left-red {
     width: 300px;
-    margin-left: 20px;
+    margin-left: 0px;
   }
 
   .seen {
@@ -651,6 +654,11 @@
 @media (min-width: 1024px) {
   /********************HOME************************/
 
+  .landing-btn:hover {
+    background-color: rgb(66, 108, 187);
+    color: white;
+  }
+
   #home-page-content {
     width: 50vw;
   }
@@ -663,12 +671,14 @@
 
   .page-content {
     margin: 0 auto;
+    min-height: 800px;
   }
 
   #projects-scroll-bar {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
+    margin-top: 30px;
     overflow-x: scroll;
   }
 
@@ -703,13 +713,13 @@
   }
 
   .chat-info-bar {
-    width: 650px;
+    width: 649px;
     border-right: 1px solid #e8e8e8;
     margin: 0 auto;
   }
 
   .send-message-form {
-    width: 650px;
+    width: 649px;
     margin: 0 auto;
     margin-top: 0px;
   }
