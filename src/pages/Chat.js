@@ -204,16 +204,18 @@ class Chat extends Component {
 
             {!this.state.hidePageContent
               ? this.state.sortedChats.map((chat) => {
-                  return (
-                    <div
-                      key={chat._id}
-                      onClick={() => {
-                        this.readChat(chat);
-                      }}
-                    >
-                      <ChatUserCard chat={chat} />
-                    </div>
-                  );
+                  if (chat.messages.length > 0) {
+                    return (
+                      <div
+                        key={chat._id}
+                        onClick={() => {
+                          this.readChat(chat);
+                        }}
+                      >
+                        <ChatUserCard chat={chat} />
+                      </div>
+                    );
+                  }
                 })
               : null}
           </div>
