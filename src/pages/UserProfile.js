@@ -208,7 +208,7 @@ class UserProfile extends React.Component {
               {this.props.user && this.state.following ? (
                 <button onClick={this.unfollowUser} className="follow-button">
                   {" "}
-                  - Unfollow
+                  Unfollow
                 </button>
               ) : null}
 
