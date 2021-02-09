@@ -201,6 +201,7 @@
 
 .edit-input {
   border: none;
+  border-radius: none;
   border-bottom: 1px solid grey;
   background-color: #f0f0f0;
   outline: none;
@@ -264,6 +265,7 @@
   border: none;
   width: 20px;
   color: rgb(71, 120, 213);
+  width: 50px;
 }
 
 #notification-message {
@@ -741,5 +743,9 @@
 
   .seen {
     margin-left: 500px;
+  }
+
+  #login-page {
+    height: 650px;
   }
 }
