@@ -28,6 +28,7 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom: 1px solid rgb(233, 233, 233);
+  cursor: pointer;
 }
 
 .bottom-card {
@@ -67,6 +68,7 @@
 
 .card-icons i {
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .liked-heart {
@@ -103,16 +105,19 @@
 
 .comment-line {
   margin-bottom: 0px;
+  cursor: pointer;
 }
 
 .likedBy-line {
   display: flex;
   margin-top: 0px;
+  cursor: pointer;
 }
 
 .likedBy-line p {
   margin-right: 0px;
   margin-left: 5px;
+  cursor: pointer;
 }
 
 .likedBy-line-written {
@@ -120,6 +125,7 @@
   display: flex;
   margin-top: 2px;
   height: 20px;
+  cursor: pointer;
 }
 
 .back {

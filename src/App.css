@@ -79,6 +79,10 @@
 
 /****************************** user profile / private*****************************/
 
+.fa-pen {
+  cursor: pointer;
+}
+
 .user-image {
   height: 80px;
   width: 80px;
@@ -155,6 +159,7 @@
   width: 150px;
   justify-content: space-between;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .edit-user > i {
@@ -213,6 +218,7 @@
   font-size: 0.8rem;
   width: 80px;
   outline: none;
+  cursor: pointer;
 }
 
 .follow-button:focus {
