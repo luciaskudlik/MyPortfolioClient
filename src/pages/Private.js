@@ -10,6 +10,8 @@ import EditUserName from "../components/EditUser/EditUserName";
 import EditOccupation from "../components/EditUser/EditOccupation";
 import EditUserImage from "../components/EditUser/EditUserImage";
 import Footer from "../components/Footer/Footer";
+import userService from "./../lib/user-service";
+import chatService from "./../lib/chat-service";
 
 class Private extends Component {
   state = {
@@ -33,45 +35,84 @@ class Private extends Component {
   };
 
   displayProjects = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/user`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log("rendered");
-        this.setState({
-          user: response.data,
-          username: response.data.username,
-          occupation: response.data.occupation,
-          portfolio: response.data.portfolio,
-          followers: response.data.followers,
-          following: response.data.following,
-          image: response.data.image,
+    //   axios
+    //     .get(`${process.env.REACT_APP_API_URL}/api/user`, {
+    //       withCredentials: true,
+    //     })
+    //     .then((response) => {
+    //       console.log("rendered");
+    //       this.setState({
+    //         user: response.data,
+    //         username: response.data.username,
+    //         occupation: response.data.occupation,
+    //         portfolio: response.data.portfolio,
+    //         followers: response.data.followers,
+    //         following: response.data.following,
+    //         image: response.data.image,
+    //       });
+    //       response.data.chats.forEach((chat) => {
+    //         axios
+    //           .get(`${process.env.REACT_APP_API_URL}/api/chat/${chat._id}`)
+    //           .then((response) => {
+    //             const filtered = response.data.messages.filter((message) => {
+    //               return (
+    //                 message.seen === false &&
+    //                 message.sentBy !== this.props.user._id
+    //               );
+    //             });
+    //             this.setState({
+    //               unreadMessages: this.state.unreadMessages + filtered.length,
+    //             });
+    //             console.log(filtered.length);
+    //           })
+    //           .catch((err) => {
+    //             console.log(err);
+    //           });
+    //       });
+    //     })
+    //     .catch((err) => console.log(err));
+
+    userService.getCurrentUser().then((data) => {
+      this.setState({
+        user: data,
+        username: data.username,
+        occupation: data.occupation,
+        portfolio: data.portfolio,
+        followers: data.followers,
+        following: data.following,
+        image: data.image,
+      });
+      data.chats.forEach((chat) => {
+        // axios
+        //   .get(`${process.env.REACT_APP_API_URL}/api/chat/${chat._id}`)
+        //   .then((response) => {
+        //     const filtered = response.data.messages.filter((message) => {
+        //       return (
+        //         message.seen === false && message.sentBy !== this.props.user._id
+        //       );
+        //     });
+        //     this.setState({
+        //       unreadMessages: this.state.unreadMessages + filtered.length,
+        //     });
+        //     console.log(filtered.length);
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //   });
+
+        chatService.getOneChat(chat._id).then((data) => {
+          const filtered = data.messages.filter((message) => {
+            return (
+              message.seen === false && message.sentBy !== this.props.user._id
+            );
+          });
+
+          this.setState({
+            unreadMessages: this.state.unreadMessages + filtered.length,
+          });
         });
-
-        response.data.chats.forEach((chat) => {
-          axios
-            .get(`${process.env.REACT_APP_API_URL}/api/chat/${chat._id}`)
-            .then((response) => {
-              const filtered = response.data.messages.filter((message) => {
-                return (
-                  message.seen === false &&
-                  message.sentBy !== this.props.user._id
-                );
-              });
-
-              this.setState({
-                unreadMessages: this.state.unreadMessages + filtered.length,
-              });
-              console.log(filtered.length);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      })
-
-      .catch((err) => console.log(err));
+      });
+    });
   };
 
   toggleFollowersPopup = () => {

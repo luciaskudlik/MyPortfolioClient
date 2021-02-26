@@ -6,6 +6,7 @@ import UserCard from "../components/UserCard/UserCard";
 import image1 from "./../images/windows.jpg";
 import image2 from "./../images/ramiro-mendes-CjS3QsRuxnE-unsplash.jpg";
 import Footer from "./../components/Footer/Footer";
+import userService from "./../lib/user-service";
 
 class Home extends React.Component {
   state = {
@@ -42,12 +43,17 @@ class Home extends React.Component {
   };
 
   componentDidMount = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/users`)
-      .then((response) => {
-        this.setState({ allUsers: response.data });
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .get(`${process.env.REACT_APP_API_URL}/api/users`)
+    //   .then((response) => {
+    //     this.setState({ allUsers: response.data });
+    //   })
+    //   .catch((err) => console.log(err));
+
+    userService.getAllUsers().then((data) => {
+      console.log("DATA", data);
+      this.setState({ allUsers: data });
+    });
   };
 
   render() {
