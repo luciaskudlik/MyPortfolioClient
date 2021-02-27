@@ -7,6 +7,8 @@ import PopUp from "./../components/PopUp/PopUp";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
+import userService from "./../lib/user-service";
+import chatService from "./../lib/chat-service";
 
 class UserProfile extends React.Component {
   state = {
@@ -27,47 +29,52 @@ class UserProfile extends React.Component {
 
   componentDidMount = () => {
     const { id } = this.props.match.params;
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/user/${id}`)
-      .then((response) => {
-        this.setState({
-          user: response.data,
-          portfolio: response.data.portfolio,
-          followers: response.data.followers,
-          userIsFollowing: response.data.following,
-        });
 
-        if (this.props.user) {
-          this.setState({ loggedInUser: true });
+    userService.getOneUser(id).then((data) => {
+      this.setState({
+        user: data,
+        portfolio: data.portfolio,
+        followers: data.followers,
+        userIsFollowing: data.following,
+      });
 
-          if (
-            response.data.followers.some(
-              (follower) => follower._id === this.props.user._id
-            )
-          ) {
-            console.log("YES IT INCLUDES");
-            this.setState({ following: true });
-          }
+      if (this.props.user) {
+        this.setState({ loggedInUser: true });
 
-          // axios
-          //   .get(`http://localhost:5000/api/user`, { withCredentials: true })
-          //   .then((response) => {
-          //     const isFollowing = response.data.following.includes(
-          //       this.state.user._id
-          //     );
-
-          //     console.log("FOLLOWING?!", isFollowing);
-
-          //     this.setState({
-          //       currentUser: response.data,
-          //       following: isFollowing,
-          //     });
-          //     console.log(this.state.currentUser);
-          //   })
-          //   .catch((err) => console.log(err));
+        if (
+          data.followers.some(
+            (follower) => follower._id === this.props.user._id
+          )
+        ) {
+          this.setState({ following: true });
         }
-      })
-      .catch((err) => console.log(err));
+      }
+    });
+
+    // axios
+    //   .get(`${process.env.REACT_APP_API_URL}/api/user/${id}`)
+    //   .then((response) => {
+    //     this.setState({
+    //       user: response.data,
+    //       portfolio: response.data.portfolio,
+    //       followers: response.data.followers,
+    //       userIsFollowing: response.data.following,
+    //     });
+
+    //     if (this.props.user) {
+    //       this.setState({ loggedInUser: true });
+
+    //       if (
+    //         response.data.followers.some(
+    //           (follower) => follower._id === this.props.user._id
+    //         )
+    //       ) {
+    //         console.log("YES IT INCLUDES");
+    //         this.setState({ following: true });
+    //       }
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   toggleFollowersPopup = () => {
@@ -81,43 +88,59 @@ class UserProfile extends React.Component {
   followUser = () => {
     const { id } = this.props.match.params;
     const currentUserId = this.props.user._id;
-    axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/api/user/follow/${id}`,
-        { currentUserId },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        console.log("followed succesfully");
-        this.setState({
-          following: true,
-        });
-        this.componentDidMount();
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .post(
+    //     `${process.env.REACT_APP_API_URL}/api/user/follow/${id}`,
+    //     { currentUserId },
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log("followed succesfully");
+    //     this.setState({
+    //       following: true,
+    //     });
+    //     this.componentDidMount();
+    //   })
+    //   .catch((err) => console.log(err));
+
+    userService.followUser(id, currentUserId).then(() => {
+      console.log("followed succesfully");
+      this.setState({
+        following: true,
+      });
+      this.componentDidMount();
+    });
   };
 
   unfollowUser = () => {
     const { id } = this.props.match.params;
     const currentUserId = this.props.user._id;
-    axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/api/user/unfollow/${id}`,
-        { currentUserId },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        console.log("unfollowed succesfully");
-        const newFollowers = this.state.followers.filter(
-          (follower) => follower._id !== currentUserId
-        );
-        this.setState({ following: false, followers: newFollowers });
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .post(
+    //     `${process.env.REACT_APP_API_URL}/api/user/unfollow/${id}`,
+    //     { currentUserId },
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log("unfollowed succesfully");
+    //     const newFollowers = this.state.followers.filter(
+    //       (follower) => follower._id !== currentUserId
+    //     );
+    //     this.setState({ following: false, followers: newFollowers });
+    //   })
+    //   .catch((err) => console.log(err));
+
+    userService.unfollowUser(id, currentUserId).then(() => {
+      console.log("unfollowed succesfully");
+      const newFollowers = this.state.followers.filter(
+        (follower) => follower._id !== currentUserId
+      );
+      this.setState({ following: false, followers: newFollowers });
+    });
   };
 
   displayEmail = () => {
@@ -142,19 +165,22 @@ class UserProfile extends React.Component {
 
         this.setState({ chatId: filteredChat[0]._id, redirect: true });
       } else {
-        axios
-          .post(
-            `${process.env.REACT_APP_API_URL}/api/chat/${id}`,
-            { currentUserId },
-            {
-              withCredentials: true,
-            }
-          )
-          .then((response) => {
-            console.log("new chat created", response.data);
-            this.setState({ chatId: response.data, redirect: true });
-          })
-          .catch((err) => console.log(err));
+        //****************DO NOT DELETE COMMENT****************************/
+        // axios
+        //   .post(`${process.env.REACT_APP_API_URL}/api/chat/${id}`, {
+        //     currentUserId,
+        //     withCredentials: true,
+        //   })
+        //   .then((response) => {
+        //     console.log("new chat created", response.data);
+        //     this.setState({ chatId: response.data, redirect: true });
+        //   })
+        //   .catch((err) => console.log(err));
+
+        chatService.createChat(id, currentUserId).then((data) => {
+          console.log("new chat created", data);
+          this.setState({ chatId: data, redirect: true });
+        });
       }
     } else {
       alert("Please log in to contact " + this.state.user.username);

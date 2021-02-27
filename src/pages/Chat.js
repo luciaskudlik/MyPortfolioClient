@@ -10,6 +10,8 @@ import Searchbar from "./../components/Searchbar/Searchbar";
 import UserCard from "../components/UserCard/UserCard";
 import { Redirect } from "react-router-dom";
 import ChatSearchUserCard from "./../components/ChatSearchUserCard/ChatSearchUserCard";
+import userService from "./../lib/user-service";
+import chatService from "./../lib/chat-service";
 
 // /**SOCKET****/
 // import io from "socket.io-client";
@@ -51,12 +53,16 @@ class Chat extends Component {
   };
 
   getAllUser = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/api/users`)
-      .then((response) => {
-        this.setState({ allUsers: response.data });
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .get(`${process.env.REACT_APP_API_URL}/api/users`)
+    //   .then((response) => {
+    //     this.setState({ allUsers: response.data });
+    //   })
+    //   .catch((err) => console.log(err));
+
+    userService.getAllUsers().then((data) => {
+      this.setState({ allUsers: data });
+    });
   };
 
   getAllChats = () => {

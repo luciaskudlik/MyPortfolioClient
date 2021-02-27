@@ -17,6 +17,15 @@ class ChatService {
     return pr;
   };
 
+  createChat = (id, currentUserId) => {
+    const pr = this.api
+      .post(`/chat/${id}`, { currentUserId, withCredentials: true })
+      .then((response) => response.data)
+      .catch((err) => console.log(err));
+
+    return pr;
+  };
+
   //   getCurrentUser = () => {
   //     const pr = this.api
   //       .get("/user", { withCredentials: true })

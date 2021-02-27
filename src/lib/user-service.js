@@ -25,6 +25,30 @@ class UserService {
     return pr;
   };
 
+  getOneUser = (id) => {
+    const pr = this.api
+      .get(`/user/${id}`)
+      .then((response) => response.data)
+      .catch((err) => console.log(err));
+    return pr;
+  };
+
+  followUser = (id, currentUserId) => {
+    const pr = this.api
+      .post(`user/follow/${id}`, { currentUserId, withCredentials: true })
+      .then((response) => response.data)
+      .catch((err) => console.log(err));
+    return pr;
+  };
+
+  unfollowUser = (id, currentUserId) => {
+    const pr = this.api
+      .post(`user/unfollow/${id}`, { currentUserId, withCredentials: true })
+      .then((response) => response.data)
+      .catch((err) => console.log(err));
+    return pr;
+  };
+
   //   create = (data) => {
   //     const pr = this.api.post(`/example/${id}`, data);
 
