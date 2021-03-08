@@ -14,6 +14,7 @@ class Signup extends Component {
     email: "",
     password: "",
     showLoadingMessage: false,
+    showErrorMessage: this.props.showErrorMessage,
   };
 
   handleFormSubmit = (event) => {
@@ -59,6 +60,11 @@ class Signup extends Component {
 
   render() {
     const { username, occupation, email, password } = this.state;
+    console.log(
+      "ERROR MESSAGE",
+      this.props.showErrorMessage,
+      this.props.isLoggedIn
+    );
     return (
       <div>
         <Navbar />

@@ -8,6 +8,7 @@ class AuthProvider extends React.Component {
     isLoggedIn: false,
     isLoading: true,
     user: null,
+    showErrorMessage: false,
   };
 
   componentDidMount() {
@@ -17,25 +18,43 @@ class AuthProvider extends React.Component {
         this.setState({ isLoggedIn: true, user: user, isLoading: false })
       )
       .catch((err) =>
-        this.setState({ isLoggedIn: false, user: null, isLoading: false })
+        this.setState({
+          isLoggedIn: false,
+          user: null,
+          isLoading: false,
+        })
       );
   }
 
   signup = (username, image, occupation, email, password) => {
     authService
       .signup(username, image, occupation, email, password)
-      .then((user) => this.setState({ isLoggedIn: true, user }))
+      .then((user) =>
+        this.setState({ isLoggedIn: true, user, showErrorMessage: false })
+      )
       .catch((err) => {
-        this.setState({ isLoggedIn: false, user: null });
+        console.log("could not sign up");
+        this.setState({
+          isLoggedIn: false,
+          user: null,
+          showErrorMessage: true,
+        });
       });
   };
 
   login = (email, password) => {
     authService
       .login(email, password)
-      .then((user) => this.setState({ isLoggedIn: true, user }))
+      .then((user) =>
+        this.setState({ isLoggedIn: true, user, showErrorMessage: false })
+      )
       .catch((err) => {
-        this.setState({ isLoggedIn: false, user: null });
+        console.log("LOGIN FAILED");
+        this.setState({
+          isLoggedIn: false,
+          user: null,
+          showErrorMessage: true,
+        });
       });
   };
 
@@ -47,13 +66,23 @@ class AuthProvider extends React.Component {
   };
 
   render() {
-    const { isLoggedIn, isLoading, user } = this.state;
+    const { isLoggedIn, isLoading, user, showErrorMessage } = this.state;
     const { signup, login, logout } = this;
 
     if (isLoading) return <p>Loading</p>;
 
     return (
-      <Provider value={{ isLoggedIn, isLoading, user, signup, login, logout }}>
+      <Provider
+        value={{
+          isLoggedIn,
+          isLoading,
+          user,
+          showErrorMessage,
+          signup,
+          login,
+          logout,
+        }}
+      >
         {this.props.children}
       </Provider>
     );
@@ -70,6 +99,7 @@ const withAuth = (WrappedComponent) => {
             const {
               isLoggedIn,
               isLoading,
+              showErrorMessage,
               user,
               signup,
               login,
@@ -81,6 +111,7 @@ const withAuth = (WrappedComponent) => {
                 {...this.props}
                 isLoggedIn={isLoggedIn}
                 isLoading={isLoading}
+                showErrorMessage={showErrorMessage}
                 user={user}
                 signup={signup}
                 login={login}

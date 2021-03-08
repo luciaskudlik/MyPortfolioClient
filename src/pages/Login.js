@@ -4,13 +4,22 @@ import Navbar from "./../components/Navbar/Navbar";
 import Footer from "./../components/Footer/Footer";
 
 class Login extends Component {
-  state = { email: "", password: "" };
+  state = {
+    email: "",
+    password: "",
+    showErrorMessage: false,
+  };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
     const { email, password } = this.state;
     // Call funciton coming from AuthProvider ( via withAuth )
     this.props.login(email, password);
+    this.updateAuthProvider();
+  };
+
+  updateAuthProvider = () => {
+    this.setState({ showErrorMessage: this.props.showErrorMessage });
   };
 
   handleChange = (event) => {
@@ -52,6 +61,7 @@ class Login extends Component {
               id="signup-button"
             />
           </form>
+          {this.state.showErrorMessage ? <p>Email or Password wrong</p> : null}
         </div>
         <Footer />
       </div>
